@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Properties of AEAD algorithms</title>
+<meta content="Andrey Bozhko" name="author">
+<meta content="
+       
+        Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms
+        in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions
+        for the most common of those properties intending to improve consistency in the field.
+       
+    " name="description">
+<meta content="xml2rfc 3.15.1" name="generator">
+<meta content="authenticated encryption, mode of operation, AEAD, properties" name="keyword">
+<meta content="draft-bozhko-cfrg-aead-properties-01" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.15.1
+    Python 3.8.2
+    appdirs 1.4.4
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
+    html5lib 1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    kitchen 1.2.6
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
+    PyYAML 5.3.1
+    requests 2.22.0
+    setuptools 45.2.0
+    six 1.14.0
+-->
+<link href="draft-bozhko-cfrg-aead-properties.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">/*
+
+  NOTE: Changes at the bottom of this file overrides some earlier settings.
+
+  Once the style has stabilized and has been adopted as an official RFC style,
+  this can be consolidated so that style settings occur only in one place, but
+  for now the contents of this file consists first of the initial CSS work as
+  provided to the RFC Formatter (xml2rfc) work, followed by itemized and
+  commented changes found necssary during the development of the v3
+  formatters.
+
+*/
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+/* general and mobile first */
+html {
+}
+body {
+  max-width: 90%;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+.author {
+  padding-bottom: 4px;
+}
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+#n-copyright-notice {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+/* general structure */
+p {
+  padding: 0;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+div, span {
+  position: relative;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+.alignCenter.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  display: table;
+  border: none;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.ulBare, li.ulBare {
+  margin-left: 0em !important;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+/* 
+dl.nohang > dt {
+  float: none;
+}
+*/
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #22e; /* Arlen: WCAG 2019 */
+}
+a[href]:hover {
+  background-color: #f2f2f2;
+}
+figcaption a[href],
+a[href].selfRef {
+  color: #222;
+}
+/* XXX probably not this:
+a.selfRef:hover {
+  background-color: transparent;
+  cursor: default;
+} */
+
+/* Figures */
+tt, code, pre {
+  background-color: #f9f9f9;
+  font-family: 'Roboto Mono', monospace;
+}
+pre {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 1em;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption {
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 1.2em 2em;
+}
+blockquote {
+  background-color: #f9f9f9;
+  color: #111; /* Arlen: WCAG 2019 */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
+th {
+  text-align: left;
+  background-color: #e9e9e9;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f5f5f5;
+}
+table caption {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+table p {
+  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
+     be allowed within tables more generally, it would be far better to select on a class. */
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  color: #666; /* Arlen: AHDJ 2019 */
+  text-decoration: none;
+  visibility: hidden;
+  user-select: none;
+  -ms-user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media screen {
+  aside:hover > a.pilcrow,
+  p:hover > a.pilcrow,
+  blockquote:hover > a.pilcrow,
+  div:hover > a.pilcrow,
+  li:hover > a.pilcrow,
+  pre:hover > a.pilcrow {
+    visibility: visible;
+  }
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: 0.9em;
+}
+#identifiers dt {
+  width: 3em;
+  clear: left;
+}
+#identifiers dd {
+  float: left;
+  margin-bottom: 0;
+}
+/* Fix PDF info block run off issue */
+@media print {
+  #identifiers dd {
+    float: none;
+  }
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #666; /* Arlen: WCAG 2019 */
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+
+/* temporary notes */
+.rfcEditorRemove::before {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  padding: 0.2em;
+  content: "The RFC Editor will remove this note";
+  color: #9e2a00; /* Arlen: WCAG 2019 */
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+}
+.rfcEditorRemove {
+  position: relative;
+  padding-top: 1.8em;
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  border-radius: 3px;
+}
+.cref {
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  pre.breakable {
+    break-inside: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+/* This is commented out here, as the string-set: doesn't
+   pass W3C validation currently */
+/*
+.ears thead .left {
+  string-set: ears-top-left content();
+}
+
+.ears thead .center {
+  string-set: ears-top-center content();
+}
+
+.ears thead .right {
+  string-set: ears-top-right content();
+}
+
+.ears tfoot .left {
+  string-set: ears-bottom-left content();
+}
+
+.ears tfoot .center {
+  string-set: ears-bottom-center content();
+}
+
+.ears tfoot .right {
+  string-set: ears-bottom-right content();
+}
+*/
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+  /* The follwing is commented out here, but set appropriately by in code, as
+     the content depends on the document */
+  /*
+  @top-left {
+    content: 'Internet-Draft';
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-left {
+    content: string(ears-top-left);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-center {
+    content: string(ears-top-center);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-right {
+    content: string(ears-top-right);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @bottom-left {
+    content: string(ears-bottom-left);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-center {
+    content: string(ears-bottom-center);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-right {
+      content: '[Page ' counter(page) ']';
+      vertical-align: top;
+      border-top: solid 1px #ccc;
+  }
+  */
+
+}
+
+/* Changes introduced to fix issues found during implementation */
+/* Make sure links are clickable even if overlapped by following H* */
+a {
+  z-index: 2;
+}
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Leave room in document info to show Internet-Draft on one line */
+#identifiers dt {
+  width: 8em;
+}
+
+/* Don't waste quite as much whitespace between label and value in doc info */
+#identifiers dd {
+  margin-left: 1em;
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre {
+  font-size: 95%;
+}
+
+/* Fix the height/width aspect for ascii art*/
+pre.sourcecode,
+.art-text pre {
+  line-height: 1.12;
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table td.text-left,
+table th.text-left {
+  text-align: left;
+}
+table td.text-center,
+table th.text-center {
+  text-align: center;
+}
+table td.text-right,
+table th.text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact informatio look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 30em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Provide table alignment support.  We can't use the alignX classes above
+   since they do unwanted things with caption and other styling. */
+table.right {
+ margin-left: auto;
+ margin-right: 0;
+}
+table.center {
+ margin-left: auto;
+ margin-right: auto;
+}
+table.left {
+ margin-left: 0;
+ margin-right: auto;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+caption a[href] {
+  color: #222;
+}
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+/* Tweak the invisible space above H* in order not to overlay links in text above */
+ h2 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 31px;
+ }
+ h3 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+ h4 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+/* Float artwork pilcrow to the right */
+@media screen {
+  .artwork a.pilcrow {
+    display: block;
+    line-height: 0.7;
+    margin-top: 0.15em;
+  }
+}
+/* Make pilcrows on dd visible */
+@media screen {
+  dd:hover > a.pilcrow {
+    visibility: visible;
+  }
+}
+/* Make the placement of figcaption match that of a table's caption
+   by removing the figure's added bottom margin */
+.alignLeft.art-text,
+.alignCenter.art-text,
+.alignRight.art-text {
+   margin-bottom: 0;
+}
+.alignLeft,
+.alignCenter,
+.alignRight {
+  margin: 1em 0 0 0;
+}
+/* In print, the pilcrow won't show on hover, so prevent it from taking up space,
+   possibly even requiring a new line */
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+/* Styling for the external metadata */
+div#external-metadata {
+  background-color: #eee;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  display: none;
+}
+div#internal-metadata {
+  padding: 0.5em;                       /* to match the external-metadata padding */
+}
+/* Styling for title RFC Number */
+h1#rfcnum {
+  clear: both;
+  margin: 0 0 -1em;
+  padding: 1em 0 0 0;
+}
+/* Make .olPercent look the same as <ol><li> */
+dl.olPercent > dd {
+  margin-bottom: 0.25em;
+  min-height: initial;
+}
+/* Give aside some styling to set it apart */
+aside {
+  border-left: 1px solid #ddd;
+  margin: 1em 0 1em 2em;
+  padding: 0.2em 2em;
+}
+aside > dl,
+aside > ol,
+aside > ul,
+aside > table,
+aside > p {
+  margin-bottom: 0.5em;
+}
+/* Additional page break settings */
+@media print {
+  figcaption, table caption {
+    page-break-before: avoid;
+  }
+}
+/* Font size adjustments for print */
+@media print {
+  body  { font-size: 10pt;      line-height: normal; max-width: 96%; }
+  h1    { font-size: 1.72em;    padding-top: 1.5em; } /* 1*1.2*1.2*1.2 */
+  h2    { font-size: 1.44em;    padding-top: 1.5em; } /* 1*1.2*1.2 */
+  h3    { font-size: 1.2em;     padding-top: 1.5em; } /* 1*1.2 */
+  h4    { font-size: 1em;       padding-top: 1.5em; }
+  h5, h6 { font-size: 1em;      margin: initial; padding: 0.5em 0 0.3em; }
+}
+/* Sourcecode margin in print, when there's no pilcrow */
+@media print {
+  .artwork,
+  .artwork > pre,
+  .sourcecode {
+    margin-bottom: 1em;
+  }
+}
+/* Avoid narrow tables forcing too narrow table captions, which may render badly */
+table {
+  min-width: 20em;
+}
+/* ol type a */
+ol.type-a { list-style-type: lower-alpha; }
+ol.type-A { list-style-type: upper-alpha; }
+ol.type-i { list-style-type: lower-roman; }
+ol.type-I { list-style-type: lower-roman; }
+/* Apply the print table and row borders in general, on request from the RPC,
+and increase the contrast between border and odd row background sligthtly */
+table {
+  border: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+}
+tr {
+  break-inside: avoid;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f8f8f8;
+}
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+/* Add support for keepWithNext */
+.keepWithNext {
+  break-after: avoid-page;
+  break-after: avoid-page;
+}
+/* Add support for keepWithPrevious */
+.keepWithPrevious {
+  break-before: avoid-page;
+}
+/* Change the approach to avoiding breaks inside artwork etc. */
+figure, pre, table, .artwork, .sourcecode  {
+  break-before: auto;
+  break-after: auto;
+}
+/* Avoid breaks between <dt> and <dd> */
+dl {
+  break-before: auto;
+  break-inside: auto;
+}
+dt {
+  break-before: auto;
+  break-after: avoid-page;
+}
+dd {
+  break-before: avoid-page;
+  break-after: auto;
+  orphans: 3;
+  widows: 3
+}
+span.break, dd.break {
+  margin-bottom: 0;
+  min-height: 0;
+  break-before: auto;
+  break-inside: auto;
+  break-after: auto;
+}
+/* Undo break-before ToC */
+@media print {
+  #toc {
+    break-before: auto;
+  }
+}
+/* Text in compact lists should not get extra bottim margin space,
+   since that would makes the list not compact */
+ul.compact p, .ulCompact p,
+ol.compact p, .olCompact p {
+ margin: 0;
+}
+/* But the list as a whole needs the extra space at the end */
+section ul.compact,
+section .ulCompact,
+section ol.compact,
+section .olCompact {
+  margin-bottom: 1em;                    /* same as p not within ul.compact etc. */
+}
+/* The tt and code background above interferes with for instance table cell
+   backgrounds.  Changed to something a bit more selective. */
+tt, code {
+  background-color: transparent;
+}
+p tt, p code, li tt, li code {
+  background-color: #f8f8f8;
+}
+/* Tweak the pre margin -- 0px doesn't come out well */
+pre {
+   margin-top: 0.5px;
+}
+/* Tweak the comact list text */
+ul.compact, .ulCompact,
+ol.compact, .olCompact,
+dl.compact, .dlCompact {
+  line-height: normal;
+}
+/* Don't add top margin for nested lists */
+li > ul, li > ol, li > dl,
+dd > ul, dd > ol, dd > dl,
+dl > dd > dl {
+  margin-top: initial;
+}
+/* Elements that should not be rendered on the same line as a <dt> */
+/* This should match the element list in writer.text.TextWriter.render_dl() */
+dd > div.artwork:first-child,
+dd > aside:first-child,
+dd > figure:first-child,
+dd > ol:first-child,
+dd > div:first-child > pre.sourcecode,
+dd > table:first-child,
+dd > ul:first-child {
+  clear: left;
+}
+/* fix for weird browser behaviour when <dd/> is empty */
+dt+dd:empty::before{
+  content: "\00a0";
+}
+/* Make paragraph spacing inside <li> smaller than in body text, to fit better within the list */
+li > p {
+  margin-bottom: 0.5em
+}
+/* Don't let p margin spill out from inside list items */
+li > p:last-of-type {
+  margin-bottom: 0;
+}
+</style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
+<script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
+</head>
+<body class="xml2rfc">
+<script src="metadata.min.js"></script>
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">Properties of AEAD algorithms</td>
+<td class="right">October 2022</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Bozhko</td>
+<td class="center">Expires 30 April 2023</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-bozhko-cfrg-aead-properties-01</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2022-10-27" class="published">27 October 2022</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2023-04-30">30 April 2023</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">A.A. Bozhko, <span class="editor">Ed.</span>
+</div>
+<div class="org">CryptoPro</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Properties of AEAD algorithms</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">
+        Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms
+        in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions
+        for the most common of those properties intending to improve consistency in the field.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 30 April 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2022 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-background" class="internal xref">Background</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-used-in-this-do" class="internal xref">Conventions Used in This Document</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-aead-properties" class="internal xref">AEAD properties</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-security-properties" class="internal xref">Security properties</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-confidentiality" class="internal xref">Confidentiality</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="auto internal xref">3.1.2</a>.  <a href="#name-data-integrity" class="internal xref">Data integrity</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.3">
+                    <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-blockwise-security" class="internal xref">Blockwise security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
+                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-key-dependent-messages-kdm-" class="internal xref">Key Dependent Messages (KDM) security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.5">
+                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-key-commitment" class="internal xref">Key commitment</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.6">
+                    <p id="section-toc.1-1.3.2.1.2.6.1"><a href="#section-3.1.6" class="auto internal xref">3.1.6</a>.  <a href="#name-leakage-resistance" class="internal xref">Leakage resistance</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.7">
+                    <p id="section-toc.1-1.3.2.1.2.7.1"><a href="#section-3.1.7" class="auto internal xref">3.1.7</a>.  <a href="#name-multi-user-security" class="internal xref">Multi-user security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.8">
+                    <p id="section-toc.1-1.3.2.1.2.8.1"><a href="#section-3.1.8" class="auto internal xref">3.1.8</a>.  <a href="#name-nonce-misuse" class="internal xref">Nonce misuse</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.8.2.1">
+                        <p id="section-toc.1-1.3.2.1.2.8.2.1.1"><a href="#section-3.1.8.1" class="auto internal xref">3.1.8.1</a>.  <a href="#name-nonce-misuse-resilience" class="internal xref">Nonce misuse resilience</a></p>
+</li>
+                      <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.8.2.2">
+                        <p id="section-toc.1-1.3.2.1.2.8.2.2.1"><a href="#section-3.1.8.2" class="auto internal xref">3.1.8.2</a>.  <a href="#name-nonce-misuse-resistance" class="internal xref">Nonce misuse resistance</a></p>
+</li>
+                    </ul>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.9">
+                    <p id="section-toc.1-1.3.2.1.2.9.1"><a href="#section-3.1.9" class="auto internal xref">3.1.9</a>.  <a href="#name-reforgeability-resilience" class="internal xref">Reforgeability resilience</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.10">
+                    <p id="section-toc.1-1.3.2.1.2.10.1"><a href="#section-3.1.10" class="auto internal xref">3.1.10</a>. <a href="#name-release-of-unverified-plain" class="internal xref">Release of unverified plaintext (RUP) security</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-implementation-properties" class="internal xref">Implementation properties</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-inverse-free" class="internal xref">Inverse-free</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-lightweight" class="internal xref">Lightweight</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.3">
+                    <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="auto internal xref">3.2.3</a>.  <a href="#name-online" class="internal xref">Online</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.4">
+                    <p id="section-toc.1-1.3.2.2.2.4.1"><a href="#section-3.2.4" class="auto internal xref">3.2.4</a>.  <a href="#name-parallelizable" class="internal xref">Parallelizable</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.5">
+                    <p id="section-toc.1-1.3.2.2.2.5.1"><a href="#section-3.2.5" class="auto internal xref">3.2.5</a>.  <a href="#name-single-pass" class="internal xref">Single pass</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.6">
+                    <p id="section-toc.1-1.3.2.2.2.6.1"><a href="#section-3.2.6" class="auto internal xref">3.2.6</a>.  <a href="#name-zk-friendly" class="internal xref">ZK-friendly</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-additional-functionality-pr" class="internal xref">Additional functionality properties</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-incremental" class="internal xref">Incremental</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
+                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-nonce-hiding" class="internal xref">Nonce-hiding</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.3">
+                    <p id="section-toc.1-1.3.2.3.2.3.1"><a href="#section-3.3.3" class="auto internal xref">3.3.3</a>.  <a href="#name-remotely-keyed" class="internal xref">Remotely-keyed</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="Introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">
+        An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption,
+        which provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some Associated Data
+        (sometimes called Header). AEAD algorithms are used in numerous applications and have become an important field in cryptographic research.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<div id="IntBack">
+<section id="section-1.1">
+        <h3 id="name-background">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-background" class="section-name selfRef">Background</a>
+        </h3>
+<p id="section-1.1-1">
+          AEAD algorithms are formally defined in <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>. The main benefit of AEAD algorithms is that they provide both data confidentiality and data
+          integrity and have a simple unified interface.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">
+          The importance of the AEAD algorithms is mainly explained by their exploitation simplicity: they have a unified interface, easy-to-understand security guarantees, and are much
+          easier to implement properly than MAC and encryption schemes separately. Therefore, their embedding into high-level schemes and protocols is highly transparent, since, for example,
+          there is no need for additional key derivation procedures. Apart from that, when using the AEAD algorithm it is possible to reduce the key size, state size, and to improve the
+          data processing speed. For instance, the use of such algorithms is mandatory for TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, IPsec ESP <span>[<a href="#RFC4303" class="cite xref">RFC4303</a>]</span>
+          <span>[<a href="#RFC8221" class="cite xref">RFC8221</a>]</span>, QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>. Hence, the research and standardization efforts in the field are extremely active. Most
+          AEAD algorithms usually come with security guarantees, formal proofs, usage guidelines and reference implementations.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">
+          Even though providing core properties of AEAD algorithms is enough for use in many applications, some environments require other unusual cryptographic properties which commonly
+          require additional analysis and research. With the growing number of such properties and research papers, misunderstanding and confusion inevitably appear. Some properties
+          might be understood in different ways, for some only non-trivial formal security notions are provided, others require modification or extension of the standard AEAD interface to
+          support additional functionality. Therefore, the risk of misuse of AEAD algorithms increases which can lead to security issues.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="IntScope">
+<section id="section-1.2">
+        <h3 id="name-scope">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+        </h3>
+<p id="section-1.2-1">
+          In the following document, we provide a short overview of the most common properties of AEAD algorithms, by giving high-level definitions of these properties
+          in <a href="#Properties" class="auto internal xref">Section 3</a>. The document aims to improve clarity and establish a common language in the field.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<section id="section-2">
+      <h2 id="name-conventions-used-in-this-do">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-used-in-this-do" class="section-name selfRef">Conventions Used in This Document</a>
+      </h2>
+<p id="section-2-1">
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+        "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted
+        as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when,
+        they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</section>
+<div id="Properties">
+<section id="section-3">
+      <h2 id="name-aead-properties">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-aead-properties" class="section-name selfRef">AEAD properties</a>
+      </h2>
+<div id="SecurityProp">
+<section id="section-3.1">
+        <h3 id="name-security-properties">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-security-properties" class="section-name selfRef">Security properties</a>
+        </h3>
+<div id="Conf">
+<section id="section-3.1.1">
+          <h4 id="name-confidentiality">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-confidentiality" class="section-name selfRef">Confidentiality</a>
+          </h4>
+<p id="section-3.1.1-1">
+            Definition. An AEAD algorithm guarantees that data is available only to those authorized to obtain it. That property is
+            required for the AEAD algorithm to be called secure.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">
+            Synonyms. Privacy.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">
+            Further reading. <span>[<a href="#R2002" class="cite xref">R2002</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span><a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Int">
+<section id="section-3.1.2">
+          <h4 id="name-data-integrity">
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-data-integrity" class="section-name selfRef">Data integrity</a>
+          </h4>
+<p id="section-3.1.2-1">
+            Definition. An AEAD algorithm guarantees that data is available only to those authorized to obtain it. That property is
+            required for the AEAD algorithm to be called secure.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-2">
+            Synonyms. Message authentication.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-3">
+            Further reading. <span>[<a href="#R2002" class="cite xref">R2002</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span><a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="BWsec">
+<section id="section-3.1.3">
+          <h4 id="name-blockwise-security">
+<a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-blockwise-security" class="section-name selfRef">Blockwise security</a>
+          </h4>
+<p id="section-3.1.3-1">
+            Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next block of a plaintext (ciphertext)
+            depending on already computed blocks of the ciphertext (plaintext) during an encryption (decryption) operation.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-2">
+            Further reading. <span>[<a href="#JMV2002" class="cite xref">JMV2002</a>]</span>, <span>[<a href="#FJMV2004" class="cite xref">FJMV2004</a>]</span><a href="#section-3.1.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="KDM">
+<section id="section-3.1.4">
+          <h4 id="name-key-dependent-messages-kdm-">
+<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-key-dependent-messages-kdm-" class="section-name selfRef">Key Dependent Messages (KDM) security</a>
+          </h4>
+<p id="section-3.1.4-1">
+            Definition. An AEAD algorithm provides security even when key-dependent plaintexts are encrypted.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-2">
+            Notes. KDM-security is achievable only if nonces are chosen randomly and associated data is key-independent.<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-3">
+            Further reading.
+            <span>[<a href="#BK2011" class="cite xref">BK2011</a>]</span><a href="#section-3.1.4-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="KeyComm">
+<section id="section-3.1.5">
+          <h4 id="name-key-commitment">
+<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-key-commitment" class="section-name selfRef">Key commitment</a>
+          </h4>
+<p id="section-3.1.5-1">
+            Definition. An AEAD algorithm guarantees that it is difficult to find a tuple of nonce, associated data and ciphertext, such that it can be decrypted
+            correctly with more than one key.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-2">
+            Synonyms. Key-robustness,  key collision resistance.<a href="#section-3.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-3">
+            Further reading. <span>[<a href="#FOR17" class="cite xref">FOR17</a>]</span>, <span>[<a href="#LGR21" class="cite xref">LGR21</a>]</span>, <span>[<a href="#GLR17" class="cite xref">GLR17</a>]</span><a href="#section-3.1.5-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Leakage">
+<section id="section-3.1.6">
+          <h4 id="name-leakage-resistance">
+<a href="#section-3.1.6" class="section-number selfRef">3.1.6. </a><a href="#name-leakage-resistance" class="section-name selfRef">Leakage resistance</a>
+          </h4>
+<p id="section-3.1.6-1">
+            Definition. An AEAD algorithm provides its security even if an additional information about computations of an encryption
+            (and possibly decryption) operation is obtained via side-channel leakages.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-2">
+            Further reading. <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span>, <span>[<a href="#B20" class="cite xref">B20</a>]</span><a href="#section-3.1.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Mu-sec">
+<section id="section-3.1.7">
+          <h4 id="name-multi-user-security">
+<a href="#section-3.1.7" class="section-number selfRef">3.1.7. </a><a href="#name-multi-user-security" class="section-name selfRef">Multi-user security</a>
+          </h4>
+<p id="section-3.1.7-1">
+            Definition. An AEAD algorithm security level degrades sublinearly in a number of users. Here the level of security is understood in the
+            sense of Authenticated Encryption advantage (AEA) as given in <span>[<a href="#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span>.<a href="#section-3.1.7-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.7-2">
+            Further reading.
+            <span>[<a href="#BT16" class="cite xref">BT16</a>]</span><a href="#section-3.1.7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="NM">
+<section id="section-3.1.8">
+          <h4 id="name-nonce-misuse">
+<a href="#section-3.1.8" class="section-number selfRef">3.1.8. </a><a href="#name-nonce-misuse" class="section-name selfRef">Nonce misuse</a>
+          </h4>
+<p id="section-3.1.8-1">
+            Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries.<a href="#section-3.1.8-1" class="pilcrow">¶</a></p>
+<div id="NM1">
+<section id="section-3.1.8.1">
+            <h5 id="name-nonce-misuse-resilience">
+<a href="#section-3.1.8.1" class="section-number selfRef">3.1.8.1. </a><a href="#name-nonce-misuse-resilience" class="section-name selfRef">Nonce misuse resilience</a>
+            </h5>
+<p id="section-3.1.8.1-1">
+              Definition. Security is provided only for messages encrypted with unique nonces.<a href="#section-3.1.8.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.8.1-2">
+              Further reading. <span>[<a href="#ADL17" class="cite xref">ADL17</a>]</span>, <span>[<a href="#RS06" class="cite xref">RS06</a>]</span><a href="#section-3.1.8.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="NM2">
+<section id="section-3.1.8.2">
+            <h5 id="name-nonce-misuse-resistance">
+<a href="#section-3.1.8.2" class="section-number selfRef">3.1.8.2. </a><a href="#name-nonce-misuse-resistance" class="section-name selfRef">Nonce misuse resistance</a>
+            </h5>
+<p id="section-3.1.8.2-1">
+              Definition. Security is provided for all messages.<a href="#section-3.1.8.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.8.2-2">
+              Further reading.
+              <span>[<a href="#RS06" class="cite xref">RS06</a>]</span><a href="#section-3.1.8.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="Reforg">
+<section id="section-3.1.9">
+          <h4 id="name-reforgeability-resilience">
+<a href="#section-3.1.9" class="section-number selfRef">3.1.9. </a><a href="#name-reforgeability-resilience" class="section-name selfRef">Reforgeability resilience</a>
+          </h4>
+<p id="section-3.1.9-1">
+            Definition. An AEAD algorithm guarantees that once a successful forgery for the algorithm has been found, it is still hard to find any subsequent forgery.<a href="#section-3.1.9-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.9-2">
+            Further reading. <span>[<a href="#BC09" class="cite xref">BC09</a>]</span>, <span>[<a href="#FLLW17" class="cite xref">FLLW17</a>]</span><a href="#section-3.1.9-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="RUP">
+<section id="section-3.1.10">
+          <h4 id="name-release-of-unverified-plain">
+<a href="#section-3.1.10" class="section-number selfRef">3.1.10. </a><a href="#name-release-of-unverified-plain" class="section-name selfRef">Release of unverified plaintext (RUP) security</a>
+          </h4>
+<p id="section-3.1.10-1">
+            Definition. An AEAD algorithm provides its security even if a plaintext is released for every ciphertext, including
+            those with failed integrity verification.<a href="#section-3.1.10-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.10-2">
+            Further reading.
+            <span>[<a href="#A14" class="cite xref">A14</a>]</span><a href="#section-3.1.10-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="ImpProp">
+<section id="section-3.2">
+        <h3 id="name-implementation-properties">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-implementation-properties" class="section-name selfRef">Implementation properties</a>
+        </h3>
+<div id="Inverse">
+<section id="section-3.2.1">
+          <h4 id="name-inverse-free">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-inverse-free" class="section-name selfRef">Inverse-free</a>
+          </h4>
+<p id="section-3.2.1-1">
+            Definition. A blockcipher-based AEAD algorithm can be securely implemented without any evaluation of the block cipher inverse.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Lightweight">
+<section id="section-3.2.2">
+          <h4 id="name-lightweight">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-lightweight" class="section-name selfRef">Lightweight</a>
+          </h4>
+<p id="section-3.2.2-1">
+            Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. Particularly, it meets
+            the criteria, required in the NIST Lightweight Cryptography competition <span>[<a href="#MBTM17" class="cite xref">MBTM17</a>]</span>.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-2">
+            Further reading.
+            <span>[<a href="#MBTM17" class="cite xref">MBTM17</a>]</span><a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Online">
+<section id="section-3.2.3">
+          <h4 id="name-online">
+<a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-online" class="section-name selfRef">Online</a>
+          </h4>
+<p id="section-3.2.3-1">
+            Definition. An AEAD algorithm encryption (decryption) algorithm can be implemented with a constant memory and a single one-direction pass over the plaintext (ciphertext),
+            writing out the result during that pass.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-2">
+            Further reading.
+            <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span>
+            <span>[<a href="#FJMV2004" class="cite xref">FJMV2004</a>]</span><a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="Parallelizable">
+<section id="section-3.2.4">
+          <h4 id="name-parallelizable">
+<a href="#section-3.2.4" class="section-number selfRef">3.2.4. </a><a href="#name-parallelizable" class="section-name selfRef">Parallelizable</a>
+          </h4>
+<p id="section-3.2.4-1">
+            Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure. In other words, with unlimited number of threads,
+            computation time remains constant in an input length.<a href="#section-3.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.4-2">
+            Further reading.
+            <span>[<a href="#C20" class="cite xref">C20</a>]</span><a href="#section-3.2.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="SinglePass">
+<section id="section-3.2.5">
+          <h4 id="name-single-pass">
+<a href="#section-3.2.5" class="section-number selfRef">3.2.5. </a><a href="#name-single-pass" class="section-name selfRef">Single pass</a>
+          </h4>
+<p id="section-3.2.5-1">
+            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).<a href="#section-3.2.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ZK">
+<section id="section-3.2.6">
+          <h4 id="name-zk-friendly">
+<a href="#section-3.2.6" class="section-number selfRef">3.2.6. </a><a href="#name-zk-friendly" class="section-name selfRef">ZK-friendly</a>
+          </h4>
+<p id="section-3.2.6-1">
+            Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often referred to as the multiplicative complexity).
+            Thus, allows efficient implementation using a domain specific language (DSL) for writing zk-SNARKs circuits.<a href="#section-3.2.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.6-2">
+            Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity<a href="#section-3.2.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.6-3">
+            Further reading.
+            <span>[<a href="#DGGK21" class="cite xref">DGGK21</a>]</span><a href="#section-3.2.6-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="AddProp">
+<section id="section-3.3">
+        <h3 id="name-additional-functionality-pr">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-additional-functionality-pr" class="section-name selfRef">Additional functionality properties</a>
+        </h3>
+<div id="Incremental">
+<section id="section-3.3.1">
+          <h4 id="name-incremental">
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-incremental" class="section-name selfRef">Incremental</a>
+          </h4>
+<p id="section-3.3.1-1">
+            Definition. An AEAD algorithm design allows to encrypt a message, which only partly differs from some other previously encrypted message, faster than encrypting
+            the whole message with the encryption operation.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-2">
+            Further reading. <span>[<a href="#SY16" class="cite xref">SY16</a>]</span>, <span>[<a href="#BKY02" class="cite xref">BKY02</a>]</span><a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="NonceHiding">
+<section id="section-3.3.2">
+          <h4 id="name-nonce-hiding">
+<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-nonce-hiding" class="section-name selfRef">Nonce-hiding</a>
+          </h4>
+<p id="section-3.3.2-1">
+            Definition. An AEAD algorithm decryption operation doesn't need the nonce value to perform the decryption. Thus, the algorithm provides privacy for the nonce value.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-2">
+            Further reading.
+            <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span><a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="RemotelyKeyed">
+<section id="section-3.3.3">
+          <h4 id="name-remotely-keyed">
+<a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-remotely-keyed" class="section-name selfRef">Remotely-keyed</a>
+          </h4>
+<p id="section-3.3.3-1">
+            Definition. An AEAD algorithm can be securely implemented with most of the operations in encryption/decryption performed
+            by an insecure (i.e. it leaks all intermediate values) device, which has no access to the key, while operations involving the key are performed by another secure device.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-2">
+            Further reading. <span>[<a href="#BFN98" class="cite xref">BFN98</a>]</span>, <span>[<a href="#DA03" class="cite xref">DA03</a>]</span><a href="#section-3.3.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="Security">
+<section id="section-4">
+      <h2 id="name-security-considerations">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-4-1">
+        This document defines the properties of AEAD algorithms. However, the document does not describe any concrete mechanisms providing these properties, neither it describes how
+        to achieve them. In fact, one can claim that an AEAD algorithm provides any of the defined properties only if its formal analysis in the relevant models was carried out.<a href="#section-4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="IANACON">
+<section id="section-5">
+      <h2 id="name-iana-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-5-1">
+        This document has no IANA actions.<a href="#section-5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-6">
+      <h2 id="name-references">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-6.1">
+        <h3 id="name-normative-references">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5116">[RFC5116]</dt>
+        <dd>
+<span class="refAuthor">McGrew, D.</span>, <span class="refTitle">"An Interface and Algorithms for Authenticated Encryption"</span>, <span class="seriesInfo">RFC 5116</span>, <span class="seriesInfo">DOI 10.17487/RFC5116</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5116">https://www.rfc-editor.org/info/rfc5116</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-6.2">
+        <h3 id="name-informative-references">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="A14">[A14]</dt>
+        <dd>
+<span class="refAuthor">Forler, C.</span>, <span class="refAuthor">List, E.</span>, <span class="refAuthor">Forler, C.</span>, <span class="refAuthor">List, E.</span>, <span class="refAuthor">List, E.</span>, and <span class="refAuthor">E. List</span>, <span class="refTitle">"How to Securely Release Unverified Plaintext in Authenticated Encryption"</span>, <span class="refContent">Advances in Cryptology – ASIACRYPT 2014. ASIACRYPT 2014. Lecture Notes in Computer Science, vol 8873. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/978-3-662-45611-8_6</span>, <time datetime="2014" class="refDate">2014</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-662-45611-8_6">https://doi.org/10.1007/978-3-662-45611-8_6</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ADL17">[ADL17]</dt>
+        <dd>
+<span class="refAuthor">Ashur, T.</span>, <span class="refAuthor">Dunkelman, O.</span>, and <span class="refAuthor">A. Luykx</span>, <span class="refTitle">"Boosting Authenticated Encryption Robustness with Minimal Modifications"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2017. CRYPTO 2017. Lecture Notes in Computer Science, vol 10403. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-319-63697-9_1</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-319-63697-9_1">https://doi.org/10.1007/978-3-319-63697-9_1</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="B20">[B20]</dt>
+        <dd>
+<span class="refAuthor">Bellizia, D.</span>, <span class="refAuthor">Bronchain, O.</span>, <span class="refAuthor">Cassiers, G.</span>, <span class="refAuthor">Grosso, V.</span>, <span class="refAuthor">Guo, C.</span>, <span class="refAuthor">Momin, C.</span>, <span class="refAuthor">Pereira, O.</span>, <span class="refAuthor">Peters, T.</span>, and <span class="refAuthor">FX. Standaert</span>, <span class="refTitle">"Mode-Level vs. Implementation-Level Physical Security in Symmetric Cryptography: A Practical Guide Through the Leakage-Resistance Jungle"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2020. CRYPTO 2020. Lecture Notes in Computer Science, vol 12170. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-030-56784-2_13</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-030-56784-2_13">https://doi.org/10.1007/978-3-030-56784-2_13</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BC09">[BC09]</dt>
+        <dd>
+<span class="refAuthor">Forler, C.</span> and <span class="refAuthor">E. List</span>, <span class="refTitle">"MAC Reforgeability"</span>, <span class="refContent">Fast Software Encryption. FSE 2009. Lecture Notes in Computer Science, vol 5665. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/978-3-642-03317-9_21</span>, <time datetime="2009" class="refDate">2009</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-642-03317-9_21">https://doi.org/10.1007/978-3-642-03317-9_21</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BFN98">[BFN98]</dt>
+        <dd>
+<span class="refAuthor">Blaze, M.</span>, <span class="refAuthor">Feigenbaum, J.</span>, and <span class="refAuthor">M. Naor</span>, <span class="refTitle">"A formal treatment of remotely keyed encryption"</span>, <span class="refContent">Advances in Cryptology — EUROCRYPT'98. EUROCRYPT 1998. Lecture Notes in Computer Science, vol 1403. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/BFb0054131</span>, <time datetime="1998" class="refDate">1998</time>, <span>&lt;<a href="https://doi.org/10.1007/BFb0054131">https://doi.org/10.1007/BFb0054131</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BK2011">[BK2011]</dt>
+        <dd>
+<span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">S. Keelveedhi</span>, <span class="refTitle">"Authenticated and Misuse-Resistant Encryption of Key-Dependent Data"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2011. CRYPTO 2011. Lecture Notes in Computer Science, vol 6841. Springer, Berlin, Heidelberg.</span>, <span class="seriesInfo">DOI 10.1007/978-3-642-22792-9_35</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-642-22792-9_35">https://doi.org/10.1007/978-3-642-22792-9_35</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BKY02">[BKY02]</dt>
+        <dd>
+<span class="refAuthor">Buonanno, E.</span>, <span class="refAuthor">Katz, J.</span>, and <span class="refAuthor">M. Yung</span>, <span class="refTitle">"Incremental Unforgeable Encryption"</span>, <span class="refContent"> Fast Software Encryption. FSE 2001. Lecture Notes in Computer Science, vol 2355. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/3-540-45473-X_9</span>, <time datetime="2002" class="refDate">2002</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-45473-X_9">https://doi.org/10.1007/3-540-45473-X_9</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BN2000">[BN2000]</dt>
+        <dd>
+<span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">C. Namprempre</span>, <span class="refTitle">"Authenticated Encryption: Relations among Notions and Analysis of the Generic Composition Paradigm"</span>, <span class="refContent">Proceedings of ASIACRYPT 2000, Springer-Verlag, LNCS 1976, pp. 531-545</span>, <span class="seriesInfo">DOI 10.1007/s00145-008-9026-x</span>, <time datetime="2000" class="refDate">2000</time>, <span>&lt;<a href="https://doi.org/10.1007/s00145-008-9026-x">https://doi.org/10.1007/s00145-008-9026-x</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BNT19">[BNT19]</dt>
+        <dd>
+<span class="refAuthor">Bellare, M.</span>, <span class="refAuthor">Ng, R.</span>, and <span class="refAuthor">B. Tackmann</span>, <span class="refTitle">"Nonces Are Noticed: AEAD Revisited"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2019. CRYPTO 2019. Lecture Notes in Computer Science, vol 11692. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-030-26948-7_9</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-030-26948-7_9">https://doi.org/10.1007/978-3-030-26948-7_9</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BT16">[BT16]</dt>
+        <dd>
+<span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">B. Tackmann</span>, <span class="refTitle">"The Multi-User Security of Authenticated Encryption: AES-GCM in TLS 1.3"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2016. CRYPTO 2016. Lecture Notes in Computer Science, vol 9814. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/978-3-662-53018-4_10</span>, <time datetime="2016" class="refDate">2016</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-662-53018-4_10">https://doi.org/10.1007/978-3-662-53018-4_10</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="C20">[C20]</dt>
+        <dd>
+<span class="refAuthor">Chakraborti, A.</span>, <span class="refAuthor">Datta, N.</span>, <span class="refAuthor">Jha, A.</span>, <span class="refAuthor">Mancillas-López, C.</span>, <span class="refAuthor">Nandi, M.</span>, and <span class="refAuthor">Y. Sasaki</span>, <span class="refTitle">"INT-RUP Secure Lightweight Parallel AE Modes"</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology, 2019(4), 81–118</span>, <span class="seriesInfo">DOI 10.13154/tosc.v2019.i4.81-118</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://doi.org/10.13154/tosc.v2019.i4.81-118">https://doi.org/10.13154/tosc.v2019.i4.81-118</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="DA03">[DA03]</dt>
+        <dd>
+<span class="refAuthor">Dodis, Y.</span> and <span class="refAuthor">JH. An</span>, <span class="refTitle">"Concealment and Its Applications to Authenticated Encryption"</span>, <span class="refContent">Advances in Cryptology — EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/3-540-39200-9_19</span>, <time datetime="2003" class="refDate">2003</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-39200-9_19">https://doi.org/10.1007/3-540-39200-9_19</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="DGGK21">[DGGK21]</dt>
+        <dd>
+<span class="refAuthor">Dobraunig, C.</span>, <span class="refAuthor">Grassi, L.</span>, <span class="refAuthor">Guinet, G.</span>, and <span class="refAuthor">K. Kuijsters</span>, <span class="refTitle">"CIMINION: Symmetric Encryption Based on Toffoli-Gates over Large Finite Fields"</span>, <span class="refContent">Advances in Cryptology – EUROCRYPT 2021. EUROCRYPT 2021. Lecture Notes in Computer Science(), vol 12697. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-030-77886-6_1</span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-030-77886-6_1">https://doi.org/10.1007/978-3-030-77886-6_1</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="FJMV2004">[FJMV2004]</dt>
+        <dd>
+<span class="refAuthor">Valette, PA.</span>, <span class="refAuthor">Joux, A.</span>, <span class="refAuthor">Martinet, G.</span>, and <span class="refAuthor">F. Valette</span>, <span class="refTitle">"Authenticated On-Line Encryption"</span>, <span class="refContent">Selected Areas in Cryptography. SAC 2003. Lecture Notes in Computer Science, vol 3006. Springer, Berlin, Heidelberg. </span>, <span class="seriesInfo">DOI 10.1007/978-3-540-24654-1_11</span>, <time datetime="2004" class="refDate">2004</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-540-24654-1_11">https://doi.org/10.1007/978-3-540-24654-1_11</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="FLLW17">[FLLW17]</dt>
+        <dd>
+<span class="refAuthor">Forler, C.</span>, <span class="refAuthor">List, E.</span>, <span class="refAuthor">Lucks, S.</span>, and <span class="refAuthor">J. Wenzel</span>, <span class="refTitle">"Reforgeability of Authenticated Encryption Schemes"</span>, <span class="refContent">Information Security and Privacy. ACISP 2017. Lecture Notes in Computer Science, vol 10343. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-319-59870-3_2</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-319-59870-3_2">https://doi.org/10.1007/978-3-319-59870-3_2</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="FOR17">[FOR17]</dt>
+        <dd>
+<span class="refAuthor">Farshim, P.</span>, <span class="refAuthor">Orlandi, C.</span>, and <span class="refAuthor">R. Rosie</span>, <span class="refTitle">"Authenticated and Misuse-Resistant Encryption of Key-Dependent DataSecurity of Symmetric Primitives under Incorrect Usage of Keys"</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology, 2017(1), 449–473.</span>, <span class="seriesInfo">DOI 10.13154/tosc.v2017.i1.449-473</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://doi.org/10.13154/tosc.v2017.i1.449-473">https://doi.org/10.13154/tosc.v2017.i1.449-473</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GLR17">[GLR17]</dt>
+        <dd>
+<span class="refAuthor">Grubbs, P.</span>, <span class="refAuthor">Lu, J.</span>, and <span class="refAuthor">T. Ristenpart</span>, <span class="refTitle">"Message Franking via Committing Authenticated Encryption."</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2017. CRYPTO 2017. Lecture Notes in Computer Science, vol 10403. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-319-63697-9_3</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-319-63697-9_3">https://doi.org/10.1007/978-3-319-63697-9_3</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="GPPS19">[GPPS19]</dt>
+        <dd>
+<span class="refAuthor">Guo, C.</span>, <span class="refAuthor">Pereira, O.</span>, <span class="refAuthor">Peters, T.</span>, and <span class="refAuthor">FX. Standaert</span>, <span class="refTitle">"Authenticated Encryption with Nonce Misuse and Physical Leakages: Definitions, Separation Results and Leveled Constructions"</span>, <span class="refContent">Progress in Cryptology – LATINCRYPT 2019. LATINCRYPT 2019. Lecture Notes in Computer Science, vol 11774. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-030-30530-7_8</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-030-30530-7_8">https://doi.org/10.1007/978-3-030-30530-7_8</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="HRRV15">[HRRV15]</dt>
+        <dd>
+<span class="refAuthor">Hoang, VT.</span>, <span class="refAuthor">Reyhanitabar, R.</span>, <span class="refAuthor">Rogaway, P.</span>, and <span class="refAuthor">D. Vizár</span>, <span class="refTitle">"Online Authenticated-Encryption and its Nonce-Reuse Misuse-Resistance"</span>, <span class="refContent">Advances in Cryptology -- CRYPTO 2015. CRYPTO 2015. Lecture Notes in Computer Science, vol 9215. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/978-3-662-47989-6_24</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-662-47989-6_24">https://doi.org/10.1007/978-3-662-47989-6_24</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.irtf-cfrg-aead-limits">[I-D.irtf-cfrg-aead-limits]</dt>
+        <dd>
+<span class="refAuthor">Günther, F.</span>, <span class="refAuthor">Thomson, M.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Usage Limits on AEAD Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-aead-limits-05</span>, <time datetime="2022-07-11" class="refDate">11 July 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-05">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="JMV2002">[JMV2002]</dt>
+        <dd>
+<span class="refAuthor">Joux, A.</span>, <span class="refAuthor">Martinet, G.</span>, and <span class="refAuthor">F. Valette</span>, <span class="refTitle">"Blockwise-Adaptive Attackers Revisiting the (In)Security of Some Provably Secure Encryption Modes: CBC, GEM, IACBC"</span>, <span class="refContent">Advances in Cryptology — CRYPTO 2002. CRYPTO 2002. Lecture Notes in Computer Science, vol 2442. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/3-540-45708-9_2</span>, <time datetime="2002" class="refDate">2002</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-45708-9_2">https://doi.org/10.1007/3-540-45708-9_2</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="LGR21">[LGR21]</dt>
+        <dd>
+<span class="refAuthor">Len, J.</span>, <span class="refAuthor">Grubbs, P.</span>, and <span class="refAuthor">T. Ristenpart</span>, <span class="refTitle">"Partitioning Oracle Attacks"</span>, <span class="refContent">30th USENIX Security Symposium (USENIX Security 21), 195--212</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
+<dd class="break"></dd>
+<dt id="MBTM17">[MBTM17]</dt>
+        <dd>
+<span class="refAuthor">McKay, K.</span>, <span class="refAuthor">Bassham, L.</span>, <span class="refAuthor">Turan, MS.</span>, and <span class="refAuthor">N. Mouha</span>, <span class="refTitle">"Report on Lightweight Cryptography"</span>, <span class="seriesInfo">DOI 10.6028/NIST.IR.8114</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.IR.8114">https://doi.org/10.6028/NIST.IR.8114</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="R2002">[R2002]</dt>
+        <dd>
+<span class="refAuthor">Rogaway, P.</span>, <span class="refTitle">"Authenticated-encryption with associated-data."</span>, <span class="refContent">Proceedings of the 9th ACM conference on Computer and communications security (CCS '02)</span>, <span class="refContent">Association for Computing Machinery, New York, NY, USA, 98–107</span>, <span class="seriesInfo">DOI 10.1145/586110.586125</span>, <time datetime="2002" class="refDate">2002</time>, <span>&lt;<a href="https://doi.org/10.1145/586110.586125">https://doi.org/10.1145/586110.586125</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4303">[RFC4303]</dt>
+        <dd>
+<span class="refAuthor">Kent, S.</span>, <span class="refTitle">"IP Encapsulating Security Payload (ESP)"</span>, <span class="seriesInfo">RFC 4303</span>, <span class="seriesInfo">DOI 10.17487/RFC4303</span>, <time datetime="2005-12" class="refDate">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4303">https://www.rfc-editor.org/info/rfc4303</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8221">[RFC8221]</dt>
+        <dd>
+<span class="refAuthor">Wouters, P.</span>, <span class="refAuthor">Migault, D.</span>, <span class="refAuthor">Mattsson, J.</span>, <span class="refAuthor">Nir, Y.</span>, and <span class="refAuthor">T. Kivinen</span>, <span class="refTitle">"Cryptographic Algorithm Implementation Requirements and Usage Guidance for Encapsulating Security Payload (ESP) and Authentication Header (AH)"</span>, <span class="seriesInfo">RFC 8221</span>, <span class="seriesInfo">DOI 10.17487/RFC8221</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8221">https://www.rfc-editor.org/info/rfc8221</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+        <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9000">https://www.rfc-editor.org/info/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RS06">[RS06]</dt>
+        <dd>
+<span class="refAuthor">Rogaway, R.</span> and <span class="refAuthor">T. Shrimpton</span>, <span class="refTitle">"A Provable-Security Treatment of the Key-Wrap Problem"</span>, <span class="refContent">Advances in Cryptology - EUROCRYPT 2006. EUROCRYPT 2006. Lecture Notes in Computer Science, vol 4004. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/11761679_23</span>, <time datetime="2016" class="refDate">2016</time>, <span>&lt;<a href="https://doi.org/10.1007/11761679_23">https://doi.org/10.1007/11761679_23</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SY16">[SY16]</dt>
+      <dd>
+<span class="refAuthor">Sasaki, Y.</span> and <span class="refAuthor">K. Yasuda</span>, <span class="refTitle">"A New Mode of Operation for Incremental Authenticated Encryption with Associated Data"</span>, <span class="refContent"> Selected Areas in Cryptography – SAC 2015. SAC 2015. Lecture Notes in Computer Science(), vol 9566. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-319-31301-6_23</span>, <time datetime="2016" class="refDate">2016</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-319-31301-6_23">https://doi.org/10.1007/978-3-319-31301-6_23</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</section>
+<div id="contributors">
+<section id="appendix-A">
+      <h2 id="name-contributors">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-contributors" class="section-name selfRef">Contributors</a>
+    </h2>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Andrey Bozhko (<span class="role">editor</span>)</span></div>
+<div dir="auto" class="left"><span class="org">CryptoPro</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:andbogc@gmail.com" class="email">andbogc@gmail.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
