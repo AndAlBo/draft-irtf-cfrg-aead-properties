@@ -4,12 +4,12 @@
 
 Network Working Group                                   A.A. Bozhko, Ed.
 Internet-Draft                                                 CryptoPro
-Intended status: Informational                           27 October 2022
-Expires: 30 April 2023
+Intended status: Informational                           7 November 2022
+Expires: 11 May 2023
 
 
                      Properties of AEAD algorithms
-                  draft-bozhko-cfrg-aead-properties-01
+                  draft-bozhko-cfrg-aead-properties-02
 
 Abstract
 
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 April 2023.
+   This Internet-Draft will expire on 11 May 2023.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 1]
+Bozhko                     Expires 11 May 2023                  [Page 1]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 2]
+Bozhko                     Expires 11 May 2023                  [Page 2]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 3]
+Bozhko                     Expires 11 May 2023                  [Page 3]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
 2.  Conventions Used in This Document
@@ -194,9 +194,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 3.1.2.  Data integrity
 
-   Definition.  An AEAD algorithm guarantees that data is available only
-   to those authorized to obtain it.  That property is required for the
-   AEAD algorithm to be called secure.
+   Definition.  An AEAD algorithm guarantees that data has not been
+   changed or forged by those who are not authorized to.  That property
+   is required for the AEAD algorithm to be called secure.
 
    Synonyms.  Message authentication.
 
@@ -221,9 +221,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 4]
+Bozhko                     Expires 11 May 2023                  [Page 4]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
    Further reading.  [BK2011]
@@ -277,9 +277,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 5]
+Bozhko                     Expires 11 May 2023                  [Page 5]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
 3.1.9.  Reforgeability resilience
@@ -333,9 +333,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 6]
+Bozhko                     Expires 11 May 2023                  [Page 6]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
 3.2.5.  Single pass
@@ -389,9 +389,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 7]
+Bozhko                     Expires 11 May 2023                  [Page 7]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
 4.  Security Considerations
@@ -445,9 +445,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 8]
+Bozhko                     Expires 11 May 2023                  [Page 8]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
    [B20]      Bellizia, D., Bronchain, O., Cassiers, G., Grosso, V.,
@@ -501,9 +501,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                 [Page 9]
+Bozhko                     Expires 11 May 2023                  [Page 9]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
    [BT16]     Bellare, M. and B. Tackmann, "The Multi-User Security of
@@ -557,9 +557,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                [Page 10]
+Bozhko                     Expires 11 May 2023                 [Page 10]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
    [FOR17]    Farshim, P., Orlandi, C., and R. Rosie, "Authenticated and
@@ -613,9 +613,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                [Page 11]
+Bozhko                     Expires 11 May 2023                 [Page 11]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
    [MBTM17]   McKay, K., Bassham, L., Turan, MS., and N. Mouha, "Report
@@ -669,9 +669,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2022
 
 
 
-Bozhko                    Expires 30 April 2023                [Page 12]
+Bozhko                     Expires 11 May 2023                 [Page 12]
 
-Internet-Draft        Properties of AEAD algorithms         October 2022
+Internet-Draft        Properties of AEAD algorithms        November 2022
 
 
 Appendix A.  Contributors
@@ -725,4 +725,4 @@ Author's Address
 
 
 
-Bozhko                    Expires 30 April 2023                [Page 13]
+Bozhko                     Expires 11 May 2023                 [Page 13]

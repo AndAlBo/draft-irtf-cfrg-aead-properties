@@ -6,7 +6,7 @@
   <!ENTITY wj     "&#8288;">
 ]>
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-bozhko-cfrg-aead-properties-01"  ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info"
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-bozhko-cfrg-aead-properties-02"  ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info"
 xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
   <front>
     <title abbrev="Properties of AEAD algorithms">
@@ -104,7 +104,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Int" numbered="true" toc="default">
           <name>Data integrity</name>
           <t>
-            Definition. An AEAD algorithm guarantees that data is available only to those authorized to obtain it. That property is
+            Definition. An AEAD algorithm guarantees that data has not been changed or forged by those who are not authorized to. That property is
             required for the AEAD algorithm to be called secure.
           </t>
           <t>
