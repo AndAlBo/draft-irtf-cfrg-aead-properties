@@ -6,28 +6,26 @@
   <!ENTITY wj     "&#8288;">
 ]>
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-bozhko-cfrg-aead-properties-02"  ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info"
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-01"  ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info"
 xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
   <front>
     <title abbrev="Properties of AEAD algorithms">
       Properties of AEAD algorithms
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-bozhko-cfrg-aead-properties-02"/>
+    <seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-01"/>
     <author fullname="Andrey Bozhko" initials="A.A." role="editor" surname="Bozhko">
       <organization>CryptoPro</organization>
       <address>
         <email>andbogc@gmail.com</email>
       </address>
     </author>
-    <date year="2022"/>
+    <date year="2023"/>
     <area>General</area>
     <workgroup>Network Working Group </workgroup>
     <keyword>authenticated encryption, mode of operation, AEAD, properties</keyword>
     <abstract>
       <t>
-        Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms
-        in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions
-        for the most common of those properties intending to improve consistency in the field.
+        Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions for the most common of those properties intending to improve consistency in the field.
       </t>
     </abstract>
   </front>
@@ -35,36 +33,26 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
     <section anchor="Introduction" numbered="true" toc="default">
       <name>Introduction</name>
       <t>
-        An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption, which provides confidentiality for the plaintext to be encrypted
-        and integrity for the plaintext and some Associated Data (sometimes called Header). AEAD algorithms are used in numerous applications and have become an important field in cryptographic research.
+        An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption, which provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some Associated Data (sometimes called Header). AEAD algorithms are used in numerous applications and have become an important field in cryptographic research.
       </t>
 
       <section anchor="IntBack" numbered="true" toc="default">
         <name>Background</name>
         <t>
-          AEAD algorithms are formally defined in <xref target="RFC5116" format="default"/>. The main benefit of AEAD algorithms is that they provide both data confidentiality and data integrity
-          and have a simple unified interface. 
+          AEAD algorithms are formally defined in <xref target="RFC5116" format="default"/>. The main benefit of AEAD algorithms is that they provide data confidentiality and integrity and have a simple unified interface.
         </t>
         <t>
-          The importance of the AEAD algorithms is mainly explained by their exploitation simplicity: they have a unified interface, easy-to-understand security guarantees, and are much easier to implement
-          properly than MAC and encryption schemes separately. Therefore, their embedding into high-level schemes and protocols is highly transparent since, for example, there is no need for additional key
-          derivation procedures. Apart from that, when using the AEAD algorithm, it is possible to reduce the key and state sizes and improve the data processing speed. For instance, such algorithms are mandatory
-          for TLS 1.3 <xref target="RFC8446" format="default"/>, IPsec ESP <xref target="RFC4303" format="default"/> <xref target="RFC8221" format="default"/>, and QUIC <xref target="RFC9000" format="default"/>. 
-          Hence, the research and standardization efforts in the field are extremely active. Most AEAD algorithms usually come with security guarantees, formal proofs, usage guidelines, and reference implementations.
+          The importance of the AEAD algorithms is mainly explained by their exploitation simplicity: they have a unified interface, easy-to-understand security guarantees, and are much easier to implement properly than MAC and encryption schemes separately. Therefore, their embedding into high-level schemes and protocols is highly transparent since, for example, there is no need for additional key derivation procedures. Apart from that, when using the AEAD algorithm, it is possible to reduce the key and state sizes and improve the data processing speed. For instance, such algorithms are mandatory for TLS 1.3 <xref target="RFC8446" format="default"/>, IPsec ESP <xref target="RFC4303" format="default"/> <xref target="RFC8221" format="default"/>, and QUIC <xref target="RFC9000" format="default"/>. Hence, the research and standardization efforts in the field are extremely active. Most AEAD algorithms usually come with security guarantees, formal proofs, usage guidelines, and reference implementations.
         </t>
         <t>
-         Even though providing core properties of AEAD algorithms is enough for use in many applications, some environments require other unusual cryptographic properties, which commonly require additional analysis
-         and research. With the growing number of such properties and research papers, misunderstanding and confusion inevitably appear. Some properties might be understood in different ways, for some only non-trivial
-         formal security notions are provided, others require modification or extension of the standard AEAD interface to support additional functionality. Therefore, the risk of misuse of AEAD algorithms increases which
-         can lead to security issues.
+          Even though providing core properties of AEAD algorithms is enough for many applications, some environments require other unusual cryptographic properties, which commonly require additional analysis and research. With the growing number of such properties and research papers, misunderstanding and confusion inevitably appear. Some properties might be understood in different ways; for some, only non-trivial formal security notions are provided, while others require modification or extension of the standard AEAD interface to support additional functionality. Therefore, the risk of misuse of AEAD algorithms increases, which can lead to security issues.
         </t>
       </section>
-      
+
       <section anchor="IntScope" numbered="true" toc="default">
         <name>Scope</name>
         <t>
-          In the following document, we provide a short overview of the most common properties of AEAD algorithms, by giving high-level definitions of these properties
-          in <xref target="Properties" format="default"/>. The document aims to improve clarity and establish a common language in the field.
+          In the following document, we provide a short overview of the most common properties of AEAD algorithms by giving high-level definitions of these properties in <xref target="Properties" format="default"/>. The document aims to improve clarity and establish a common language in the field.
         </t>
 
       </section>
@@ -72,23 +60,81 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
     <section numbered="true" toc="default">
       <name>Conventions Used in This Document</name>
       <t>
-        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
-        "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted
-        as described in BCP 14 <xref target="RFC2119" format="default"/> <xref target="RFC8174" format="default"/> when, and only when,
-        they appear in all capitals, as shown here.
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default"/> <xref target="RFC8174" format="default"/> when, and only when, they appear in all capitals, as shown here.
+      </t>
+    </section>
+
+    <section anchor="AEAD" numbered="true" toc="default">
+      <name>AEAD algorithms</name>
+      <t>
+        This section gives a general definition of an AEAD algorithm following <xref target="RFC5116" format="default"/>.
+      </t>
+      <t>
+        Definition. An AEAD algorithm is defined by two operations, which are authenticated encryption and authenticated decryption:
+      </t>
+      <ul>
+        <li>
+          <t>
+            A deterministic operation of authenticated encryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a plaintext P. The plaintext contains the data to be encrypted and authenticated, and the associated data contains the data to be authenticated only. Each nonce value must be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.
+          </t>
+        </li>
+        <li>
+          <t>
+            A deterministic operation of authenticated decryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a ciphertext C. The operation verifies the integrity of the ciphertext and associated data and decrypts the ciphertext. It returns a special symbol FAIL if the inputs are not authentic; otherwise, the operation returns a plaintext P.
+          </t>
+        </li>
+      </ul>
+      <t>
+        For more details on AEAD definition, please refer to <xref target="RFC5116" format="default"/>.
+      </t>
+      <t>
+        Throughout this document, by default, we will consider nonce-based AEAD algorithms, which have an interface from the definition above, and give no other restrictions on their structure. However, some properties defined in the document apply only to particular classes of such algorithms, like block cipher-based AEAD algorithms (such algorithms use block cipher as a building block). If that is the case, we explicitly point that out in the corresponding section. Some other properties, on the contrary, are defined for algorithms with extended or completely different interfaces. We address that issue in <xref target="Classification" format="default"/>.
+      </t>
+      <t>
+        We will call an AEAD algorithm secure if it provides such properties as Confidentiality and Data integrity, defined in <xref target="Base" format="default"/>, against any active nonce-respecting adversary. Even though we aim to give high-level definitions, we sometimes use the advantage notion. Specifically, we will use the Authenticated Encryption advantage notion. We adopt the corresponding definition from <xref target="I-D.irtf-cfrg-aead-limits" format="default"/>.
+      </t>
+      <t>
+        Definition. Authenticated Encryption advantage is the probability of an active adversary succeeding in breaking the authenticated-encryption properties of the AEAD algorithm. In this document, the definition of authenticated encryption advantage roughly is the probability that an attacker successfully distinguishes the ciphertext outputs of the AEAD scheme from the outputs of a random function or is able to forge a ciphertext that will be accepted as valid.
       </t>
     </section>
 
     <section anchor="Properties" numbered="true" toc="default">
       <name>AEAD properties</name>
-      <section anchor="SecurityProp" numbered="true" toc="default">
-        <name>Security properties</name>
+      <section anchor="Classification" numbered="true" toc="default">
+        <name>Classification of AEAD properties</name>
+        <t>
+          In this document we use a high-level classification of additional properties. The classification aims to give an intuition on how one can benefit from the property. The additional properties fall into one of these three categories:
+        </t>
+        <ul>
+          <li>
+            <t>
+              Security properties. We say that the property is a security property if it considers new threats or adversarial capabilities, in addition to those of the usual nonce-respecting adversary, which aims to break confidentiality or data integrity.
+            </t>
+          </li>
+          <li>
+            <t>
+              Implementation properties. We say that the property is an implementation property if it allows for more efficient implementations of the AEAD algorithm in special cases or environments.
+            </t>
+          </li>
+          <li>
+            <t>
+              Additional functionality properties. We say that the property is an additional functionality property if it provides new features in addition to the regular authenticated encryption with associated data.
+            </t>
+          </li>
+        </ul>
 
+        <t>
+          We notice that the distinction between the security and additional functionality properties might be vague. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. In fact, each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Hence, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms and, in contrast to security properties, not the extended ones.
+        </t>
+
+      </section>
+      
+      <section anchor="Base" numbered="true" toc="default">
+        <name>Base properties</name>
         <section anchor="Conf" numbered="true" toc="default">
           <name>Confidentiality</name>
           <t>
-            Definition. An AEAD algorithm guarantees that data is available only to those authorized to obtain it. That property is required for the AEAD
-            algorithm to be called secure.
+            Definition. An AEAD algorithm guarantees that the plaintext is available only to those authorized to obtain it, i.e., those possessing the secret key. That property is required for the AEAD algorithm to be called secure.
           </t>
           <t>
             Synonyms. Privacy.
@@ -101,8 +147,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Int" numbered="true" toc="default">
           <name>Data integrity</name>
           <t>
-            Definition. An AEAD algorithm guarantees that data has not been changed or forged by those who are not authorized to.
-            That property is required for the AEAD algorithm to be called secure.
+            Definition. An AEAD algorithm guarantees that the plaintext and the associated data have not been changed or forged by those not authorized to, i.e., those not possessing the secret key. That property is required for the AEAD algorithm to be called secure.
           </t>
           <t>
             Synonyms. Message authentication.
@@ -111,12 +156,18 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
             Further reading. <xref target="R2002" format="default"/>, <xref target="BN2000" format="default"/>
           </t>
         </section>
+      </section>
 
+      <section anchor="SecurityProp" numbered="true" toc="default">
+        <name>Security properties</name>
+        
         <section anchor="BWsec" numbered="true" toc="default">
           <name>Blockwise security</name>
           <t>
-            Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next block of the plaintext (ciphertext)
-            depending on already computed blocks of the ciphertext (plaintext) during an encryption (decryption) operation.
+            Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next block of the plaintext depending on already computed ciphertext blocks during an encryption operation.
+          </t>
+          <t>
+            Note. The case when an adversary can adaptively choose the next block of the ciphertext depending on already computed blocks of the plaintext, which appear in the device memory before the integrity verification during the decryption, can also be considered. This case is strongly related to RUP security, defined in <xref target="RUP" format="default"/>.
           </t>
           <t>
             Further reading. <xref target="JMV2002" format="default"/>, <xref target="FJMV2004" format="default"/>
@@ -129,7 +180,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
             Definition. An AEAD algorithm provides security even when key-dependent plaintexts are encrypted.
           </t>
           <t>
-            Notes. KDM-security is achievable only if nonces are chosen randomly and associated data is key-independent.
+            Notes. KDM security is achievable only if nonces are chosen randomly and associated data is key-independent.
           </t>
           <t>
             Further reading.
@@ -140,8 +191,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="KeyComm" numbered="true" toc="default">
           <name>Key commitment</name>
           <t>
-            Definition. An AEAD algorithm guarantees that it is difficult to find a tuple of the nonce, associated data, and ciphertext such that
-            it can be decrypted correctly with more than one key.
+            Definition. An AEAD algorithm guarantees that it is difficult to find a tuple of the nonce, associated data, and ciphertext such that it can be decrypted correctly with more than one key.
           </t>
           <t>
             Synonyms. Key-robustness,  key collision resistance.
@@ -154,8 +204,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Leakage" numbered="true" toc="default">
           <name>Leakage resistance</name>
           <t>
-            Definition. An AEAD algorithm provides security even if some additional information about computations of an encryption (and possibly decryption)
-            operation is obtained via side-channel leakages.
+            Definition. An AEAD algorithm provides security even if some additional information about computations of an encryption (and possibly decryption) operation is obtained via side-channel leakages.
           </t>
           <t>
             Further reading. <xref target="GPPS19" format="default"/>, <xref target="B20" format="default"/>
@@ -165,8 +214,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Mu-sec" numbered="true" toc="default">
           <name>Multi-user security</name>
           <t>
-            Definition. An AEAD algorithm security level degrades sublinearly in the number of users. Here the level of security is understood in the sense of Authenticated Encryption Advantage (AEA)
-            as given in <xref target="I-D.irtf-cfrg-aead-limits" format="default"/>. 
+            Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.
           </t>
           <t>
             Further reading. <xref target="BT16" format="default"/>
@@ -176,29 +224,37 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="NM" numbered="true" toc="default">
           <name>Nonce misuse</name>
           <t>
-            Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries.
+            Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries. Nonce misuse resilience and resistance are defined as follows:
           </t>
-          
-          <section anchor="NM1" numbered="true" toc="default">
-            <name>Nonce misuse resilience</name>
-            <t>
-              Definition. Security is provided only for messages encrypted with unique nonces.
-            </t>
-            <t>
-              Further reading. <xref target="ADL17" format="default"/>, <xref target="RS06" format="default"/>
-            </t>
-          </section>
+          <ul>
+            <li>
+              <t>
+                Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.
+              </t>
+            </li>
+            <li>
+              <t>
+                Nonce misuse resistance. Security is provided for all messages.
+              </t>
+            </li>
+          </ul>
+          <t>
+            Further reading. <xref target="RS06" format="default"/>, <xref target="ADL17" format="default"/>
+          </t>
+        </section>
 
-          <section anchor="NM2" numbered="true" toc="default">
-            <name>Nonce misuse resistance</name>
-            <t>
-              Definition. Security is provided for all messages.
-            </t>
-            <t>
-              Further reading. <xref target="RS06" format="default"/>
-            </t>
-          </section>
 
+        <section anchor="NonceHiding" numbered="true" toc="default">
+          <name>Nonce-hiding</name>
+          <t>
+            Definition. An AEAD algorithm decryption operation doesn't require the nonce to perform decryption and provides privacy for the nonce value used for encryption.
+          </t>
+          <t>
+            Note. In nonce-hiding AEAD algorithms, the ciphertext contains information equivalent to an encrypted nonce. Hence, retrieving information about nonce from the ciphertext has to be difficult.
+          </t>
+          <t>
+            Further reading. <xref target="BNT19" format="default"/>
+          </t>
         </section>
 
         <section anchor="Reforg" numbered="true" toc="default">
@@ -236,8 +292,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Lightweight" numbered="true" toc="default">
           <name>Lightweight</name>
           <t>
-            Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST
-            Lightweight Cryptography competition <xref target="MBTM17" format="default"/>.
+            Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST Lightweight Cryptography competition <xref target="MBTM17" format="default"/>.
           </t>
           <t>
             Further reading. <xref target="MBTM17" format="default"/>
@@ -247,8 +302,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Online" numbered="true" toc="default">
           <name>Online</name>
           <t>
-            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory and a single one-direction pass over the plaintext (ciphertext),
-            writing out the result during that pass.
+            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
           </t>
           <t>
             Further reading.
@@ -263,6 +317,9 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
             Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure.
           </t>
           <t>
+            Synonyms. Pipelineable.
+          </t>
+          <t>
             Further reading. <xref target="C20" format="default"/>
           </t>
         </section>
@@ -273,20 +330,18 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
             Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).
           </t>
         </section>
-        
+
         <section anchor="StaticAD" numbered="true" toc="default">
           <name>Static Associated Data</name>
           <t>
-            Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational
-            cost of encryption.
+            Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational cost of encryption.
           </t>
         </section>
 
         <section anchor="ZK" numbered="true" toc="default">
           <name>ZK-friendly</name>
           <t>
-            Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient
-            implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.
+            Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.
           </t>
           <t>
             Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity
@@ -304,53 +359,39 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Incremental" numbered="true" toc="default">
           <name>Incremental</name>
           <t>
-            Definition. An AEAD algorithm allows encrypting a message, which only partly differs from some other previously encrypted message, faster than processing it from scratch.
+            Definition. An AEAD algorithm allows encrypting and authenticating a message (associated data and a plaintext pair), which only partly differs from some previous message, faster than processing it from scratch.
           </t>
           <t>
-            Further reading. <xref target="SY16" format="default"/>, <xref target="BKY02" format="default"/>
-          </t>
-        </section>
-
-
-        <section anchor="NonceHiding" numbered="true" toc="default">
-          <name>Nonce-hiding</name>
-          <t>
-            Definition. An AEAD algorithm decryption operation doesn't need the nonce value to perform the decryption. Thus, the algorithm provides privacy for the nonce value.
-          </t>
-          <t>
-            Further reading.
-            <xref target="BNT19" format="default"/>
+            Further reading. <xref target="SY16" format="default"/>, <xref target="BKY02" format="default"/>, <xref target="M05" format="default"/>
           </t>
         </section>
 
         <section anchor="RemotelyKeyed" numbered="true" toc="default">
           <name>Remotely-keyed</name>
           <t>
-            Definition. An AEAD algorithm can be securely implemented with most of the operations in encryption/decryption performed by an insecure (i.e., it leaks all intermediate values) device, 
-            which has no access to the key, while another secure device performs operations involving the key.
+            Definition. An AEAD algorithm can be implemented with most of the operations in encryption/decryption performed by an insecure (i.e., it leaks all intermediate values) device, which has no access to the key, while another secure device performs operations involving the key.
           </t>
           <t>
             Further reading. <xref target="BFN98" format="default"/>, <xref target="DA03" format="default"/>
           </t>
         </section>
-      
+
         <section anchor="Robust" numbered="true" toc="default">
           <name>Robust</name>
           <t>
-            Definition. An AEAD algorithm allows the user to choose an arbitrary value l >= 0 for every plaintext and then encrypts it into a ciphertext, which is l bits longer. 
+            Definition. An AEAD algorithm allows the user to choose an arbitrary value l >= 0 for every plaintext and then encrypts it into a ciphertext, which is l bits longer.
           </t>
           <t>
             Further reading. <xref target="HKR2015" format="default"/>
           </t>
         </section>
-          
+
       </section>
     </section>
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
       <t>
-        This document defines the properties of AEAD algorithms. However, the document does not describe any concrete mechanisms providing these properties, neither it describes how
-        to achieve them. In fact, one can claim that an AEAD algorithm provides any of the defined properties only if its analysis in the relevant models was carried out.
+        This document defines the properties of AEAD algorithms. However, the document does not describe any concrete mechanisms providing these properties, neither it describes how to achieve them. In fact, one can claim that an AEAD algorithm provides any of the defined properties only if its analysis in the relevant models was carried out.
       </t>
     </section>
 
@@ -374,7 +415,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <name>Informative References</name>
 
         <xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-irtf-cfrg-aead-limits.xml"/>
-        
+
         <reference anchor="R2002">
           <front>
             <title>
@@ -516,7 +557,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
             <date year="2019"/>
           </front>
           <seriesInfo name="DOI" value="10.1007/978-3-030-30530-7_8"/>
-          <refcontent>Progress in Cryptology – LATINCRYPT 2019. LATINCRYPT 2019. Lecture Notes in Computer Science, vol 11774. Springer, Cham</refcontent>
+          <refcontent>Progress in Cryptology - LATINCRYPT 2019. LATINCRYPT 2019. Lecture Notes in Computer Science, vol 11774. Springer, Cham</refcontent>
         </reference>
 
         <reference anchor="BT16">
@@ -732,7 +773,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
           <seriesInfo name="DOI" value="10.1007/3-540-39200-9_19"/>
           <refcontent>Advances in Cryptology — EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</refcontent>
         </reference>
-        
+
         <reference anchor="HKR2015">
           <front>
             <title>
@@ -747,6 +788,18 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
           <refcontent>Advances in Cryptology -- EUROCRYPT 2015. EUROCRYPT 2015. Lecture Notes in Computer Science(), vol 9056. Springer, Berlin, Heidelberg. </refcontent>
         </reference>
 
+        <reference anchor="M05">
+          <front>
+            <title>
+              Efficient authentication of large, dynamic data sets using Galois/counter mode (GCM)
+            </title>
+            <author initials='D.' surname='McGrew' fullname='David McGrew'/>
+            <date year="2005"/>
+          </front>
+          <seriesInfo name="DOI" value="10.1109/SISW.2005.3."/>
+          <refcontent>Third IEEE International Security in Storage Workshop (SISW'05), San Francisco, CA, USA </refcontent>
+        </reference>
+        
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
 
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4303.xml"/>

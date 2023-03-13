@@ -34,14 +34,14 @@ ps2pdf ?= ps2pdf
 .PHONY: latest txt html pdf submit diff clean
 
 latest: txt html
-txt:  draft-bozhko-cfrg-aead-properties.txt
-html: draft-bozhko-cfrg-aead-properties.html
+txt:  draft-irtf-cfrg-aead-properties.txt
+html: draft-irtf-cfrg-aead-properties.html
 
-idnits: draft-bozhko-cfrg-aead-properties.txt
-	$(idnits) draft-bozhko-cfrg-aead-properties.txt
+idnits: draft-irtf-cfrg-aead-properties.txt
+	$(idnits) draft-irtf-cfrg-aead-properties.txt
 
 clean:
-	-rm -f draft-bozhko-cfrg-aead-properties.txt.{txt,html,pdf} index.html
+	-rm -f draft-irtf-cfrg-aead-properties.txt.{txt,html,pdf} index.html
 	-rm -f *.diff.html
 
 commit: latest
