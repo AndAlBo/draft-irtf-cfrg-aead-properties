@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" class="Internet-Draft">
-<head>
-<meta charset="utf-8">
+<!-- saved from url=(0071)https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html -->
+<html lang="en" class="Internet-Draft"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Properties of AEAD algorithms</title>
@@ -11,29 +11,28 @@
         Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions for the most common of those properties intending to improve consistency in the field.
        
     " name="description">
-<meta content="xml2rfc 3.15.1" name="generator">
+<meta content="xml2rfc 3.18.2" name="generator">
 <meta content="authenticated encryption, mode of operation, AEAD, properties" name="keyword">
-<meta content="draft-irtf-cfrg-aead-properties-01" name="ietf.draft">
+<meta content="draft-irtf-cfrg-aead-properties-02" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.15.1
-    Python 3.8.2
-    appdirs 1.4.4
-    ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
-    html5lib 1.1
+  xml2rfc 3.18.2
+    Python 3.9.16
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
-    kitchen 1.2.6
-    lxml 4.9.1
-    MarkupSafe 2.1.1
+    lxml 4.9.3
+    platformdirs 3.11.0
     pycountry 22.3.5
-    PyYAML 5.3.1
-    requests 2.22.0
-    setuptools 45.2.0
-    six 1.14.0
+    PyYAML 6.0.1
+    requests 2.31.0
+    setuptools 58.1.0
+    six 1.16.0
+    wcwidth 0.2.8
+    weasyprint 60.1
 -->
-<link href="draft-irtf-cfrg-aead-properties.xml" rel="alternate" type="application/rfc+xml">
-<link href="#copyright" rel="license">
+<link href="https://www.ietf.org/a/www/www6s/staging/draft-irtf-cfrg-aead-properties-02.xml" rel="alternate" type="application/rfc+xml">
+<link href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#copyright" rel="license">
 <style type="text/css">/*
 
   NOTE: Changes at the bottom of this file overrides some earlier settings.
@@ -42,7 +41,7 @@
   this can be consolidated so that style settings occur only in one place, but
   for now the contents of this file consists first of the initial CSS work as
   provided to the RFC Formatter (xml2rfc) work, followed by itemized and
-  commented changes found necssary during the development of the v3
+  commented changes found necessary during the development of the v3
   formatters.
 
 */
@@ -52,9 +51,14 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
 
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
+
 @viewport {
   zoom: 1.0;
-  width: extend-to-zoom;
 }
 @-ms-viewport {
   width: extend-to-zoom;
@@ -69,9 +73,10 @@ body {
   color: #222;
   background-color: #fff;
   font-size: 14px;
-  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   scroll-behavior: smooth;
+  overflow-wrap: break-word;
 }
 .ears {
   display: none;
@@ -158,6 +163,15 @@ div {
 svg {
   display: block;
 }
+svg[font-family~="serif" i], svg [font-family~="serif" i] {
+  font-family: var(--font-serif);
+}
+svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
+  font-family: var(--font-sans);
+}
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
 .alignCenter.art-text {
   background-color: #f9f9f9;
   border: 1px solid #eee;
@@ -241,7 +255,8 @@ a[href]:hover {
   background-color: #f2f2f2;
 }
 figcaption a[href],
-a[href].selfRef {
+a[href].selfRef,
+.iref + a[href].internal {
   color: #222;
 }
 /* XXX probably not this:
@@ -253,7 +268,7 @@ a.selfRef:hover {
 /* Figures */
 tt, code, pre {
   background-color: #f9f9f9;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-mono);
 }
 pre {
   border: 1px solid #eee;
@@ -292,6 +307,9 @@ blockquote {
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 1em 0;
+}
+blockquote > *:last-child {
+  margin-bottom: 0;
 }
 cite {
   display: block;
@@ -490,7 +508,7 @@ address.vcard .nameRole {
   margin-left: 0;
 }
 address.vcard .label {
-  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  font-family: var(--font-sans);
   margin: 0.5em 0;
 }
 address.vcard .type {
@@ -630,7 +648,6 @@ hr.addr {
 /* pagination */
 @media print {
   body {
-
     width: 100%;
   }
   p {
@@ -653,7 +670,7 @@ hr.addr {
   figure {
     overflow: scroll;
   }
-  pre.breakable {
+  .breakable pre {
     break-inside: auto;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -723,7 +740,7 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-  /* The follwing is commented out here, but set appropriately by in code, as
+  /* The following is commented out here, but set appropriately by in code, as
      the content depends on the document */
   /*
   @top-left {
@@ -828,7 +845,7 @@ tt, code, pre {
 }
 
 /* Fix the height/width aspect for ascii art*/
-pre.sourcecode,
+.sourcecode pre,
 .art-text pre {
   line-height: 1.12;
 }
@@ -864,7 +881,7 @@ table th.text-right {
   text-align: right;
 }
 
-/* Make the alternative author contact informatio look less like just another
+/* Make the alternative author contact information look less like just another
    author, and group it closer with the primary author contact information */
 .alternative-contact {
   margin: 0.5em 0 0.25em 0;
@@ -1061,7 +1078,7 @@ ol.type-A { list-style-type: upper-alpha; }
 ol.type-i { list-style-type: lower-roman; }
 ol.type-I { list-style-type: lower-roman; }
 /* Apply the print table and row borders in general, on request from the RPC,
-and increase the contrast between border and odd row background sligthtly */
+and increase the contrast between border and odd row background slightly */
 table {
   border: 1px solid #ddd;
 }
@@ -1121,7 +1138,7 @@ span.break, dd.break {
     break-before: auto;
   }
 }
-/* Text in compact lists should not get extra bottim margin space,
+/* Text in compact lists should not get extra bottom margin space,
    since that would makes the list not compact */
 ul.compact p, .ulCompact p,
 ol.compact p, .olCompact p {
@@ -1146,7 +1163,7 @@ p tt, p code, li tt, li code {
 pre {
    margin-top: 0.5px;
 }
-/* Tweak the comact list text */
+/* Tweak the compact list text */
 ul.compact, .ulCompact,
 ol.compact, .olCompact,
 dl.compact, .dlCompact {
@@ -1164,7 +1181,7 @@ dd > div.artwork:first-child,
 dd > aside:first-child,
 dd > figure:first-child,
 dd > ol:first-child,
-dd > div:first-child > pre.sourcecode,
+dd > div.sourcecode:first-child,
 dd > table:first-child,
 dd > ul:first-child {
   clear: left;
@@ -1178,24 +1195,24 @@ li > p {
   margin-bottom: 0.5em
 }
 /* Don't let p margin spill out from inside list items */
-li > p:last-of-type {
+li > p:last-of-type:only-child {
   margin-bottom: 0;
 }
 </style>
-<link href="rfc-local.css" rel="stylesheet" type="text/css">
+<link href="./draft-irtf-cfrg-aead-properties_files/rfc-local.css" rel="stylesheet" type="text/css">
 <script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
 </head>
 <body class="xml2rfc">
-<script src="metadata.min.js"></script>
+<script src="./draft-irtf-cfrg-aead-properties_files/metadata.min.js.download"></script>
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Properties of AEAD algorithms</td>
-<td class="right">March 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bozhko</td>
-<td class="center">Expires 11 September 2023</td>
+<td class="center">Expires 18 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1205,15 +1222,15 @@ li > p:last-of-type {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-irtf-cfrg-aead-properties-01</dd>
+<dd class="internet-draft">draft-irtf-cfrg-aead-properties-02</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-10" class="published">10 March 2023</time>
+<time datetime="2023-10-16" class="published">16 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-11">11 September 2023</time></dd>
+<dd class="expires"><time datetime="2024-04-18">18 April 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1226,40 +1243,40 @@ li > p:last-of-type {
 </div>
 <h1 id="title">Properties of AEAD algorithms</h1>
 <section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+      <h2 id="abstract"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">
-        Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions for the most common of those properties intending to improve consistency in the field.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+        Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The extensive use of AEAD algorithms in various high-level applications has caused the need for AEAD algorithms with additional properties and motivated research in the area. This document gives definitions for the most common of those properties intending to improve consistency in the field.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
         <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
         </h2>
 <p id="section-boilerplate.1-1">
         This Internet-Draft is submitted in full conformance with the
-        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+        provisions of BCP 78 and BCP 79.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-boilerplate.1-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-2">
         Internet-Drafts are working documents of the Internet Engineering Task
         Force (IETF). Note that other groups may also distribute working
         documents as Internet-Drafts. The list of current Internet-Drafts is
-        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-boilerplate.1-2" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-3">
         Internet-Drafts are draft documents valid for a maximum of six months
         and may be updated, replaced, or obsoleted by other documents at any
         time. It is inappropriate to use Internet-Drafts as reference
-        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+        material or to cite them other than as "work in progress."<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 April 2024.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
 <section id="section-boilerplate.2">
         <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
             Copyright (c) 2023 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+            document authors. All rights reserved.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
             Provisions Relating to IETF Documents
@@ -1269,145 +1286,143 @@ li > p:last-of-type {
             respect to this document. Code Components extracted from this
             document must include Revised BSD License text as described in
             Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+            warranty as described in the Revised BSD License.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="toc">
 <section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        <a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-background" class="internal xref">Background</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-background" class="internal xref">Background</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-scope" class="internal xref">Scope</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-used-in-this-do" class="internal xref">Conventions Used in This Document</a></p>
+            <p id="section-toc.1-1.2.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-conventions-used-in-this-do" class="internal xref">Conventions Used in This Document</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-aead-algorithms" class="internal xref">AEAD algorithms</a></p>
+            <p id="section-toc.1-1.3.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-aead-algorithms" class="internal xref">AEAD algorithms</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-aead-properties" class="internal xref">AEAD properties</a></p>
+            <p id="section-toc.1-1.4.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-aead-properties" class="internal xref">AEAD properties</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-classification-of-aead-prop" class="internal xref">Classification of AEAD properties</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-classification-of-aead-prop" class="internal xref">Classification of AEAD properties</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-base-properties" class="internal xref">Base properties</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2" class="auto internal xref">4.2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-security-properties" class="internal xref">Security properties</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
-                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-confidentiality" class="internal xref">Confidentiality</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.1" class="auto internal xref">4.2.1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-confidentiality" class="internal xref">Confidentiality</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
-                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-data-integrity" class="internal xref">Data integrity</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.2" class="auto internal xref">4.2.2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-data-integrity" class="internal xref">Data integrity</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.3" class="auto internal xref">4.2.3</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-blockwise-security" class="internal xref">Blockwise security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.4">
+                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.4" class="auto internal xref">4.2.4</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-full-commitment" class="internal xref">Full commitment</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.5">
+                    <p id="section-toc.1-1.4.2.2.2.5.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5" class="auto internal xref">4.2.5</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-key-commitment" class="internal xref">Key commitment</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.6">
+                    <p id="section-toc.1-1.4.2.2.2.6.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.6" class="auto internal xref">4.2.6</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-key-dependent-messages-kdm-" class="internal xref">Key Dependent Messages (KDM) security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.7">
+                    <p id="section-toc.1-1.4.2.2.2.7.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.7" class="auto internal xref">4.2.7</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-leakage-resistance" class="internal xref">Leakage resistance</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.8">
+                    <p id="section-toc.1-1.4.2.2.2.8.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.8" class="auto internal xref">4.2.8</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-multi-user-security" class="internal xref">Multi-user security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.9">
+                    <p id="section-toc.1-1.4.2.2.2.9.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.9" class="auto internal xref">4.2.9</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-nonce-misuse" class="internal xref">Nonce misuse</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.10">
+                    <p id="section-toc.1-1.4.2.2.2.10.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.10" class="auto internal xref">4.2.10</a>.&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-reforgeability-resilience" class="internal xref">Reforgeability resilience</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.11">
+                    <p id="section-toc.1-1.4.2.2.2.11.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.11" class="auto internal xref">4.2.11</a>.&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-release-of-unverified-plain" class="internal xref">Release of unverified plaintext (RUP) security</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-security-properties" class="internal xref">Security properties</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3" class="auto internal xref">4.3</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-implementation-properties" class="internal xref">Implementation properties</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.1">
-                    <p id="section-toc.1-1.4.2.3.2.1.1"><a href="#section-4.3.1" class="auto internal xref">4.3.1</a>.  <a href="#name-blockwise-security" class="internal xref">Blockwise security</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.1.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.1" class="auto internal xref">4.3.1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-inverse-free" class="internal xref">Inverse-free</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.2">
-                    <p id="section-toc.1-1.4.2.3.2.2.1"><a href="#section-4.3.2" class="auto internal xref">4.3.2</a>.  <a href="#name-key-dependent-messages-kdm-" class="internal xref">Key Dependent Messages (KDM) security</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.2.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.2" class="auto internal xref">4.3.2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-lightweight" class="internal xref">Lightweight</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.3">
-                    <p id="section-toc.1-1.4.2.3.2.3.1"><a href="#section-4.3.3" class="auto internal xref">4.3.3</a>.  <a href="#name-key-commitment" class="internal xref">Key commitment</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.3.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.3" class="auto internal xref">4.3.3</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-online" class="internal xref">Online</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.4">
-                    <p id="section-toc.1-1.4.2.3.2.4.1"><a href="#section-4.3.4" class="auto internal xref">4.3.4</a>.  <a href="#name-leakage-resistance" class="internal xref">Leakage resistance</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.4.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.4" class="auto internal xref">4.3.4</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-parallelizable" class="internal xref">Parallelizable</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.5">
-                    <p id="section-toc.1-1.4.2.3.2.5.1"><a href="#section-4.3.5" class="auto internal xref">4.3.5</a>.  <a href="#name-multi-user-security" class="internal xref">Multi-user security</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.5.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.5" class="auto internal xref">4.3.5</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-single-pass" class="internal xref">Single pass</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.6">
-                    <p id="section-toc.1-1.4.2.3.2.6.1"><a href="#section-4.3.6" class="auto internal xref">4.3.6</a>.  <a href="#name-nonce-misuse" class="internal xref">Nonce misuse</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.6.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.6" class="auto internal xref">4.3.6</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-static-associated-data" class="internal xref">Static Associated Data</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.7">
-                    <p id="section-toc.1-1.4.2.3.2.7.1"><a href="#section-4.3.7" class="auto internal xref">4.3.7</a>.  <a href="#name-nonce-hiding" class="internal xref">Nonce-hiding</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.8">
-                    <p id="section-toc.1-1.4.2.3.2.8.1"><a href="#section-4.3.8" class="auto internal xref">4.3.8</a>.  <a href="#name-reforgeability-resilience" class="internal xref">Reforgeability resilience</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.9">
-                    <p id="section-toc.1-1.4.2.3.2.9.1"><a href="#section-4.3.9" class="auto internal xref">4.3.9</a>.  <a href="#name-release-of-unverified-plain" class="internal xref">Release of unverified plaintext (RUP) security</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.7.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.7" class="auto internal xref">4.3.7</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-zk-friendly" class="internal xref">ZK-friendly</a></p>
 </li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-implementation-properties" class="internal xref">Implementation properties</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4" class="auto internal xref">4.4</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-additional-functionality-pr" class="internal xref">Additional functionality properties</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.1">
-                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-inverse-free" class="internal xref">Inverse-free</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.1" class="auto internal xref">4.4.1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-incremental" class="internal xref">Incremental</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.2">
-                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-lightweight" class="internal xref">Lightweight</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.2" class="auto internal xref">4.4.2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-nonce-hiding" class="internal xref">Nonce-hiding</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.3">
-                    <p id="section-toc.1-1.4.2.4.2.3.1"><a href="#section-4.4.3" class="auto internal xref">4.4.3</a>.  <a href="#name-online" class="internal xref">Online</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.3.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.3" class="auto internal xref">4.4.3</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-remotely-keyed" class="internal xref">Remotely-keyed</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.4">
-                    <p id="section-toc.1-1.4.2.4.2.4.1"><a href="#section-4.4.4" class="auto internal xref">4.4.4</a>.  <a href="#name-parallelizable" class="internal xref">Parallelizable</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.5">
-                    <p id="section-toc.1-1.4.2.4.2.5.1"><a href="#section-4.4.5" class="auto internal xref">4.4.5</a>.  <a href="#name-single-pass" class="internal xref">Single pass</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.6">
-                    <p id="section-toc.1-1.4.2.4.2.6.1"><a href="#section-4.4.6" class="auto internal xref">4.4.6</a>.  <a href="#name-static-associated-data" class="internal xref">Static Associated Data</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.7">
-                    <p id="section-toc.1-1.4.2.4.2.7.1"><a href="#section-4.4.7" class="auto internal xref">4.4.7</a>.  <a href="#name-zk-friendly" class="internal xref">ZK-friendly</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
-                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-additional-functionality-pr" class="internal xref">Additional functionality properties</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5.2.1">
-                    <p id="section-toc.1-1.4.2.5.2.1.1"><a href="#section-4.5.1" class="auto internal xref">4.5.1</a>.  <a href="#name-incremental" class="internal xref">Incremental</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5.2.2">
-                    <p id="section-toc.1-1.4.2.5.2.2.1"><a href="#section-4.5.2" class="auto internal xref">4.5.2</a>.  <a href="#name-remotely-keyed" class="internal xref">Remotely-keyed</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5.2.3">
-                    <p id="section-toc.1-1.4.2.5.2.3.1"><a href="#section-4.5.3" class="auto internal xref">4.5.3</a>.  <a href="#name-robust" class="internal xref">Robust</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.4.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.4" class="auto internal xref">4.4.4</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-robust" class="internal xref">Robust</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.7.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-7" class="auto internal xref">7</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-7.1" class="auto internal xref">7.1</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-7.2" class="auto internal xref">7.2</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-contributors" class="internal xref">Contributors</a></p>
+            <p id="section-toc.1-1.8.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#appendix-A" class="auto internal xref">Appendix A</a>.&nbsp;&nbsp;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-contributors" class="internal xref">Contributors</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.9.1"><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#appendix-B" class="auto internal xref"></a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1416,380 +1431,387 @@ li > p:last-of-type {
 <div id="Introduction">
 <section id="section-1">
       <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1" class="section-number selfRef">1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">
-        An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption, which provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some Associated Data (sometimes called Header). AEAD algorithms are used in numerous applications and have become an important field in cryptographic research.<a href="#section-1-1" class="pilcrow">¶</a></p>
+        An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption, which provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some Associated Data (sometimes called Header). AEAD algorithms are used in numerous applications and have become an important field in cryptographic research.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1-1" class="pilcrow">¶</a></p>
 <div id="IntBack">
 <section id="section-1.1">
         <h3 id="name-background">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-background" class="section-name selfRef">Background</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.1" class="section-number selfRef">1.1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-background" class="section-name selfRef">Background</a>
         </h3>
 <p id="section-1.1-1">
-          AEAD algorithms are formally defined in <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>. The main benefit of AEAD algorithms is that they provide data confidentiality and integrity and have a simple unified interface.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+          AEAD algorithms are formally defined in <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC5116" class="cite xref">RFC5116</a>]</span>. The main benefit of AEAD algorithms is that they provide both data confidentiality and data integrity and have a simple unified interface.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">
-          The importance of the AEAD algorithms is mainly explained by their exploitation simplicity: they have a unified interface, easy-to-understand security guarantees, and are much easier to implement properly than MAC and encryption schemes separately. Therefore, their embedding into high-level schemes and protocols is highly transparent since, for example, there is no need for additional key derivation procedures. Apart from that, when using the AEAD algorithm, it is possible to reduce the key and state sizes and improve the data processing speed. For instance, such algorithms are mandatory for TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, IPsec ESP <span>[<a href="#RFC4303" class="cite xref">RFC4303</a>]</span> <span>[<a href="#RFC8221" class="cite xref">RFC8221</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>. Hence, the research and standardization efforts in the field are extremely active. Most AEAD algorithms usually come with security guarantees, formal proofs, usage guidelines, and reference implementations.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+          The importance of the AEAD algorithms is mainly explained by their exploitation simplicity: they have a unified interface, easy-to-understand security guarantees, and are much easier to implement properly than MAC and encryption schemes separately. Therefore, their embedding into high-level schemes and protocols is highly transparent since, for example, there is no need for additional key derivation procedures. Apart from that, when using the AEAD algorithm, it is possible to reduce the key and state sizes and improve the data processing speed. For instance, such algorithms are mandatory for TLS 1.3 <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC8446" class="cite xref">RFC8446</a>]</span>, IPsec ESP <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC4303" class="cite xref">RFC4303</a>]</span> <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC8221" class="cite xref">RFC8221</a>]</span>, and QUIC <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC9000" class="cite xref">RFC9000</a>]</span>. Hence, the research and standardization efforts in the field are extremely active. Most AEAD algorithms usually come with security guarantees, formal proofs, usage guidelines, and reference implementations.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">
-          Even though providing core properties of AEAD algorithms is enough for many applications, some environments require other unusual cryptographic properties, which commonly require additional analysis and research. With the growing number of such properties and research papers, misunderstanding and confusion inevitably appear. Some properties might be understood in different ways; for some, only non-trivial formal security notions are provided, while others require modification or extension of the standard AEAD interface to support additional functionality. Therefore, the risk of misuse of AEAD algorithms increases, which can lead to security issues.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+          Even though providing core properties of AEAD algorithms is enough for use in many applications, some environments require other unusual cryptographic properties, which commonly require additional analysis and research. With the growing number of such properties and research papers, misunderstanding and confusion inevitably appear. Some properties might be understood in different ways, for some only non-trivial formal security notions are provided, others require modification or extension of the standard AEAD interface to support additional functionality. Therefore, the risk of misuse of AEAD algorithms increases which can lead to security issues.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="IntScope">
 <section id="section-1.2">
         <h3 id="name-scope">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.2" class="section-number selfRef">1.2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-scope" class="section-name selfRef">Scope</a>
         </h3>
 <p id="section-1.2-1">
-          In the following document, we provide a short overview of the most common properties of AEAD algorithms by giving high-level definitions of these properties in <a href="#Properties" class="auto internal xref">Section 4</a>. The document aims to improve clarity and establish a common language in the field.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+          In the following document, we provide a short overview of the most common properties of AEAD algorithms, by giving high-level definitions of these properties in <a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#Properties" class="auto internal xref">Section 4</a>. The document aims to improve clarity and establish a common language in the field.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <section id="section-2">
       <h2 id="name-conventions-used-in-this-do">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-used-in-this-do" class="section-name selfRef">Conventions Used in This Document</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-2" class="section-number selfRef">2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-conventions-used-in-this-do" class="section-name selfRef">Conventions Used in This Document</a>
       </h2>
 <p id="section-2-1">
-        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-2-1" class="pilcrow">¶</a></p>
 </section>
 <div id="AEAD">
 <section id="section-3">
       <h2 id="name-aead-algorithms">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-aead-algorithms" class="section-name selfRef">AEAD algorithms</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3" class="section-number selfRef">3. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-aead-algorithms" class="section-name selfRef">AEAD algorithms</a>
       </h2>
 <p id="section-3-1">
-        This section gives a general definition of an AEAD algorithm following <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+        In this section we give a general definition of an AEAD algorithm, following <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC5116" class="cite xref">RFC5116</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">
-        Definition. An AEAD algorithm is defined by two operations, which are authenticated encryption and authenticated decryption:<a href="#section-3-2" class="pilcrow">¶</a></p>
+        Definition. An AEAD algorithm is defined by two operations  --- authenticated encryption and authenticated decryption:<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-3.1">
           <p id="section-3-3.1.1">
-            A deterministic operation of authenticated encryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a plaintext P. The plaintext contains the data to be encrypted and authenticated, and the associated data contains the data to be authenticated only. Each nonce value must be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
+            A determenistic operation of authenticated encryption has four inputs, each of them is a binary string: a secret key K of a fixed bit lenght, a nonce N, associated data A and a plaintext P. The plaintext cointains the data to be encrypted and autheticated, the associated data cointains the data to be authenticated only. Each nonce value must be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-3.2">
           <p id="section-3-3.2.1">
-            A deterministic operation of authenticated decryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a ciphertext C. The operation verifies the integrity of the ciphertext and associated data and decrypts the ciphertext. It returns a special symbol FAIL if the inputs are not authentic; otherwise, the operation returns a plaintext P.<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+            A determenistic operation of authenticated decryption has four inputs, each of them is a binary string: a secret key K of a fixed bit lenght, a nonce N, associated data A and a ciphertext C. The operation verifies the integrity of the ciphertext and associated data, and decrypts the ciphertext. It returns a special symbol FAIL if the inputs are not authentic, otherwise the operation returns a plaintext P.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-3-4">
-        For more details on AEAD definition, please refer to <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>.<a href="#section-3-4" class="pilcrow">¶</a></p>
+        For more details on AEAD definition please refer to <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC5116" class="cite xref">RFC5116</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">
-        Throughout this document, by default, we will consider nonce-based AEAD algorithms, which have an interface from the definition above, and give no other restrictions on their structure. However, some properties defined in the document apply only to particular classes of such algorithms, like block cipher-based AEAD algorithms (such algorithms use block cipher as a building block). If that is the case, we explicitly point that out in the corresponding section. Some other properties, on the contrary, are defined for algorithms with extended or completely different interfaces. We address that issue in <a href="#Classification" class="auto internal xref">Section 4.1</a>.<a href="#section-3-5" class="pilcrow">¶</a></p>
+        Throught this document, by default, we will consider nonce-based AEAD algorithms, which have an interface from the definition above, and give no other restrictions on their strcuture. However, some properties defined in the document are applicable only to some special classes of such algorithms, like block cipher based AEAD algorithms (such algorithms use block cipher as a building block). If that is the case we explicitly point that out in the corresponding section. Some other properties, on the contarary, are defined for algorithms with extended or completely different interfaces. We address that issue in Section <a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#Classification" class="auto internal xref">Section 4.1</a>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">
-        We will call an AEAD algorithm secure if it provides such properties as Confidentiality and Data integrity, defined in <a href="#Base" class="auto internal xref">Section 4.2</a>, against any active nonce-respecting adversary. Even though we aim to give high-level definitions, we sometimes use the adversarial advantage notion. Specifically, we will use the Authenticated Encryption advantage notion for the AEAD algorithm. We adopt the corresponding definition from <span>[<a href="#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span>.<a href="#section-3-6" class="pilcrow">¶</a></p>
+        We will call an AEAD algorithm secure, if it providees such properties as Confidentiality and Data integrity, defined in Section <a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#Properties" class="auto internal xref">Section 4</a>. Even though we are aiming to give high-level definitions, we will sometimes use the adversaial advantage notion. Specifically, we will use the Authenticated Encryption advantage notion for the AEAD algorithm. We adopt the corresponding definition from <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-6" class="pilcrow">¶</a></p>
 <p id="section-3-7">
-        Definition. Authenticated Encryption advantage is the probability of an active adversary succeeding in breaking the authenticated-encryption properties of the AEAD algorithm. In this document, the definition of authenticated encryption advantage roughly is the probability that an attacker successfully distinguishes the ciphertext outputs of the AEAD scheme from the outputs of a random function or is able to forge a ciphertext that will be accepted as valid.<a href="#section-3-7" class="pilcrow">¶</a></p>
+        Definition. The probability of an active attacker succeeding in breaking the authenticated-encryption properties of the AEAD algorithm. In this document, the definition of authenticated encryption advantage roughly is the probability that an attacker successfully distinguishes the ciphertext outputs of the AEAD scheme from the outputs of a random function or is able to forge a ciphertext that will be accepted as valid.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Properties">
 <section id="section-4">
       <h2 id="name-aead-properties">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-aead-properties" class="section-name selfRef">AEAD properties</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4" class="section-number selfRef">4. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-aead-properties" class="section-name selfRef">AEAD properties</a>
       </h2>
 <div id="Classification">
 <section id="section-4.1">
         <h3 id="name-classification-of-aead-prop">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-classification-of-aead-prop" class="section-name selfRef">Classification of AEAD properties</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.1" class="section-number selfRef">4.1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-classification-of-aead-prop" class="section-name selfRef">Classification of AEAD properties</a>
         </h3>
 <p id="section-4.1-1">
-          In this document we use a high-level classification of additional properties. The classification aims to give an intuition on how one can benefit from the property. The additional properties fall into one of these three categories:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+          In this document we use a very high-level classification of properties. That classification is aimed to highlight the differences between the nature of the considered properties. All properties in the document fall into one of these three categories:<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">
             <p id="section-4.1-2.1.1">
-              Security properties. We say that the property is a security property if it considers new threats or adversarial capabilities, in addition to those of the usual nonce-respecting adversary, which aims to break confidentiality or data integrity.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+              Security properties<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.2">
             <p id="section-4.1-2.2.1">
-              Implementation properties. We say that the property is an implementation property if it allows for more efficient implementations of the AEAD algorithm in special cases or environments.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
+              Implementation properties<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.3">
             <p id="section-4.1-2.3.1">
-              Additional functionality properties. We say that the property is an additional functionality property if it provides new features in addition to the regular authenticated encryption with associated data.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+              Additional functionality properties<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-3">
-          We notice that the distinction between the security and additional functionality properties might be vague. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. In fact, each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Hence, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms and, in contrast to security properties, not the extended ones.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="Base">
+<div id="SecurityProp">
 <section id="section-4.2">
-        <h3 id="name-base-properties">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-base-properties" class="section-name selfRef">Base properties</a>
+        <h3 id="name-security-properties">
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2" class="section-number selfRef">4.2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-security-properties" class="section-name selfRef">Security properties</a>
         </h3>
 <div id="Conf">
 <section id="section-4.2.1">
           <h4 id="name-confidentiality">
-<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-confidentiality" class="section-name selfRef">Confidentiality</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-confidentiality" class="section-name selfRef">Confidentiality</a>
           </h4>
 <p id="section-4.2.1-1">
-            Definition. An AEAD algorithm guarantees that the plaintext is available only to those authorized to obtain it, i.e., those possessing the secret key. That property is required for the AEAD algorithm to be called secure.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+            Definition. An AEAD algorithm guarantees that the plaintext is available only to those authorized to obtain it, i.e. those who are in the posession of the secret key. That property is required for the AEAD algorithm to be called secure.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-2">
-            Synonyms. Privacy.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+            Synonyms. Privacy.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-3">
-            Further reading. <span>[<a href="#R2002" class="cite xref">R2002</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span><a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#R2002" class="cite xref">R2002</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BN2000" class="cite xref">BN2000</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Int">
 <section id="section-4.2.2">
           <h4 id="name-data-integrity">
-<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-data-integrity" class="section-name selfRef">Data integrity</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-data-integrity" class="section-name selfRef">Data integrity</a>
           </h4>
 <p id="section-4.2.2-1">
-            Definition. An AEAD algorithm guarantees that the plaintext and the associated data have not been changed or forged by those not authorized to, i.e., those not possessing the secret key. That property is required for the AEAD algorithm to be called secure.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+            Definition. An AEAD algorithm guarantees that the plaintext and the associated data has not been changed or forged by those who are not authorized to, i.e. by those who are not in the posession of the secret key. That property is required for the AEAD algorithm to be called secure.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-2">
-            Synonyms. Message authentication.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+            Synonyms. Message authentication.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-3">
-            Further reading. <span>[<a href="#R2002" class="cite xref">R2002</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span><a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#R2002" class="cite xref">R2002</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BN2000" class="cite xref">BN2000</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-</section>
-</div>
-<div id="SecurityProp">
-<section id="section-4.3">
-        <h3 id="name-security-properties">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-security-properties" class="section-name selfRef">Security properties</a>
-        </h3>
 <div id="BWsec">
-<section id="section-4.3.1">
+<section id="section-4.2.3">
           <h4 id="name-blockwise-security">
-<a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-blockwise-security" class="section-name selfRef">Blockwise security</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-blockwise-security" class="section-name selfRef">Blockwise security</a>
           </h4>
-<p id="section-4.3.1-1">
-            Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next block of the plaintext depending on already computed ciphertext blocks during an encryption operation.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.1-2">
-            Note. The case when an adversary can adaptively choose the next block of the ciphertext depending on already computed blocks of the plaintext, which appear in the device memory before the integrity verification during the decryption, can also be considered. This case is strongly related to RUP security, defined in <a href="#RUP" class="auto internal xref">Section 4.3.9</a>.<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.3.1-3">
-            Further reading. <span>[<a href="#JMV2002" class="cite xref">JMV2002</a>]</span>, <span>[<a href="#FJMV2004" class="cite xref">FJMV2004</a>]</span><a href="#section-4.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-1">
+            Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next block of the plaintext (ciphertext) depending on already computed blocks of the ciphertext (plaintext) during an encryption (decryption) operation.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#JMV2002" class="cite xref">JMV2002</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#FJMV2004" class="cite xref">FJMV2004</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="KDM">
-<section id="section-4.3.2">
-          <h4 id="name-key-dependent-messages-kdm-">
-<a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-key-dependent-messages-kdm-" class="section-name selfRef">Key Dependent Messages (KDM) security</a>
+<div id="FullComm">
+<section id="section-4.2.4">
+          <h4 id="name-full-commitment">
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-full-commitment" class="section-name selfRef">Full commitment</a>
           </h4>
-<p id="section-4.3.2-1">
-            Definition. An AEAD algorithm provides security even when key-dependent plaintexts are encrypted.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.2-2">
-            Notes. KDM security is achievable only if nonces are chosen randomly and associated data is key-independent.<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.3.2-3">
-            Further reading.
-            <span>[<a href="#BK2011" class="cite xref">BK2011</a>]</span><a href="#section-4.3.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-1">
+            Definition. An AEAD algorithm guarantees that it is difficult to find two or more different tuples of the key, nonce, associated data, and plaintext such that they encrypt to the same ciphertext. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to all inputs of an authenticated encryption operation.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-2">
+            Functional applications. Message franking <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#GLR17" class="cite xref">GLR17</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.4-3">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BH22" class="cite xref">BH22</a>]</span>,  <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#CR22" class="cite xref">CR22</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="KeyComm">
-<section id="section-4.3.3">
+<section id="section-4.2.5">
           <h4 id="name-key-commitment">
-<a href="#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="#name-key-commitment" class="section-name selfRef">Key commitment</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5" class="section-number selfRef">4.2.5. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-key-commitment" class="section-name selfRef">Key commitment</a>
           </h4>
-<p id="section-4.3.3-1">
-            Definition. An AEAD algorithm guarantees that it is difficult to find a tuple of the nonce, associated data, and ciphertext such that it can be decrypted correctly with more than one key.<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.3-2">
-            Synonyms. Key-robustness,  key collision resistance.<a href="#section-4.3.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3.3-3">
-            Further reading. <span>[<a href="#FOR17" class="cite xref">FOR17</a>]</span>, <span>[<a href="#LGR21" class="cite xref">LGR21</a>]</span>, <span>[<a href="#GLR17" class="cite xref">GLR17</a>]</span><a href="#section-4.3.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-1">
+            Definition. An AEAD algorithm guarantees that it is difficult to find two or more different keys and the same number of potentially equal triples of nonce, associated data, and plaintext such that they encrypt to the same ciphertext under corresponding keys. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to the key used for an authenticated encryption operation.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-2">
+            Synonyms. Key-robustness,  key collision resistance.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-3">
+            Notes. Key commitment follows from full commitment. Full commitment does not follow form key commitment. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BH22" class="cite xref">BH22</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-4">
+            Functional applications. Password-Authenticated Key Exchange <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#LGR21" class="cite xref">LGR21</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5-4" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-5">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BH22" class="cite xref">BH22</a>]</span>,  <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#CR22" class="cite xref">CR22</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#FOR17" class="cite xref">FOR17</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#LGR21" class="cite xref">LGR21</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#GLR17" class="cite xref">GLR17</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="KDM">
+<section id="section-4.2.6">
+          <h4 id="name-key-dependent-messages-kdm-">
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.6" class="section-number selfRef">4.2.6. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-key-dependent-messages-kdm-" class="section-name selfRef">Key Dependent Messages (KDM) security</a>
+          </h4>
+<p id="section-4.2.6-1">
+            Definition. An AEAD algorithm provides security even when key-dependent plaintexts are encrypted.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.6-2">
+            Notes. KDM-security is achievable only if nonces are chosen randomly and associated data is key-independent.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.6-3">
+            Functional applications. Disk encryption schemes <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BK2011" class="cite xref">BK2011</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.6-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.6-4">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BK2011" class="cite xref">BK2011</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Leakage">
-<section id="section-4.3.4">
+<section id="section-4.2.7">
           <h4 id="name-leakage-resistance">
-<a href="#section-4.3.4" class="section-number selfRef">4.3.4. </a><a href="#name-leakage-resistance" class="section-name selfRef">Leakage resistance</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.7" class="section-number selfRef">4.2.7. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-leakage-resistance" class="section-name selfRef">Leakage resistance</a>
           </h4>
-<p id="section-4.3.4-1">
-            Definition. An AEAD algorithm provides security even if some additional information about computations of an encryption (and possibly decryption) operation is obtained via side-channel leakages.<a href="#section-4.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.4-2">
-            Further reading. <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span>, <span>[<a href="#B20" class="cite xref">B20</a>]</span><a href="#section-4.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.7-1">
+            Definition. An AEAD algorithm provides security even if some additional information about computations of an encryption (and possibly decryption) operation is obtained via side-channel leakages.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.7-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.7-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#GPPS19" class="cite xref">GPPS19</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#B20" class="cite xref">B20</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Mu-sec">
-<section id="section-4.3.5">
+<section id="section-4.2.8">
           <h4 id="name-multi-user-security">
-<a href="#section-4.3.5" class="section-number selfRef">4.3.5. </a><a href="#name-multi-user-security" class="section-name selfRef">Multi-user security</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.8" class="section-number selfRef">4.2.8. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-multi-user-security" class="section-name selfRef">Multi-user security</a>
           </h4>
-<p id="section-4.3.5-1">
-            Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.<a href="#section-4.3.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.5-2">
-            Further reading. <span>[<a href="#BT16" class="cite xref">BT16</a>]</span><a href="#section-4.3.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.8-1">
+            Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.8-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.8-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BT16" class="cite xref">BT16</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="NM">
-<section id="section-4.3.6">
+<section id="section-4.2.9">
           <h4 id="name-nonce-misuse">
-<a href="#section-4.3.6" class="section-number selfRef">4.3.6. </a><a href="#name-nonce-misuse" class="section-name selfRef">Nonce misuse</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.9" class="section-number selfRef">4.2.9. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-nonce-misuse" class="section-name selfRef">Nonce misuse</a>
           </h4>
-<p id="section-4.3.6-1">
-            Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries. Nonce misuse resilience and resistance are defined as follows:<a href="#section-4.3.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.9-1">
+            Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries. Nonce misuse resilience and resistance are defined as follows:<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.9-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.3.6-2.1">
-              <p id="section-4.3.6-2.1.1">
-                Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.<a href="#section-4.3.6-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4.2.9-2.1">
+              <p id="section-4.2.9-2.1.1">
+                Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.9-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-4.3.6-2.2">
-              <p id="section-4.3.6-2.2.1">
-                Nonce misuse resistance. Security is provided for all messages.<a href="#section-4.3.6-2.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-4.2.9-2.2">
+              <p id="section-4.2.9-2.2.1">
+                Nonce misuse resistance. Security is provided for all messages.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.9-2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.3.6-3">
-            Further reading. <span>[<a href="#RS06" class="cite xref">RS06</a>]</span>, <span>[<a href="#ADL17" class="cite xref">ADL17</a>]</span><a href="#section-4.3.6-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="NonceHiding">
-<section id="section-4.3.7">
-          <h4 id="name-nonce-hiding">
-<a href="#section-4.3.7" class="section-number selfRef">4.3.7. </a><a href="#name-nonce-hiding" class="section-name selfRef">Nonce-hiding</a>
-          </h4>
-<p id="section-4.3.7-1">
-            Definition. An AEAD algorithm decryption operation doesn't require the nonce to perform decryption and provides privacy for the nonce value used for encryption.<a href="#section-4.3.7-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.7-2">
-            Note. In nonce-hiding AEAD algorithms, the ciphertext contains information equivalent to an encrypted nonce. Hence, retrieving information about nonce from the ciphertext has to be difficult.<a href="#section-4.3.7-2" class="pilcrow">¶</a></p>
-<p id="section-4.3.7-3">
-            Further reading. <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span><a href="#section-4.3.7-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.9-3">
+              Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RS06" class="cite xref">RS06</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#ADL17" class="cite xref">ADL17</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.9-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Reforg">
-<section id="section-4.3.8">
+<section id="section-4.2.10">
           <h4 id="name-reforgeability-resilience">
-<a href="#section-4.3.8" class="section-number selfRef">4.3.8. </a><a href="#name-reforgeability-resilience" class="section-name selfRef">Reforgeability resilience</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.10" class="section-number selfRef">4.2.10. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-reforgeability-resilience" class="section-name selfRef">Reforgeability resilience</a>
           </h4>
-<p id="section-4.3.8-1">
-            Definition. An AEAD algorithm guarantees that once a successful forgery for the algorithm has been found, it is still hard to find any subsequent forgery.<a href="#section-4.3.8-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.8-2">
-            Further reading. <span>[<a href="#BC09" class="cite xref">BC09</a>]</span>, <span>[<a href="#FLLW17" class="cite xref">FLLW17</a>]</span><a href="#section-4.3.8-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.10-1">
+            Definition. An AEAD algorithm guarantees that once a successful forgery for the algorithm has been found, it is still hard to find any subsequent forgery.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.10-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.10-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BC09" class="cite xref">BC09</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#FLLW17" class="cite xref">FLLW17</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="RUP">
-<section id="section-4.3.9">
+<section id="section-4.2.11">
           <h4 id="name-release-of-unverified-plain">
-<a href="#section-4.3.9" class="section-number selfRef">4.3.9. </a><a href="#name-release-of-unverified-plain" class="section-name selfRef">Release of unverified plaintext (RUP) security</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.11" class="section-number selfRef">4.2.11. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-release-of-unverified-plain" class="section-name selfRef">Release of unverified plaintext (RUP) security</a>
           </h4>
-<p id="section-4.3.9-1">
-            Definition. An AEAD algorithm provides security even if the plaintext is released for every ciphertext, including those with failed integrity verification.<a href="#section-4.3.9-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.9-2">
+<p id="section-4.2.11-1">
+            Definition. An AEAD algorithm provides security even if the plaintext is released for every ciphertext, including those with failed integrity verification.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.11-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.11-2">
+            Functional applications. Decryption with limited memory <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#FJMV2004" class="cite xref">FJMV2004</a>]</span>, CMS protocols <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#RFC5652" class="cite xref">RFC5652</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.11-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.11-3">
             Further reading.
-            <span>[<a href="#A14" class="cite xref">A14</a>]</span><a href="#section-4.3.9-2" class="pilcrow">¶</a></p>
+            <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#A14" class="cite xref">A14</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.2.11-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="ImpProp">
-<section id="section-4.4">
+<section id="section-4.3">
         <h3 id="name-implementation-properties">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-implementation-properties" class="section-name selfRef">Implementation properties</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3" class="section-number selfRef">4.3. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-implementation-properties" class="section-name selfRef">Implementation properties</a>
         </h3>
 <div id="Inverse">
-<section id="section-4.4.1">
+<section id="section-4.3.1">
           <h4 id="name-inverse-free">
-<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-inverse-free" class="section-name selfRef">Inverse-free</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-inverse-free" class="section-name selfRef">Inverse-free</a>
           </h4>
-<p id="section-4.4.1-1">
-            Definition. A block cipher-based AEAD algorithm can be securely implemented without evaluating the block cipher inverse.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-1">
+            Definition. A block cipher-based AEAD algorithm can be securely implemented without evaluating the block cipher inverse.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Lightweight">
-<section id="section-4.4.2">
+<section id="section-4.3.2">
           <h4 id="name-lightweight">
-<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-lightweight" class="section-name selfRef">Lightweight</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-lightweight" class="section-name selfRef">Lightweight</a>
           </h4>
-<p id="section-4.4.2-1">
-            Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST Lightweight Cryptography competition <span>[<a href="#MBTM17" class="cite xref">MBTM17</a>]</span>.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.2-2">
-            Further reading. <span>[<a href="#MBTM17" class="cite xref">MBTM17</a>]</span><a href="#section-4.4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.3.2-1">
+            Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST Lightweight Cryptography competition <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#MBTM17" class="cite xref">MBTM17</a>]</span>.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.2-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#MBTM17" class="cite xref">MBTM17</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Online">
-<section id="section-4.4.3">
+<section id="section-4.3.3">
           <h4 id="name-online">
-<a href="#section-4.4.3" class="section-number selfRef">4.4.3. </a><a href="#name-online" class="section-name selfRef">Online</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-online" class="section-name selfRef">Online</a>
           </h4>
-<p id="section-4.4.3-1">
-            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.<a href="#section-4.4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.3-2">
+<p id="section-4.3.3-1">
+            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.3-2">
             Further reading.
-            <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span>
-            <span>[<a href="#FJMV2004" class="cite xref">FJMV2004</a>]</span><a href="#section-4.4.3-2" class="pilcrow">¶</a></p>
+            <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#HRRV15" class="cite xref">HRRV15</a>]</span>
+            <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#FJMV2004" class="cite xref">FJMV2004</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Parallelizable">
-<section id="section-4.4.4">
+<section id="section-4.3.4">
           <h4 id="name-parallelizable">
-<a href="#section-4.4.4" class="section-number selfRef">4.4.4. </a><a href="#name-parallelizable" class="section-name selfRef">Parallelizable</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.4" class="section-number selfRef">4.3.4. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-parallelizable" class="section-name selfRef">Parallelizable</a>
           </h4>
-<p id="section-4.4.4-1">
-            Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure.<a href="#section-4.4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.4-2">
-            Synonyms. Pipelineable.<a href="#section-4.4.4-2" class="pilcrow">¶</a></p>
-<p id="section-4.4.4-3">
-            Further reading. <span>[<a href="#C20" class="cite xref">C20</a>]</span><a href="#section-4.4.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.3.4-1">
+            Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.4-2">
+            Synonyms. Pipelineable.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.3.4-3">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#C20" class="cite xref">C20</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="SinglePass">
-<section id="section-4.4.5">
+<section id="section-4.3.5">
           <h4 id="name-single-pass">
-<a href="#section-4.4.5" class="section-number selfRef">4.4.5. </a><a href="#name-single-pass" class="section-name selfRef">Single pass</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.5" class="section-number selfRef">4.3.5. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-single-pass" class="section-name selfRef">Single pass</a>
           </h4>
-<p id="section-4.4.5-1">
-            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).<a href="#section-4.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.5-1">
+            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="StaticAD">
-<section id="section-4.4.6">
+<section id="section-4.3.6">
           <h4 id="name-static-associated-data">
-<a href="#section-4.4.6" class="section-number selfRef">4.4.6. </a><a href="#name-static-associated-data" class="section-name selfRef">Static Associated Data</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.6" class="section-number selfRef">4.3.6. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-static-associated-data" class="section-name selfRef">Static Associated Data</a>
           </h4>
-<p id="section-4.4.6-1">
-            Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational cost of encryption.<a href="#section-4.4.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.6-1">
+            Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational cost of encryption.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ZK">
-<section id="section-4.4.7">
+<section id="section-4.3.7">
           <h4 id="name-zk-friendly">
-<a href="#section-4.4.7" class="section-number selfRef">4.4.7. </a><a href="#name-zk-friendly" class="section-name selfRef">ZK-friendly</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.7" class="section-number selfRef">4.3.7. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-zk-friendly" class="section-name selfRef">ZK-friendly</a>
           </h4>
-<p id="section-4.4.7-1">
-            Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.<a href="#section-4.4.7-1" class="pilcrow">¶</a></p>
-<p id="section-4.4.7-2">
-            Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity<a href="#section-4.4.7-2" class="pilcrow">¶</a></p>
-<p id="section-4.4.7-3">
+<p id="section-4.3.7-1">
+            Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.7-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.7-2">
+            Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.7-2" class="pilcrow">¶</a></p>
+<p id="section-4.3.7-3">
             Further reading.
-            <span>[<a href="#DGGK21" class="cite xref">DGGK21</a>]</span><a href="#section-4.4.7-3" class="pilcrow">¶</a></p>
+            <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#DGGK21" class="cite xref">DGGK21</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.3.7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="AddProp">
-<section id="section-4.5">
+<section id="section-4.4">
         <h3 id="name-additional-functionality-pr">
-<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-additional-functionality-pr" class="section-name selfRef">Additional functionality properties</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4" class="section-number selfRef">4.4. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-additional-functionality-pr" class="section-name selfRef">Additional functionality properties</a>
         </h3>
 <div id="Incremental">
-<section id="section-4.5.1">
+<section id="section-4.4.1">
           <h4 id="name-incremental">
-<a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-incremental" class="section-name selfRef">Incremental</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-incremental" class="section-name selfRef">Incremental</a>
           </h4>
-<p id="section-4.5.1-1">
-            Definition. An AEAD algorithm allows encrypting and authenticating a message (associated data and a plaintext pair), which only partly differs from some previous message, faster than processing it from scratch.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.5.1-2">
-            Further reading. <span>[<a href="#SY16" class="cite xref">SY16</a>]</span>, <span>[<a href="#BKY02" class="cite xref">BKY02</a>]</span>, <span>[<a href="#M05" class="cite xref">M05</a>]</span><a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-1">
+            Definition. An AEAD algorithm allows encrypting a message, which only partly differs from some other previously encrypted message, faster than processing it from scratch.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.1-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#SY16" class="cite xref">SY16</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BKY02" class="cite xref">BKY02</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="NonceHiding">
+<section id="section-4.4.2">
+          <h4 id="name-nonce-hiding">
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-nonce-hiding" class="section-name selfRef">Nonce-hiding</a>
+          </h4>
+<p id="section-4.4.2-1">
+            Definition. An AEAD algorithm decryption operation doesn't need the nonce value to perform the decryption. Thus, the algorithm provides privacy for the nonce value.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.2-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BNT19" class="cite xref">BNT19</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="RemotelyKeyed">
-<section id="section-4.5.2">
+<section id="section-4.4.3">
           <h4 id="name-remotely-keyed">
-<a href="#section-4.5.2" class="section-number selfRef">4.5.2. </a><a href="#name-remotely-keyed" class="section-name selfRef">Remotely-keyed</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.3" class="section-number selfRef">4.4.3. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-remotely-keyed" class="section-name selfRef">Remotely-keyed</a>
           </h4>
-<p id="section-4.5.2-1">
-            Definition. An AEAD algorithm can be implemented with most of the operations in encryption/decryption performed by an insecure (i.e., it leaks all intermediate values) device, which has no access to the key, while another secure device performs operations involving the key.<a href="#section-4.5.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.5.2-2">
-            Further reading. <span>[<a href="#BFN98" class="cite xref">BFN98</a>]</span>, <span>[<a href="#DA03" class="cite xref">DA03</a>]</span><a href="#section-4.5.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.3-1">
+            Definition. An AEAD algorithm can be securely implemented with most of the operations in encryption/decryption performed by an insecure (i.e., it leaks all intermediate values) device, which has no access to the key, while another secure device performs operations involving the key.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.3-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#BFN98" class="cite xref">BFN98</a>]</span>, <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#DA03" class="cite xref">DA03</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Robust">
-<section id="section-4.5.3">
+<section id="section-4.4.4">
           <h4 id="name-robust">
-<a href="#section-4.5.3" class="section-number selfRef">4.5.3. </a><a href="#name-robust" class="section-name selfRef">Robust</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.4" class="section-number selfRef">4.4.4. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-robust" class="section-name selfRef">Robust</a>
           </h4>
-<p id="section-4.5.3-1">
-            Definition. An AEAD algorithm allows the user to choose an arbitrary value l &gt;= 0 for every plaintext and then encrypts it into a ciphertext, which is l bits longer.<a href="#section-4.5.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.5.3-2">
-            Further reading. <span>[<a href="#HKR2015" class="cite xref">HKR2015</a>]</span><a href="#section-4.5.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.4.4-1">
+            Definition. An AEAD algorithm allows the user to choose an arbitrary value l &gt;= 0 for every plaintext and then encrypts it into a ciphertext, which is l bits longer.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4.4-2">
+            Further reading. <span>[<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#HKR2015" class="cite xref">HKR2015</a>]</span><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-4.4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1799,28 +1821,28 @@ li > p:last-of-type {
 <div id="Security">
 <section id="section-5">
       <h2 id="name-security-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-5" class="section-number selfRef">5. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-5-1">
-        This document defines the properties of AEAD algorithms. However, the document does not describe any concrete mechanisms providing these properties, neither it describes how to achieve them. In fact, one can claim that an AEAD algorithm provides any of the defined properties only if its analysis in the relevant models was carried out.<a href="#section-5-1" class="pilcrow">¶</a></p>
+        This document defines the properties of AEAD algorithms. However, the document does not describe any concrete mechanisms providing these properties, neither it describes how to achieve them. In fact, one can claim that an AEAD algorithm provides any of the defined properties only if its analysis in the relevant models was carried out.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="IANACON">
 <section id="section-6">
       <h2 id="name-iana-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-6" class="section-number selfRef">6. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
 <p id="section-6-1">
-        This document has no IANA actions.<a href="#section-6-1" class="pilcrow">¶</a></p>
+        This document has no IANA actions.<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-7">
       <h2 id="name-references">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-7" class="section-number selfRef">7. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-references" class="section-name selfRef">References</a>
       </h2>
 <section id="section-7.1">
         <h3 id="name-normative-references">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-7.1" class="section-number selfRef">7.1. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1839,7 +1861,7 @@ li > p:last-of-type {
 </section>
 <section id="section-7.2">
         <h3 id="name-informative-references">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#section-7.2" class="section-number selfRef">7.2. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="A14">[A14]</dt>
@@ -1861,6 +1883,10 @@ li > p:last-of-type {
 <dt id="BFN98">[BFN98]</dt>
         <dd>
 <span class="refAuthor">Blaze, M.</span>, <span class="refAuthor">Feigenbaum, J.</span>, and <span class="refAuthor">M. Naor</span>, <span class="refTitle">"A formal treatment of remotely keyed encryption"</span>, <span class="refContent">Advances in Cryptology — EUROCRYPT'98. EUROCRYPT 1998. Lecture Notes in Computer Science, vol 1403. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/BFb0054131</span>, <time datetime="1998" class="refDate">1998</time>, <span>&lt;<a href="https://doi.org/10.1007/BFb0054131">https://doi.org/10.1007/BFb0054131</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BH22">[BH22]</dt>
+        <dd>
+<span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">V.T. Hoang</span>, <span class="refTitle">"Efficient schemes for committing authenticated encryption."</span>, <span class="refContent">Advances in Cryptology – EUROCRYPT 2022. EUROCRYPT 2022. Lecture Notes in Computer Science, vol 13276. Springer, Cham.</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-07085-3_29</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-07085-3_29">https://doi.org/10.1007/978-3-031-07085-3_29</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="BK2011">[BK2011]</dt>
         <dd>
@@ -1885,6 +1911,10 @@ li > p:last-of-type {
 <dt id="C20">[C20]</dt>
         <dd>
 <span class="refAuthor">Chakraborti, A.</span>, <span class="refAuthor">Datta, N.</span>, <span class="refAuthor">Jha, A.</span>, <span class="refAuthor">Mancillas-López, C.</span>, <span class="refAuthor">Nandi, M.</span>, and <span class="refAuthor">Y. Sasaki</span>, <span class="refTitle">"INT-RUP Secure Lightweight Parallel AE Modes"</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology, 2019(4), 81–118</span>, <span class="seriesInfo">DOI 10.13154/tosc.v2019.i4.81-118</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://doi.org/10.13154/tosc.v2019.i4.81-118">https://doi.org/10.13154/tosc.v2019.i4.81-118</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="CR22">[CR22]</dt>
+        <dd>
+<span class="refAuthor">Chan, J.</span> and <span class="refAuthor">P. Rogaway</span>, <span class="refTitle">"On Committing Authenticated-Encryption."</span>, <span class="refContent">Computer Security – ESORICS 2022. ESORICS 2022. Lecture Notes in Computer Science, vol 13555. Springer, Cham.</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-17146-8_14</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-17146-8_14">https://doi.org/10.1007/978-3-031-17146-8_14</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="DA03">[DA03]</dt>
         <dd>
@@ -1924,7 +1954,7 @@ li > p:last-of-type {
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-aead-limits">[I-D.irtf-cfrg-aead-limits]</dt>
         <dd>
-<span class="refAuthor">Günther, F.</span>, <span class="refAuthor">Thomson, M.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Usage Limits on AEAD Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-aead-limits-06</span>, <time datetime="2023-01-30" class="refDate">30 January 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-06">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Günther, F.</span>, <span class="refAuthor">Thomson, M.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Usage Limits on AEAD Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-aead-limits-07</span>, <time datetime="2023-05-31" class="refDate">31 May 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-07">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="JMV2002">[JMV2002]</dt>
         <dd>
@@ -1933,10 +1963,6 @@ li > p:last-of-type {
 <dt id="LGR21">[LGR21]</dt>
         <dd>
 <span class="refAuthor">Len, J.</span>, <span class="refAuthor">Grubbs, P.</span>, and <span class="refAuthor">T. Ristenpart</span>, <span class="refTitle">"Partitioning Oracle Attacks"</span>, <span class="refContent">30th USENIX Security Symposium (USENIX Security 21), 195--212</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
-<dd class="break"></dd>
-<dt id="M05">[M05]</dt>
-        <dd>
-<span class="refAuthor">McGrew, D.</span>, <span class="refTitle">"Efficient authentication of large, dynamic data sets using Galois/counter mode (GCM)"</span>, <span class="refContent">Third IEEE International Security in Storage Workshop (SISW'05), San Francisco, CA, USA </span>, <span class="seriesInfo">DOI 10.1109/SISW.2005.3.</span>, <time datetime="2005" class="refDate">2005</time>, <span>&lt;<a href="https://doi.org/10.1109/SISW.2005.3.">https://doi.org/10.1109/SISW.2005.3.</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="MBTM17">[MBTM17]</dt>
         <dd>
@@ -1949,6 +1975,10 @@ li > p:last-of-type {
 <dt id="RFC4303">[RFC4303]</dt>
         <dd>
 <span class="refAuthor">Kent, S.</span>, <span class="refTitle">"IP Encapsulating Security Payload (ESP)"</span>, <span class="seriesInfo">RFC 4303</span>, <span class="seriesInfo">DOI 10.17487/RFC4303</span>, <time datetime="2005-12" class="refDate">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4303">https://www.rfc-editor.org/info/rfc4303</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5652">[RFC5652]</dt>
+        <dd>
+<span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">STD 70</span>, <span class="seriesInfo">RFC 5652</span>, <span class="seriesInfo">DOI 10.17487/RFC5652</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5652">https://www.rfc-editor.org/info/rfc5652</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8221">[RFC8221]</dt>
         <dd>
@@ -1976,14 +2006,14 @@ li > p:last-of-type {
 <div id="contributors">
 <section id="appendix-A">
       <h2 id="name-contributors">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-contributors" class="section-name selfRef">Contributors</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#appendix-A" class="section-number selfRef">Appendix A. </a><a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-contributors" class="section-name selfRef">Contributors</a>
     </h2>
 </section>
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
       <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-aead-properties-02.html#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Andrey Bozhko (<span class="role">editor</span>)</span></div>
@@ -2003,5 +2033,6 @@ toc.querySelector("nav").addEventListener("click", e => {
   toc.classList.remove("active");
 });
 </script>
-</body>
-</html>
+
+
+</body></html>
