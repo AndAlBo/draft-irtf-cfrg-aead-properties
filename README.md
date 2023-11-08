@@ -2,7 +2,7 @@
 
 This is the working area for the individual Internet-Draft, "Properties of AEAD algorithms".
 
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-bozhko-cfrg-aead-properties/)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-irtf-cfrg-aead-properties/)
 
 
 ## Command Line Usage
