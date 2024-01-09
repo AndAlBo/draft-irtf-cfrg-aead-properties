@@ -302,7 +302,7 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
         <section anchor="Online" numbered="true" toc="default">
           <name>Online</name>
           <t>
-            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
+            Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory usage and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
           </t>
           <t>
             Further reading.
