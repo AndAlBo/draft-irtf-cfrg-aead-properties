@@ -75,12 +75,12 @@ xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" vers
       <ul>
         <li>
           <t>
-            A determenistic operation of authenticated encryption has four inputs, each of them is a binary string: a secret key K of a fixed bit lenght, a nonce N, associated data A and a plaintext P. The plaintext cointains the data to be encrypted and autheticated, the associated data cointains the data to be authenticated only. Each nonce value must be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.
+            A deterministic operation of authenticated encryption has four inputs, each of them is a binary string: a secret key K of a fixed bit length, a nonce N, associated data A and a plaintext P. The plaintext cointains the data to be encrypted and autheticated, the associated data cointains the data to be authenticated only. Each nonce value must be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.
           </t>
         </li>
         <li>
           <t>
-            A determenistic operation of authenticated decryption has four inputs, each of them is a binary string: a secret key K of a fixed bit lenght, a nonce N, associated data A and a ciphertext C. The operation verifies the integrity of the ciphertext and associated data, and decrypts the ciphertext. It returns a special symbol FAIL if the inputs are not authentic, otherwise the operation returns a plaintext P.
+            A deterministic operation of authenticated decryption has four inputs, each of them is a binary string: a secret key K of a fixed bit length, a nonce N, associated data A and a ciphertext C. The operation verifies the integrity of the ciphertext and associated data, and decrypts the ciphertext. It returns a special symbol FAIL if the inputs are not authentic, otherwise the operation returns a plaintext P.
           </t>
         </li>
       </ul>
