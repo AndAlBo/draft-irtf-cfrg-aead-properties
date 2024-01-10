@@ -4,8 +4,8 @@
 
 Network Working Group                                   A.A. Bozhko, Ed.
 Internet-Draft                                                 CryptoPro
-Intended status: Informational                           16 October 2023
-Expires: 18 April 2024
+Intended status: Informational                           10 January 2024
+Expires: 13 July 2024
 
 
                      Properties of AEAD algorithms
@@ -36,11 +36,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 April 2024.
+   This Internet-Draft will expire on 13 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Bozhko                    Expires 18 April 2024                 [Page 1]
+Bozhko                    Expires 13 July 2024                  [Page 1]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -76,46 +76,47 @@ Table of Contents
    3.  AEAD algorithms . . . . . . . . . . . . . . . . . . . . . . .   4
    4.  AEAD properties . . . . . . . . . . . . . . . . . . . . . . .   5
      4.1.  Classification of AEAD properties . . . . . . . . . . . .   5
-     4.2.  Security properties . . . . . . . . . . . . . . . . . . .   5
-       4.2.1.  Confidentiality . . . . . . . . . . . . . . . . . . .   5
+     4.2.  Basic properties  . . . . . . . . . . . . . . . . . . . .   6
+       4.2.1.  Confidentiality . . . . . . . . . . . . . . . . . . .   6
        4.2.2.  Data integrity  . . . . . . . . . . . . . . . . . . .   6
-       4.2.3.  Blockwise security  . . . . . . . . . . . . . . . . .   6
-       4.2.4.  Full commitment . . . . . . . . . . . . . . . . . . .   6
-       4.2.5.  Key commitment  . . . . . . . . . . . . . . . . . . .   6
-       4.2.6.  Key Dependent Messages (KDM) security . . . . . . . .   7
-       4.2.7.  Leakage resistance  . . . . . . . . . . . . . . . . .   7
-       4.2.8.  Multi-user security . . . . . . . . . . . . . . . . .   7
-       4.2.9.  Nonce misuse  . . . . . . . . . . . . . . . . . . . .   7
-       4.2.10. Reforgeability resilience . . . . . . . . . . . . . .   8
-       4.2.11. Release of unverified plaintext (RUP) security  . . .   8
-     4.3.  Implementation properties . . . . . . . . . . . . . . . .   8
-       4.3.1.  Inverse-free  . . . . . . . . . . . . . . . . . . . .   8
-       4.3.2.  Lightweight . . . . . . . . . . . . . . . . . . . . .   8
-       4.3.3.  Online  . . . . . . . . . . . . . . . . . . . . . . .   8
-       4.3.4.  Parallelizable  . . . . . . . . . . . . . . . . . . .   8
-       4.3.5.  Single pass . . . . . . . . . . . . . . . . . . . . .   9
-       4.3.6.  Static Associated Data  . . . . . . . . . . . . . . .   9
-       4.3.7.  ZK-friendly . . . . . . . . . . . . . . . . . . . . .   9
-     4.4.  Additional functionality properties . . . . . . . . . . .   9
-       4.4.1.  Incremental . . . . . . . . . . . . . . . . . . . . .   9
-       4.4.2.  Nonce-hiding  . . . . . . . . . . . . . . . . . . . .   9
-       4.4.3.  Remotely-keyed  . . . . . . . . . . . . . . . . . . .  10
-       4.4.4.  Robust  . . . . . . . . . . . . . . . . . . . . . . .  10
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+     4.3.  Security properties . . . . . . . . . . . . . . . . . . .   6
+       4.3.1.  Blockwise security  . . . . . . . . . . . . . . . . .   6
+       4.3.2.  Full commitment . . . . . . . . . . . . . . . . . . .   7
+       4.3.3.  Key commitment  . . . . . . . . . . . . . . . . . . .   7
+       4.3.4.  Key Dependent Messages (KDM) security . . . . . . . .   7
+       4.3.5.  Leakage resistance  . . . . . . . . . . . . . . . . .   8
+       4.3.6.  Multi-user security . . . . . . . . . . . . . . . . .   8
+       4.3.7.  Nonce-hiding  . . . . . . . . . . . . . . . . . . . .   8
+       4.3.8.  Nonce misuse  . . . . . . . . . . . . . . . . . . . .   8
+       4.3.9.  Reforgeability resilience . . . . . . . . . . . . . .   8
+       4.3.10. Release of unverified plaintext (RUP) security  . . .   9
+     4.4.  Implementation properties . . . . . . . . . . . . . . . .   9
+       4.4.1.  Inverse-free  . . . . . . . . . . . . . . . . . . . .   9
+       4.4.2.  Lightweight . . . . . . . . . . . . . . . . . . . . .   9
+       4.4.3.  Online  . . . . . . . . . . . . . . . . . . . . . . .   9
+       4.4.4.  Parallelizable  . . . . . . . . . . . . . . . . . . .   9
+       4.4.5.  Single pass . . . . . . . . . . . . . . . . . . . . .  10
+       4.4.6.  Static Associated Data  . . . . . . . . . . . . . . .  10
+       4.4.7.  ZK-friendly . . . . . . . . . . . . . . . . . . . . .  10
+   5.  AEAD algorithms with additional functionality . . . . . . . .  10
+     5.1.  Incremental . . . . . . . . . . . . . . . . . . . . . . .  10
+     5.2.  Remotely-keyed  . . . . . . . . . . . . . . . . . . . . .  11
+     5.3.  Robust  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  11
 
 
 
-Bozhko                    Expires 18 April 2024                 [Page 2]
+Bozhko                    Expires 13 July 2024                  [Page 2]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
-   Appendix A.  Contributors . . . . . . . . . . . . . . . . . . . .  16
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  16
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  12
+   Appendix A.  Contributors . . . . . . . . . . . . . . . . . . . .  17
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
 
@@ -129,8 +130,8 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 1.1.  Background
 
    AEAD algorithms are formally defined in [RFC5116].  The main benefit
-   of AEAD algorithms is that they provide both data confidentiality and
-   data integrity and have a simple unified interface.
+   of AEAD algorithms is that they provide data confidentiality and
+   integrity and have a simple unified interface.
 
    The importance of the AEAD algorithms is mainly explained by their
    exploitation simplicity: they have a unified interface, easy-to-
@@ -141,22 +142,22 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
    derivation procedures.  Apart from that, when using the AEAD
    algorithm, it is possible to reduce the key and state sizes and
    improve the data processing speed.  For instance, such algorithms are
-   mandatory for TLS 1.3 [RFC8446], IPsec ESP [RFC4303] [RFC8221], and
+   mandatory for TLS 1.3 [RFC8446], IPsec ESP [RFC4303][RFC8221], and
    QUIC [RFC9000].  Hence, the research and standardization efforts in
    the field are extremely active.  Most AEAD algorithms usually come
    with security guarantees, formal proofs, usage guidelines, and
    reference implementations.
 
    Even though providing core properties of AEAD algorithms is enough
-   for use in many applications, some environments require other unusual
+   for many applications, some environments require other unusual
    cryptographic properties, which commonly require additional analysis
    and research.  With the growing number of such properties and
    research papers, misunderstanding and confusion inevitably appear.
-   Some properties might be understood in different ways, for some only
-   non-trivial formal security notions are provided, others require
-   modification or extension of the standard AEAD interface to support
-   additional functionality.  Therefore, the risk of misuse of AEAD
-   algorithms increases which can lead to security issues.
+   Some properties might be understood in different ways; for some, only
+   non-trivial formal security notions are provided, while others
+   require modification or extension of the standard AEAD interface to
+   support additional functionality.  Therefore, the risk of misuse of
+   AEAD algorithms increases, which can lead to security issues.
 
 
 
@@ -164,146 +165,188 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-
-Bozhko                    Expires 18 April 2024                 [Page 3]
+Bozhko                    Expires 13 July 2024                  [Page 3]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
 1.2.  Scope
 
    In the following document, we provide a short overview of the most
-   common properties of AEAD algorithms, by giving high-level
-   definitions of these properties in Section 4.  The document aims to
-   improve clarity and establish a common language in the field.
+   common properties of AEAD algorithms by giving high-level definitions
+   of these properties in Section 4.  The document aims to improve
+   clarity and establish a common language in the field.
 
 2.  Conventions Used in This Document
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   14 [RFC2119][RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
 3.  AEAD algorithms
 
-   In this section we give a general definition of an AEAD algorithm,
+   This section gives a general definition of an AEAD algorithm
    following [RFC5116].
 
-   Definition.  An AEAD algorithm is defined by two operations ---
-   authenticated encryption and authenticated decryption:
+   Definition.  An AEAD algorithm is defined by two operations, which
+   are authenticated encryption and authenticated decryption:
 
-   *  A determenistic operation of authenticated encryption has four
-      inputs, each of them is a binary string: a secret key K of a fixed
-      bit lenght, a nonce N, associated data A and a plaintext P.  The
-      plaintext cointains the data to be encrypted and autheticated, the
-      associated data cointains the data to be authenticated only.  Each
-      nonce value must be unique in every distinct invocation of the
-      operation for any particular value of the key.  The authenticated
-      encryption operation outputs a ciphertext C.
+   *  A deterministic operation of authenticated encryption has four
+      inputs, each a binary string: a secret key K of a fixed bit
+      length, a nonce N, associated data A, and a plaintext P.  The
+      plaintext contains the data to be encrypted and authenticated, and
+      the associated data contains the data to be authenticated only.
+      Each nonce value must be unique in every distinct invocation of
+      the operation for any particular value of the key.  The
+      authenticated encryption operation outputs a ciphertext C.
 
-   *  A determenistic operation of authenticated decryption has four
-      inputs, each of them is a binary string: a secret key K of a fixed
-      bit lenght, a nonce N, associated data A and a ciphertext C.  The
+   *  A deterministic operation of authenticated decryption has four
+      inputs, each a binary string: a secret key K of a fixed bit
+      length, a nonce N, associated data A, and a ciphertext C.  The
       operation verifies the integrity of the ciphertext and associated
-      data, and decrypts the ciphertext.  It returns a special symbol
-      FAIL if the inputs are not authentic, otherwise the operation
+      data and decrypts the ciphertext.  It returns a special symbol
+      FAIL if the inputs are not authentic; otherwise, the operation
       returns a plaintext P.
 
-   For more details on AEAD definition please refer to [RFC5116].
+   For more details on AEAD definition, please refer to [RFC5116].
 
-   Throught this document, by default, we will consider nonce-based AEAD
-   algorithms, which have an interface from the definition above, and
-   give no other restrictions on their strcuture.  However, some
-   properties defined in the document are applicable only to some
-   special classes of such algorithms, like block cipher based AEAD
-   algorithms (such algorithms use block cipher as a building block).
+   TODO: The additional functionality properties section is obsolete.
+   There is a separate section, where different AEADs with additional
+   functionality are discussed.  Add a new paragraph on AEADs with
+   additional functionality and rewrite the next one.
 
 
 
-Bozhko                    Expires 18 April 2024                 [Page 4]
+
+
+Bozhko                    Expires 13 July 2024                  [Page 4]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
-   If that is the case we explicitly point that out in the corresponding
-   section.  Some other properties, on the contarary, are defined for
-   algorithms with extended or completely different interfaces.  We
-   address that issue in Section Section 4.1.
+   Throughout this document, by default, we will consider nonce-based
+   AEAD algorithms, which have an interface from the definition above,
+   and give no other restrictions on their structure.  However, some
+   properties defined in the document apply only to particular classes
+   of such algorithms, like block cipher-based AEAD algorithms (such
+   algorithms use block cipher as a building block).  If that is the
+   case, we explicitly point that out in the corresponding section.
+   Some other properties, on the contrary, are defined for algorithms
+   with extended or completely different interfaces.  We address that
+   issue in Section 4.1.
 
-   We will call an AEAD algorithm secure, if it providees such
-   properties as Confidentiality and Data integrity, defined in
-   Section Section 4.  Even though we are aiming to give high-level
-   definitions, we will sometimes use the adversaial advantage notion.
+   We will call an AEAD algorithm secure if it provides such properties
+   as Confidentiality and Data integrity, defined in Section 4.2,
+   against any active nonce-respecting adversary.  Even though we aim to
+   give high-level definitions, we sometimes use the advantage notion.
    Specifically, we will use the Authenticated Encryption advantage
-   notion for the AEAD algorithm.  We adopt the corresponding definition
-   from [I-D.irtf-cfrg-aead-limits].
+   notion.  We adopt the corresponding definition from
+   [I-D.irtf-cfrg-aead-limits].
 
-   Definition.  The probability of an active attacker succeeding in
-   breaking the authenticated-encryption properties of the AEAD
-   algorithm.  In this document, the definition of authenticated
-   encryption advantage roughly is the probability that an attacker
-   successfully distinguishes the ciphertext outputs of the AEAD scheme
-   from the outputs of a random function or is able to forge a
-   ciphertext that will be accepted as valid.
+   Definition.  Authenticated Encryption advantage is the probability of
+   an active adversary succeeding in breaking the authenticated-
+   encryption properties of the AEAD algorithm.  In this document, the
+   definition of authenticated encryption advantage roughly is the
+   probability that an attacker successfully distinguishes the
+   ciphertext outputs of the AEAD scheme from the outputs of a random
+   function or is able to forge a ciphertext that will be accepted as
+   valid.
 
 4.  AEAD properties
 
 4.1.  Classification of AEAD properties
 
-   In this document we use a very high-level classification of
-   properties.  That classification is aimed to highlight the
-   differences between the nature of the considered properties.  All
-   properties in the document fall into one of these three categories:
+   TODO: Rewrite.  Basic prop?
 
-   *  Security properties
+   In this document we use a high-level classification of additional
+   properties.  The classification aims to give an intuition on how one
+   can benefit from the property.  The additional properties fall into
+   one of these three categories:
 
-   *  Implementation properties
+   *  Security properties.  We say that the property is a security
+      property if it considers new threats or adversarial capabilities,
+      in addition to those of the usual nonce-respecting adversary,
+      which aims to break confidentiality or data integrity.
 
-   *  Additional functionality properties
+   *  Implementation properties.  We say that the property is an
+      implementation property if it allows for more efficient
+      implementations of the AEAD algorithm in special cases or
+      environments.
 
-4.2.  Security properties
+
+
+Bozhko                    Expires 13 July 2024                  [Page 5]
+
+Internet-Draft        Properties of AEAD algorithms         January 2024
+
+
+   *  Additional functionality properties.  We say that the property is
+      an additional functionality property if it provides new features
+      in addition to the regular authenticated encryption with
+      associated data.
+
+   We notice that the distinction between the security and additional
+   functionality properties might be vague.  The convention in this
+   document is that additional functionality requires some extension of
+   the standard AEAD interface.  In fact, each additional functionality
+   property defines a new class of algorithms, which is not a subclass
+   of regular AEAD.  Hence, the basic threats and adversarial
+   capabilities must be redefined for each of these classes.  As a
+   result, additional functionality properties consider the basic
+   threats and adversarial capabilities for their class of algorithms
+   and, in contrast to security properties, not the extended ones.
+
+4.2.  Basic properties
 
 4.2.1.  Confidentiality
 
    Definition.  An AEAD algorithm guarantees that the plaintext is
-   available only to those authorized to obtain it, i.e. those who are
-   in the posession of the secret key.  That property is required for
-   the AEAD algorithm to be called secure.
+   available only to those authorized to obtain it, i.e., those
+   possessing the secret key.  That property is required for the AEAD
+   algorithm to be called secure.
 
    Synonyms.  Privacy.
 
    Further reading.  [R2002], [BN2000]
 
-
-
-Bozhko                    Expires 18 April 2024                 [Page 5]
-
-Internet-Draft        Properties of AEAD algorithms         October 2023
-
-
 4.2.2.  Data integrity
 
    Definition.  An AEAD algorithm guarantees that the plaintext and the
-   associated data has not been changed or forged by those who are not
-   authorized to, i.e. by those who are not in the posession of the
-   secret key.  That property is required for the AEAD algorithm to be
-   called secure.
+   associated data have not been changed or forged by those not
+   authorized to, i.e., those not possessing the secret key.  That
+   property is required for the AEAD algorithm to be called secure.
 
    Synonyms.  Message authentication.
 
    Further reading.  [R2002], [BN2000]
 
-4.2.3.  Blockwise security
+4.3.  Security properties
+
+4.3.1.  Blockwise security
 
    Definition.  An AEAD algorithm provides security even if an adversary
-   can adaptively choose the next block of the plaintext (ciphertext)
-   depending on already computed blocks of the ciphertext (plaintext)
-   during an encryption (decryption) operation.
+   can adaptively choose the next block of the plaintext depending on
+   already computed ciphertext blocks during an encryption operation.
+
+
+
+
+Bozhko                    Expires 13 July 2024                  [Page 6]
+
+Internet-Draft        Properties of AEAD algorithms         January 2024
+
+
+   Note.  The case when an adversary can adaptively choose the next
+   block of the ciphertext depending on already computed blocks of the
+   plaintext, which appear in the device memory before the integrity
+   verification during the decryption, can also be considered.  This
+   case is strongly related to RUP security, defined in Section 4.3.10.
 
    Further reading.  [JMV2002], [FJMV2004]
 
-4.2.4.  Full commitment
+4.3.2.  Full commitment
 
    Definition.  An AEAD algorithm guarantees that it is difficult to
    find two or more different tuples of the key, nonce, associated data,
@@ -315,7 +358,7 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [BH22], [CR22]
 
-4.2.5.  Key commitment
+4.3.3.  Key commitment
 
    Definition.  An AEAD algorithm guarantees that it is difficult to
    find two or more different keys and the same number of potentially
@@ -329,33 +372,31 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
    Notes.  Key commitment follows from full commitment.  Full commitment
    does not follow form key commitment.  [BH22]
 
-
-
-
-
-Bozhko                    Expires 18 April 2024                 [Page 6]
-
-Internet-Draft        Properties of AEAD algorithms         October 2023
-
-
    Functional applications.  Password-Authenticated Key Exchange
    [LGR21].
 
-   Further reading.  [BH22], [CR22], [FOR17], [LGR21], [GLR17]
+   Further reading.  [BH22],[CR22], [FOR17], [LGR21], [GLR17]
 
-4.2.6.  Key Dependent Messages (KDM) security
+4.3.4.  Key Dependent Messages (KDM) security
 
    Definition.  An AEAD algorithm provides security even when key-
    dependent plaintexts are encrypted.
 
-   Notes.  KDM-security is achievable only if nonces are chosen randomly
+   Notes.  KDM security is achievable only if nonces are chosen randomly
    and associated data is key-independent.
 
    Functional applications.  Disk encryption schemes [BK2011].
 
+
+
+Bozhko                    Expires 13 July 2024                  [Page 7]
+
+Internet-Draft        Properties of AEAD algorithms         January 2024
+
+
    Further reading.  [BK2011]
 
-4.2.7.  Leakage resistance
+4.3.5.  Leakage resistance
 
    Definition.  An AEAD algorithm provides security even if some
    additional information about computations of an encryption (and
@@ -363,14 +404,25 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [GPPS19], [B20]
 
-4.2.8.  Multi-user security
+4.3.6.  Multi-user security
 
    Definition.  An AEAD algorithm Authenticated Encryption advantage
    increases sublinearly in the number of users.
 
    Further reading.  [BT16]
 
-4.2.9.  Nonce misuse
+4.3.7.  Nonce-hiding
+
+   Definition.  An AEAD algorithm provides confidentiality for the nonce
+   value used to encrypt a plaintext.
+
+   Note.  The decryption operation in a nonce-hiding AEAD algorithm does
+   not require the nonce as input.  In nonce-hiding AEAD algorithms, the
+   ciphertext contains information equivalent to an encrypted nonce.
+
+   Further reading.  [BNT19]
+
+4.3.8.  Nonce misuse
 
    Definition.  An AEAD algorithm provides security (resilience or
    resistance) even if an adversary can repeat nonces in its encryption
@@ -384,25 +436,28 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [RS06], [ADL17]
 
-
-
-
-
-
-Bozhko                    Expires 18 April 2024                 [Page 7]
-
-Internet-Draft        Properties of AEAD algorithms         October 2023
-
-
-4.2.10.  Reforgeability resilience
+4.3.9.  Reforgeability resilience
 
    Definition.  An AEAD algorithm guarantees that once a successful
    forgery for the algorithm has been found, it is still hard to find
    any subsequent forgery.
 
+
+
+
+Bozhko                    Expires 13 July 2024                  [Page 8]
+
+Internet-Draft        Properties of AEAD algorithms         January 2024
+
+
+   Examples.  Deoxys [TODO], AEGIS [TODO].
+
+   Functional applications.  VoIP, video streaming in a lightweight
+   setting [BC09][FLLW17].
+
    Further reading.  [BC09], [FLLW17]
 
-4.2.11.  Release of unverified plaintext (RUP) security
+4.3.10.  Release of unverified plaintext (RUP) security
 
    Definition.  An AEAD algorithm provides security even if the
    plaintext is released for every ciphertext, including those with
@@ -413,14 +468,14 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [A14]
 
-4.3.  Implementation properties
+4.4.  Implementation properties
 
-4.3.1.  Inverse-free
+4.4.1.  Inverse-free
 
    Definition.  A block cipher-based AEAD algorithm can be securely
    implemented without evaluating the block cipher inverse.
 
-4.3.2.  Lightweight
+4.4.2.  Lightweight
 
    Definition.  An AEAD algorithm can be efficiently and securely
    implemented on resource-constrained devices.  In particular, it meets
@@ -429,43 +484,44 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [MBTM17]
 
-4.3.3.  Online
+4.4.3.  Online
 
    Definition.  An AEAD algorithm encryption (decryption) operation can
-   be implemented with a constant memory and a single one-direction pass
-   over the plaintext (ciphertext), writing out the result during that
-   pass.
+   be implemented with a constant memory usage and a single one-
+   direction pass over the plaintext (ciphertext), writing out the
+   result during that pass.
 
-   Further reading.  [HRRV15] [FJMV2004]
+   Further reading.  [HRRV15], [FJMV2004]
 
-4.3.4.  Parallelizable
+4.4.4.  Parallelizable
 
    Definition.  An AEAD algorithm can fully exploit the parallel
    computation infrastructure.
 
 
 
-Bozhko                    Expires 18 April 2024                 [Page 8]
+
+Bozhko                    Expires 13 July 2024                  [Page 9]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
    Synonyms.  Pipelineable.
 
    Further reading.  [C20]
 
-4.3.5.  Single pass
+4.4.5.  Single pass
 
    Definition.  An AEAD algorithm encryption (decryption) operation can
    be implemented with a single pass over the plaintext (ciphertext).
 
-4.3.6.  Static Associated Data
+4.4.6.  Static Associated Data
 
    Definition.  An AEAD algorithm allows pre-computation for static (or
    repeating) associated data so that static AD doesn't significantly
    contribute to the computational cost of encryption.
 
-4.3.7.  ZK-friendly
+4.4.7.  ZK-friendly
 
    Definition.  An AEAD algorithm operates on binary and prime fields
    with a low number of non-linear operations (often called
@@ -478,35 +534,35 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [DGGK21]
 
-4.4.  Additional functionality properties
+5.  AEAD algorithms with additional functionality
 
-4.4.1.  Incremental
+   TODO: Introduction.  The basic properties for each of these AEAD
+   classes differ from the basic properties of convenient AEADs.
 
-   Definition.  An AEAD algorithm allows encrypting a message, which
-   only partly differs from some other previously encrypted message,
-   faster than processing it from scratch.
+5.1.  Incremental
+
+   Definition.  An AEAD algorithm allows encrypting and authenticating a
+   message (associated data and a plaintext pair), which only partly
+   differs from some previous message, faster than processing it from
+   scratch.
 
    Further reading.  [SY16], [BKY02]
 
-4.4.2.  Nonce-hiding
-
-   Definition.  An AEAD algorithm decryption operation doesn't need the
-   nonce value to perform the decryption.  Thus, the algorithm provides
-   privacy for the nonce value.
-
-   Further reading.  [BNT19]
 
 
 
 
 
 
-Bozhko                    Expires 18 April 2024                 [Page 9]
+
+
+
+Bozhko                    Expires 13 July 2024                 [Page 10]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
-4.4.3.  Remotely-keyed
+5.2.  Remotely-keyed
 
    Definition.  An AEAD algorithm can be securely implemented with most
    of the operations in encryption/decryption performed by an insecure
@@ -516,7 +572,7 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [BFN98], [DA03]
 
-4.4.4.  Robust
+5.3.  Robust
 
    Definition.  An AEAD algorithm allows the user to choose an arbitrary
    value l >= 0 for every plaintext and then encrypts it into a
@@ -524,7 +580,7 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
    Further reading.  [HKR2015]
 
-5.  Security Considerations
+6.  Security Considerations
 
    This document defines the properties of AEAD algorithms.  However,
    the document does not describe any concrete mechanisms providing
@@ -533,13 +589,13 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
    properties only if its analysis in the relevant models was carried
    out.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -557,12 +613,12 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 10]
+Bozhko                    Expires 13 July 2024                 [Page 11]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
-7.2.  Informative References
+8.2.  Informative References
 
    [A14]      Forler, C., List, E., Forler, C., List, E., List, E., and
               E. List, "How to Securely Release Unverified Plaintext in
@@ -613,9 +669,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 11]
+Bozhko                    Expires 13 July 2024                 [Page 12]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
    [BK2011]   Bellare, M. and S. Keelveedhi, "Authenticated and Misuse-
@@ -669,9 +725,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 12]
+Bozhko                    Expires 13 July 2024                 [Page 13]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
    [DA03]     Dodis, Y. and JH. An, "Concealment and Its Applications to
@@ -725,9 +781,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 13]
+Bozhko                    Expires 13 July 2024                 [Page 14]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
    [GPPS19]   Guo, C., Pereira, O., Peters, T., and FX. Standaert,
@@ -781,9 +837,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 14]
+Bozhko                    Expires 13 July 2024                 [Page 15]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
    [R2002]    Rogaway, P., "Authenticated-encryption with associated-
@@ -837,9 +893,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2023
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 15]
+Bozhko                    Expires 13 July 2024                 [Page 16]
 
-Internet-Draft        Properties of AEAD algorithms         October 2023
+Internet-Draft        Properties of AEAD algorithms         January 2024
 
 
 Appendix A.  Contributors
@@ -893,4 +949,4 @@ Author's Address
 
 
 
-Bozhko                    Expires 18 April 2024                [Page 16]
+Bozhko                    Expires 13 July 2024                 [Page 17]
