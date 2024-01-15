@@ -55,7 +55,7 @@
 			</t>
 		</section>
 		<section anchor="AEAD" numbered="true" toc="default">
-			<name>AEAD algorithms</name>
+			<name>AEAD Algorithms</name>
 			<t>
 				This section gives a general definition of an AEAD algorithm following <xref target="RFC5116" format="default"/>.
 			</t>
@@ -71,7 +71,10 @@
 					</li>
 				</ul>
 			<t>
-				For more details on AEAD definition, please refer to <xref target="RFC5116" format="default" />.
+				We note that specifications of AEAD algorithms that use authentication tags to ensure integrity may define it as an independent output of the encryption operation and as an independent input of the decryption operation. Throughout this document, by default, we will consider the authentication tag as part of the ciphertext unless stated otherwise.
+			</t>	
+			<t>
+				For more details on the AEAD definition, please refer to <xref target="RFC5116" format="default" />.
 			</t>
 			<t>
 				TODO: The additional functionality properties section is obsolete. There is a separate section, where different AEADs with additional functionality are discussed. Add a new paragraph on AEADs with additional functionality and rewrite the next one.
@@ -87,9 +90,9 @@
 			</t>
 		</section>
 		<section anchor="Properties" numbered="true" toc="default">
-			<name>AEAD properties</name>
+			<name>AEAD Properties</name>
 			<section anchor="Classification" numbered="true" toc="default">
-				<name>Classification of AEAD properties</name>
+				<name>Classification of AEAD Properties</name>
 				<t>
 				TODO: Rewrite. Basic prop?
 				</t>
@@ -119,7 +122,7 @@
 			</section>
       
 			<section anchor="Base" numbered="true" toc="default">
-				<name>Basic properties</name>
+				<name>Basic Properties</name>
 				<section anchor="Conf" numbered="true" toc="default">
 					<name>Confidentiality</name>
 					<t>
@@ -134,7 +137,7 @@
 				</section>
 
 				<section anchor="Int" numbered="true" toc="default">
-					<name>Data integrity</name>
+					<name>Data Integrity</name>
 					<t>
 						Definition. An AEAD algorithm guarantees that the plaintext and the associated data have not been changed or forged by those not authorized to, i.e., those not possessing the secret key. That property is required for the AEAD algorithm to be called secure.
 					</t>
@@ -148,9 +151,9 @@
 			</section>
 
 			<section anchor="SecurityProp" numbered="true" toc="default">
-				<name>Security properties</name>
+				<name>Security Properties</name>
 				<section anchor="BWsec" numbered="true" toc="default">
-					<name>Blockwise security</name>
+					<name>Blockwise Security</name>
 					<t>
 						Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next block of the plaintext depending on already computed ciphertext blocks during an encryption operation.
 					</t>
@@ -163,20 +166,23 @@
 				</section>
 				
 				<section anchor="FullComm" numbered="true" toc="default">
-					<name>Full commitment</name>
+					<name>Full Commitment</name>
 					<t>
 						Definition. An AEAD algorithm guarantees that it is difficult to find two or more different tuples of the key, nonce, associated data, and plaintext such that they encrypt to the same ciphertext. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to all inputs of an authenticated encryption operation.
+					</t>
+					<t>
+						Note. Full commitment can be considered in a weaker setting, where certain restrictions on the tuples produced by an adversary are imposed <xref target="MLGR23" format="default" />. For instance, an adversary must find tuples that all share the same associated data value. In such cases, an AEAD algorithm is said to provide full (key) commitment in a restricted setting. The imposed restrictions MUST be listed.
 					</t>
 					<t>
 						Functional applications. Message franking <xref target="GLR17" format="default" />.
 					</t>
 					<t>
 						Further reading.
-						<xref target="BH22" format="default" />, <xref target="CR22" format="default" />
+						<xref target="BH22" format="default" />, <xref target="CR22" format="default" />, <xref target="MLGR23" format="default" />
 					</t>
 				</section>
 				<section anchor="KeyComm" numbered="true" toc="default">
-					<name>Key commitment</name>
+					<name>Key Commitment</name>
 					<t>
 						Definition. An AEAD algorithm guarantees that it is difficult to find two or more different keys and the same number of potentially equal triples of nonce, associated data, and plaintext such that they encrypt to the same ciphertext under corresponding keys. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to the key used for an authenticated encryption operation.
 					</t>
@@ -194,7 +200,7 @@
 					</t>
 				</section>
 				<section anchor="KDM" numbered="true" toc="default">
-					<name>Key Dependent Messages (KDM) security</name>
+					<name>Key Dependent Messages (KDM) Security</name>
 					<t>
 						Definition. An AEAD algorithm provides security even when key-dependent plaintexts are encrypted.
 					</t>
@@ -210,7 +216,7 @@
 					</t>
 				</section>
 				<section anchor="Leakage" numbered="true" toc="default">
-					<name>Leakage resistance</name>
+					<name>Leakage Resistance</name>
 					<t>
 						Definition. An AEAD algorithm provides security even if some additional information about computations of an encryption (and possibly decryption) operation is obtained via side-channel leakages.
 					</t>
@@ -220,7 +226,7 @@
 					</t>
 				</section>
 				<section anchor="Mu-sec" numbered="true" toc="default">
-					<name>Multi-user security</name>
+					<name>Multi-User Security</name>
 					<t>
 						Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.
 					</t>
@@ -230,7 +236,7 @@
 					</t>
 				</section>
 				<section anchor="NonceHiding" numbered="true" toc="default">
-					<name>Nonce-hiding</name>
+					<name>Nonce-Hiding</name>
 					<t>
 						Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt a plaintext.
 					</t>
@@ -243,7 +249,7 @@
 					</t>
 				</section>
 				<section anchor="NM" numbered="true" toc="default">
-					<name>Nonce misuse</name>
+					<name>Nonce Misuse</name>
 					<t>
 						Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries. Nonce misuse resilience and resistance are defined as follows:
 					</t>
@@ -260,8 +266,38 @@
 						<xref target="RS06" format="default" />, <xref target="ADL17" format="default" />
 					</t>
 				</section>
+				
+				<section anchor="Quantum" numbered="true" toc="default">
+					<name>Quantum Security</name>
+					<t>
+						Definition. An AEAD algorithm provides security (in a Q1 or Q2 model) against a quantum adversary. Q1 and Q2 models are defined as follows:
+					</t>
+					<ul>
+						<li>
+							<t>Q1 model.  An adversary has access to local quantum computational power. It has classical access to encryption and decryption oracles.</t>
+							
+							<t>Synonyms. Post-quantum security.</t>
+							
+							<t>Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO].</t>
+						</li>
+						<li>
+							<t>Q2 model. An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles; it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.</t>
+							
+							<t>Synonyms. Superposition-based quantum security.</t>
+							
+							<t>Examples. QCB <xref target="BBCLNSS21" format="default" />.</t>
+						</li>
+					</ul>
+					<t>
+						Note. Most symmetric cryptographic algorithms that are secure in the classical model provide quantum security in the Q1 model, i.e., they are post-quantum secure. Security in the Q1 setting corresponds to security against "harvest now, decrypt later" attacks. 
+					</t>
+					<t>
+						Further reading. <xref target="KLLNP16" format="default" />, <xref target="BBCLNSS21" format="default" />, <xref target="G17" format = "default"/>
+					</t>
+				</section>
+				
 				<section anchor="Reforg" numbered="true" toc="default">
-					<name>Reforgeability resilience</name>
+					<name>Reforgeability Resilience</name>
 					<t>
 						Definition. An AEAD algorithm guarantees that once a successful forgery for the algorithm has been found, it is still hard to find any subsequent forgery.
 					</t>
@@ -277,9 +313,9 @@
 					</t>
 				</section>
 				<section anchor="RUP" numbered="true" toc="default">
-					<name>Release of unverified plaintext (RUP) security</name>
+					<name>Release of Unverified Plaintext (RUP) Security</name>
 					<t>
-						Definition. An AEAD algorithm provides security even if the plaintext is released for every ciphertext, including those with failed integrity verification.
+						Definition. An AEAD algorithm provides data integrity even if the plaintext is released for every ciphertext, including those with failed integrity verification.
 					</t>
 					<t>
 						Functional applications. Decryption with limited memory <xref target="FJMV2004" format="default" />, CMS protocols <xref target="RFC5652" format="default" />.
@@ -291,11 +327,17 @@
 				</section>
 			</section>
 			<section anchor="ImpProp" numbered="true" toc="default">
-				<name>Implementation properties</name>
+				<name>Implementation Properties</name>
 				<section anchor="Inverse" numbered="true" toc="default">
-					<name>Inverse-free</name>
+					<name>Inverse-Free</name>
 					<t>
-						Definition. A block cipher-based AEAD algorithm can be securely implemented without evaluating the block cipher inverse.
+						Definition. A primitive-based AEAD algorithm can be securely implemented without evaluating the primitive inverse.
+					</t>
+					<t>
+						Note. In a sponge-based AEAD algorithm, an underlying permutation is viewed as a primitive.
+					</t>
+					<t>
+						Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO]
 					</t>
 				</section>
 				<section anchor="Lightweight" numbered="true" toc="default">
@@ -330,7 +372,7 @@
 					</t>
 				</section>
 				<section anchor="SinglePass" numbered="true" toc="default">
-					<name>Single pass</name>
+					<name>Single Pass</name>
 					<t>
 						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).
 					</t>
@@ -342,9 +384,12 @@
 					</t>
 				</section>
 				<section anchor="ZK" numbered="true" toc="default">
-					<name>ZK-friendly</name>
+					<name>ZK-Friendly</name>
 					<t>
 						Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.
+					</t>
+					<t>
+						Example. Ciminion with Wegman-Carter MAC <xref target="DGGK21" format="default"/>
 					</t>
 					<t>
 						Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity
@@ -357,7 +402,7 @@
 			</section>
 		</section>
 		<section anchor="AddProp" numbered="true" toc="default">
-			<name>AEAD algorithms with additional functionality</name>
+			<name>AEAD Algorithms with Additional Functionality</name>
 			<t>
 				TODO: Introduction. The basic properties for each of these AEAD classes differ from the basic properties of convenient AEADs.
 			</t>
@@ -372,7 +417,7 @@
 				</t>
 			</section>
 			<section anchor="RemotelyKeyed" numbered="true" toc="default">
-				<name>Remotely-keyed</name>
+				<name>Remotely-Keyed</name>
 				<t>
 					Definition. An AEAD algorithm can be securely implemented with most of the operations in encryption/decryption performed by an insecure (i.e., it leaks all intermediate values) device, which has no access to the key, while another secure device performs operations involving the key.
 				</t>
@@ -729,6 +774,57 @@
 					<seriesInfo name="DOI" value="10.1007/978-3-662-46800-5_2" />
 					<refcontent>Advances in Cryptology -- EUROCRYPT 2015. EUROCRYPT 2015. Lecture Notes in Computer Science(), vol 9056. Springer, Berlin, Heidelberg.</refcontent>
 				</reference>
+				<reference anchor="MLGR23">
+					<front>
+						<title>Robust Authenticated-Encryption AEZ and the Problem That It Solves</title>
+						<author initials="S." surname="Menda" fullname="Sanketh Menda" />
+						<author initials="J." surname="Julia" fullname="Julia Len" />
+						<author initials="P." surname="Grubbs" fullname="Paul Grubbs" />
+						<author initials="T." surname="Ristenpart" fullname="Thomas Ristenpart" />
+						<date year="2023" />
+					</front>
+					<seriesInfo name="DOI" value="10.1007/978-3-031-30634-1_13" />
+					<refcontent>Advances in Cryptology – EUROCRYPT 2023. EUROCRYPT 2023. Lecture Notes in Computer Science, vol 14007. Springer, Cham.</refcontent>
+				</reference>
+				
+				<reference anchor="BBCLNSS21">
+					<front>
+						<title>QCB: Efficient Quantum-Secure Authenticated Encryption</title>
+						<author initials="R." surname="Bhaumik" fullname="Ritam Bhaumik" />
+						<author initials="X." surname="Bonnetain" fullname="Xavier Bonnetain" />
+						<author initials="A." surname="Chailloux" fullname="André Chailloux" />
+						<author initials="G." surname="Leurent" fullname="Gaëtan Leurent" />
+						<author initials="M." surname="Naya-Plasencia" fullname="María Naya-Plasencia" />
+						<author initials="A." surname="Schrottenlohe" fullname="André Schrottenlohe" />
+						<author initials="Y." surname="Seurin" fullname="Yannick Seurin" />
+						<date year="2021" />
+					</front>
+					<seriesInfo name="DOI" value="10.1007/978-3-030-92062-3_23" />
+					<refcontent>Advances in Cryptology – ASIACRYPT 2021. ASIACRYPT 2021. Lecture Notes in Computer Science(), vol 13090. Springer, Cham.</refcontent>
+				</reference>
+				
+				<reference anchor="KLLNP16">
+					<front>
+						<title>Quantum Differential and Linear Cryptanalysis</title>
+						<author initials="M." surname="Menda" fullname="Marc Kaplan" />
+						<author initials="G." surname="Leurent" fullname="Gaëtan Leurent" />
+						<author initials="A." surname="Leverrier" fullname="Anthony Leverrier" />
+						<author initials="M." surname="Naya-Plasencia" fullname="María Naya-Plasencia" />
+						<date year="2021" />
+					</front>
+					<seriesInfo name="DOI" value="10.13154/tosc.v2016.i1.71-94" />
+					<refcontent> IACR Transactions on Symmetric Cryptology, 2016(1), 71–94.</refcontent>
+				</reference>
+				
+				<reference anchor="G17">
+					<front>
+						<title>Quantum Security of Cryptographic Primitives</title>
+						<author initials="T." surname="Gagliardoni" fullname="Tommaso Gagliardoni"/>
+						<date year="2017"/>
+					</front>
+					<refcontent>Ph.D. Thesis, Technische Universität Darmstadt</refcontent>
+				</reference>
+				
 				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml" />
 				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4303.xml" />
 				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8221.xml" />
