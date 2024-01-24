@@ -125,7 +125,7 @@
 					</li>
 				</ul>
 				<t>
-					We notice that the distinction between the security and additional functionality properties might be vague. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Hence, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms and, in contrast to security properties, not the extended ones. For that reason we are not focusing on additional functionality properties, they are not discussed in this section. In section <xref target="AddProp" format="default"/>, some examples of AEAD algorithms with additional functionality are provided.
+					We notice that the distinction between the security and additional functionality properties might be vague. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Hence, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms and, in contrast to security properties, not the extended ones. For that reason we are not considering additional functionality properties, they are not discussed in this section. In section <xref target="AddProp" format="default"/>, some examples of AEAD algorithms with additional functionality are provided.
 				</t>
 			</section>
       
@@ -178,7 +178,7 @@
 						The case when an adversary can adaptively choose the next block of the ciphertext depending on already computed blocks of the plaintext, which appear in the device memory before the integrity verification during the decryption, can also be considered. This case is strongly related to RUP security, defined in <xref target="RUP" format="default"/>.
 					</t>
 					<t>
-						Applications. Streaming, encryption on constrained Internet-of-Things devices with constant latency and with smart cards.
+						Applications. Real-time streaming protocols, encryption on resource-constrained devices.
 					</t>
 					<t>
 						Further reading. <xref target="EV16" format="default"/>, <xref target="JMV2002" format="default"/>, <xref target="FJMV2004" format="default"/>, <xref target="HRRV15" format="default"/>
@@ -232,22 +232,7 @@
 						<xref target="BH22" format="default" />,<xref target="CR22" format="default" />, <xref target="FOR17" format="default" />, <xref target="LGR21" format="default" />, <xref target="GLR17" format="default" />
 					</t>
 				</section>
-				<section anchor="KDM" numbered="true" toc="default">
-					<name>Key Dependent Messages (KDM) Security</name>
-					<t>
-						Definition. An AEAD algorithm provides security even when key-dependent plaintexts are encrypted.
-					</t>
-					<t>
-						Notes. KDM security is achievable only if nonces are chosen randomly and associated data is key-independent.
-					</t>
-					<t>
-						Applications. Disk encryption schemes <xref target="BK2011" format="default"/>.
-					</t>
-					<t>
-						Further reading.
-						<xref target="BK2011" format="default" />
-					</t>
-				</section>
+				
 				<section anchor="Leakage" numbered="true" toc="default">
 					<name>Leakage Resistance</name>
 					<t>
@@ -278,7 +263,7 @@
 				<section anchor="Mu-sec" numbered="true" toc="default">
 					<name>Multi-User Security</name>
 					<t>
-						Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.
+						Definition. An AEAD algorithm Authenticated Encryption advantage (see definition in <xref target="AEAD" format="default"/>) increases sublinearly in the number of users.
 					</t>
 					<t>
 						Security model. mu-ind  <xref target="BT16" format="default" />.
@@ -311,7 +296,7 @@
 						Applications. Any application that can't rely on a secure "out-of-band" nonce communication.
 					</t>
 					<t>
-						Note. As discussed in <xref target="BNT19" format="default" />, adversary-visible nonces might compromise message and user privacy, similar to the way any metadata might do. As pointed out in <xref target="D13" format="default" />, even using a counter as a nonce value might compromise privacy. Designing a privacy-preserving way to manage nonces might be a challenging problem for an application.    TODO: Can I cite [TODO]?
+						Note. As discussed in <xref target="BNT19" format="default" />, adversary-visible nonces might compromise message and user privacy, similar to the way any metadata might do. As pointed out in <xref target="D13" format="default" />, even using a counter as a nonce value might compromise privacy. Designing a privacy-preserving way to manage nonces might be a challenging problem for an application.    TODO: Can I cite <xref target="D13" format="default" />?
 					</t>
 					<t>
 						Further reading. <xref target="BNT19" format="default" />.
@@ -322,14 +307,35 @@
 					<t>
 						Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries. Nonce misuse resilience and resistance are defined as follows:
 					</t>
+					<t>
+						Applications. Any application where nonce uniqueness can't be guaranteed, security against fault-injection attacks and malfunctions, processes parallelization, full disk encryption. 
+					</t>
 					<ul>
 						<li>
 							<t>Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.</t>
+							<t>
+								Examples. ChaCha20-Poly1305 [TODO], AES-GCM [TODO] (only confidentiality).
+							</t>
+							<t>
+								Security models. CPA resilience (confidentiality), authenticity resilience (integrity), CCA resilience (authenticated encryption) <xref target="ADL17" format="default" />.
+							</t>
 						</li>
 						<li>
 							<t>Nonce misuse resistance. Security is provided for all messages.</t>
+							<t>
+								Examples. AES-GCM-SIV [TODO], Deoxys-II [TODO].
+							</t>
+							<t>
+								Security models. MRAE <xref target="RS06" format="default" />.
+							</t>
+							<t>
+								Note. SIV construction <xref target="RS06" format="default" /> is a generic construction that provides nonce misuse resistance.  
+							</t>
 						</li>
 					</ul>
+					<t>
+						Note. Nonce misuse resilience follows from nonce misuse resistance. Nonce misuse resistance does not follow from nonce misuse resilience.					
+					</t>
 					<t>
 						Further reading.
 						<xref target="RS06" format="default" />, <xref target="ADL17" format="default" />
@@ -347,7 +353,7 @@
 							
 							<t>Synonyms. Post-quantum security.</t>
 							
-							<t>Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO].</t>
+							<t>Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AES-GCM-SIV [TODO], AEGIS [TODO].</t>
 						</li>
 						<li>
 							<t>Q2 model. An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles; it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.</t>
@@ -358,7 +364,7 @@
 						</li>
 					</ul>
 					<t>
-						Note. Most symmetric cryptographic algorithms that are secure in the classical model provide quantum security in the Q1 model, i.e., they are post-quantum secure. Security in the Q1 setting corresponds to security against "harvest now, decrypt later" attacks. 
+						Note. Most symmetric cryptographic algorithms that are secure in the classical model provide quantum security in the Q1 model, i.e., they are post-quantum secure. Security in the Q1 setting corresponds to security against "harvest now, decrypt later" attacks. Security in the Q2 model is considered stronger, security in Q1 follows from security in Q2. For discussions on the relevance of the Q2 model please see <xref target="G17" format = "default"/>. 
 					</t>
 					<t>
 						Further reading. <xref target="KLLNP16" format="default" />, <xref target="BBCLNSS21" format="default" />, <xref target="G17" format = "default"/>
@@ -371,10 +377,13 @@
 						Definition. An AEAD algorithm guarantees that once a successful forgery for the algorithm has been found, it is still hard to find any subsequent forgery.
 					</t>
 					<t>
-						Examples. Deoxys [TODO], AEGIS [TODO].
+						Security model. j-Int-CTXT <xref target="FLLW17" format="default" />.
 					</t>
 					<t>
-						Functional applications. VoIP, video streaming in a lightweight setting <xref target="BC09" format="default" /><xref target="FLLW17" format="default" />.
+						Examples. Deoxys [TODO], AEGIS [TODO], ASCON [TODO].
+					</t>
+					<t>
+						Functional applications. VoIP, real-time streaming in a lightweight setting, apllications which require small ciphertext overhead (i.e., short tags).
 					</t>
 					<t>
 						Further reading.
@@ -387,11 +396,23 @@
 						Definition. An AEAD algorithm provides data integrity even if the plaintext is released for every ciphertext, including those with failed integrity verification.
 					</t>
 					<t>
-						Functional applications. Decryption with limited memory <xref target="FJMV2004" format="default" />, CMS protocols <xref target="RFC5652" format="default" />.
+						Security model. INT-RUP <xref target="A14" format="default" />.
+					</t>
+					<t>
+						Example. GCM-RUP <xref target="ADL17" format="default" />.
+					</t>
+					<t>
+						Functional applications. Decryption with limited memory <xref target="FJMV2004" format="default" />, real-time streaming protocols.
+					</t>
+					<t>
+						Note. In <xref target="ADL17" format="default"/> a generic approach to achieve INT-RUP security is introduced. 
+					</t>
+					<t>
+						"In the provided definition, we only consider integrity in the RUP setting, as confidentiality, in the usual sense, is clearly unachievable under RUP. In <xref target="A14" format="default" />, the notion of 'Plaintext Awareness' is introduced, capturing the best possible confidentiality under RUP in the following sense: 'The adversary cannot gain any additional knowledge about the plaintext from decryption queries beyond what it can derive from encryption queries'.  
 					</t>
 					<t>
 						Further reading.
-						<xref target="A14" format="default" />
+						<xref target="A14" format="default" />, <xref target="ADL17" format="default" />
 					</t>
 				</section>
 			</section>
@@ -403,16 +424,19 @@
 						Definition. A primitive-based AEAD algorithm can be securely implemented without evaluating the primitive inverse.
 					</t>
 					<t>
-						Note. In a sponge-based AEAD algorithm, an underlying permutation is viewed as a primitive.
+						Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO]
 					</t>
 					<t>
-						Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO]
+						Note. In a sponge-based AEAD algorithm, an underlying permutation is viewed as a primitive.
 					</t>
 				</section>
 				<section anchor="Lightweight" numbered="true" toc="default">
 					<name>Lightweight</name>
 					<t>
 						Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST Lightweight Cryptography competition <xref target="MBTM17" format="default" />.
+					</t>
+					<t>
+						Examples. OCB [TODO], Ascon [TODO].
 					</t>
 					<t>
 						Further reading.
@@ -425,6 +449,15 @@
 						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory usage and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
 					</t>
 					<t>
+						Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO], Ascon [TODO].
+					</t>
+					<t>
+						Applications. Real-time streaming protocols, resource-constrained devices.
+					</t>
+					<t>
+						Note. Blockwise security (see <xref target="BWsec" format="default" />) might be a relevant security property for online AEAD algorithms in certain applications. 
+					</t>
+					<t>
 						Further reading.
 						<xref target="HRRV15" format="default" />, <xref target="FJMV2004" format="default" />
 					</t>
@@ -434,7 +467,12 @@
 					<t>
 						Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure.
 					</t>
-					<t>Synonyms. Pipelineable.</t>
+					<t>
+						Synonyms. Pipelineable.
+					</t>
+					<t>
+						Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO]
+					</t>
 					<t>
 						Further reading.
 						<xref target="C20" format="default" />
@@ -445,11 +483,17 @@
 					<t>
 						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).
 					</t>
+					<t>
+						Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO]
+					</t>
 				</section>
 				<section anchor="StaticAD" numbered="true" toc="default">
 					<name>Static Associated Data</name>
 					<t>
 						Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational cost of encryption.
+					</t>
+					<t>
+						Examples. GCM [TODO],  ChaCha20-Poly1305 [TODO], OCB [TODO]
 					</t>
 				</section>
 				<section anchor="ZK" numbered="true" toc="default">
