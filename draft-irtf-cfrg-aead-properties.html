@@ -1195,7 +1195,7 @@ li > p:last-of-type {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bozhko</td>
-<td class="center">Expires 26 July 2024</td>
+<td class="center">Expires 27 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1208,12 +1208,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-irtf-cfrg-aead-properties-02</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-23" class="published">23 January 2024</time>
+<time datetime="2024-01-24" class="published">24 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-26">26 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-27">27 July 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1249,7 +1249,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1446,10 +1446,10 @@ li > p:last-of-type {
  The document's objective is to enhance clarity and establish a shared language in the field. However, the primary application of the document lies in the following two use cases within IETF documents:<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.2-3.1">
-            <p id="section-1.2-3.1.1">An RFC or I-D that defines an AEAD algorithm SHOULD employ the notations of <a href="#Properties" class="auto internal xref">Section 4</a> when listing additional properties of the algorithm.<a href="#section-1.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-3.1.1">For an RFC or I-D that defines an AEAD algorithm it is RECOMMENDED to employ the notations of <a href="#Properties" class="auto internal xref">Section 4</a> when listing additional properties of the algorithm.<a href="#section-1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-3.2">
-            <p id="section-1.2-3.2.1">An RFC or I-D that defines a generic protocol based on an AEAD algorithm SHOULD use the notations of <a href="#Properties" class="auto internal xref">Section 4</a> if any additional properties are required from the algorithm.<a href="#section-1.2-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-3.2.1">For an RFC or I-D that defines a generic protocol based on an AEAD algorithm it is RECOMMENDED to use the notations of <a href="#Properties" class="auto internal xref">Section 4</a> if any additional properties are required from the algorithm.<a href="#section-1.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1672,7 +1672,15 @@ li > p:last-of-type {
 <p id="section-4.3.6-1">
  Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.<a href="#section-4.3.6-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.6-2">
- Further reading. <span>[<a href="#BT16" class="cite xref">BT16</a>]</span><a href="#section-4.3.6-2" class="pilcrow">¶</a></p>
+ Security model. mu-ind  <span>[<a href="#BT16" class="cite xref">BT16</a>]</span>.<a href="#section-4.3.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.3.6-3">
+ Examples. AES-GCM [TODO]<span>[<a href="#HTT18" class="cite xref">HTT18</a>]</span><span>[<a href="#LMP17" class="cite xref">LMP17</a>]</span>, ChaCha20-Poly1305 [TODO]<span>[<a href="#DGGP21" class="cite xref">DGGP21</a>]</span>, AES-GCM-SIV <span>[<a href="#BHT18" class="cite xref">BHT18</a>]</span>, AEGIS [TODO].<a href="#section-4.3.6-3" class="pilcrow">¶</a></p>
+<p id="section-4.3.6-4">
+ Applications. Data transimission layer of secure communication protocols (e.g., TLS, IPSec, SRTP, etc.)<a href="#section-4.3.6-4" class="pilcrow">¶</a></p>
+<p id="section-4.3.6-5">
+ Note. It holds that for any AEAD algorithm, Authenticated Encryption security degrades no worse than linearly. However, for some applications with a significant number of users, better multi-user guarantees are required. For example, in the TLS 1.3 protocol, to address this issue, AEAD algorithms are used with a randomized nonce (deterministically derived from a traffic secret and a sequence number). Using nonce randomization in block-cipher counter-based AEAD modes can contribute to multi-user security <span>[<a href="#BT16" class="cite xref">BT16</a>]</span>. Multi-user usage limits for AES-GCM and ChaCha20-Poly1305 are provided in <span>[<a href="#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span>.<a href="#section-4.3.6-5" class="pilcrow">¶</a></p>
+<p id="section-4.3.6-6">
+ Further reading. <span>[<a href="#BT16" class="cite xref">BT16</a>]</span>, <span>[<a href="#HTT18" class="cite xref">HTT18</a>]</span>, <span>[<a href="#LMP17" class="cite xref">LMP17</a>]</span>,<span>[<a href="#DGGP21" class="cite xref">DGGP21</a>]</span>, <span>[<a href="#BHT18" class="cite xref">BHT18</a>]</span><a href="#section-4.3.6-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="NonceHiding">
@@ -1681,12 +1689,17 @@ li > p:last-of-type {
 <a href="#section-4.3.7" class="section-number selfRef">4.3.7. </a><a href="#name-nonce-hiding" class="section-name selfRef">Nonce-Hiding</a>
           </h4>
 <p id="section-4.3.7-1">
- Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt a plaintext.<a href="#section-4.3.7-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt plaintext. The algorithm includes information equivalent to the encrypted nonce in the ciphertext and doesn't require the nonce as input for the decryption operation.<a href="#section-4.3.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-2">
- Note. The decryption operation in a nonce-hiding AEAD algorithm does not require the nonce as input. In nonce-hiding AEAD algorithms, the ciphertext contains information equivalent to an encrypted nonce.<a href="#section-4.3.7-2" class="pilcrow">¶</a></p>
+ Example. Hide-Nonce (HN) transforms <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span>.<a href="#section-4.3.7-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-3">
- Further reading.
- <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span><a href="#section-4.3.7-3" class="pilcrow">¶</a></p>
+ Security model. AE2 <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span>.<a href="#section-4.3.7-3" class="pilcrow">¶</a></p>
+<p id="section-4.3.7-4">
+ Applications. Any application that can't rely on a secure "out-of-band" nonce communication.<a href="#section-4.3.7-4" class="pilcrow">¶</a></p>
+<p id="section-4.3.7-5">
+ Note. As discussed in <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span>, adversary-visible nonces might compromise message and user privacy, similar to the way any metadata might do. As pointed out in <span>[<a href="#D13" class="cite xref">D13</a>]</span>, even using a counter as a nonce value might compromise privacy. Designing a privacy-preserving way to manage nonces might be a challenging problem for an application.    TODO: Can I cite [TODO]?<a href="#section-4.3.7-5" class="pilcrow">¶</a></p>
+<p id="section-4.3.7-6">
+ Further reading. <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span>.<a href="#section-4.3.7-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="NM">
@@ -1943,11 +1956,11 @@ li > p:last-of-type {
 <dd class="break"></dd>
 <dt id="ABV21">[ABV21]</dt>
         <dd>
-<span class="refAuthor">Andreeva, E.</span>, <span class="refAuthor">Bhati, A.S.</span>, and <span class="refAuthor">D. Vizár</span>, <span class="refTitle">"Nonce-misuse security of the SAEF authenticated encryption mode."</span>, <span class="refContent">Selected Areas in Cryptography: 27th International Conference, Halifax, NS, Canada (Virtual Event), October 21-23, 2020, Revised Selected Papers 27. Springer International Publishing, 2021</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
+<span class="refAuthor">Andreeva, E.</span>, <span class="refAuthor">Bhati, A.S.</span>, and <span class="refAuthor">D. Vizár</span>, <span class="refTitle">"Nonce-misuse security of the SAEF authenticated encryption mode"</span>, <span class="refContent">Selected Areas in Cryptography: 27th International Conference, Halifax, NS, Canada (Virtual Event), October 21-23, 2020, Revised Selected Papers 27. Springer International Publishing, 2021</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
 <dd class="break"></dd>
 <dt id="ADGKLS22">[ADGKLS22]</dt>
         <dd>
-<span class="refAuthor">Albertini, A.</span>, <span class="refAuthor">Duong, T.</span>, <span class="refAuthor">Gueron, S.</span>, <span class="refAuthor">Kölbl, S.</span>, <span class="refAuthor">Luykx, A.</span>, and <span class="refAuthor">S. Schmieg</span>, <span class="refTitle">"How to abuse and fix authenticated encryption without key commitment."</span>, <span class="refContent">1st USENIX Security Symposium (USENIX Security 22), pp. 3291-3308. 2022</span>, <time datetime="2022" class="refDate">2022</time>. </dd>
+<span class="refAuthor">Albertini, A.</span>, <span class="refAuthor">Duong, T.</span>, <span class="refAuthor">Gueron, S.</span>, <span class="refAuthor">Kölbl, S.</span>, <span class="refAuthor">Luykx, A.</span>, and <span class="refAuthor">S. Schmieg</span>, <span class="refTitle">"How to abuse and fix authenticated encryption without key commitment"</span>, <span class="refContent">1st USENIX Security Symposium (USENIX Security 22), pp. 3291-3308. 2022</span>, <time datetime="2022" class="refDate">2022</time>. </dd>
 <dd class="break"></dd>
 <dt id="ADL17">[ADL17]</dt>
         <dd>
@@ -1973,6 +1986,10 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">V.T. Hoang</span>, <span class="refTitle">"Efficient schemes for committing authenticated encryption."</span>, <span class="refContent">Advances in Cryptology – EUROCRYPT 2022. EUROCRYPT 2022. Lecture Notes in Computer Science, vol 13276. Springer, Cham.</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-07085-3_29</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-07085-3_29">https://doi.org/10.1007/978-3-031-07085-3_29</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="BHT18">[BHT18]</dt>
+        <dd>
+<span class="refAuthor">Bose, P.</span>, <span class="refAuthor">Hoang, V.T.</span>, and <span class="refAuthor">S. Tessaro</span>, <span class="refTitle">"Revisiting AES-GCM-SIV: multi-user security, faster key derivation, and better bounds"</span>, <span class="refContent">Annual International Conference on the Theory and Applications of Cryptographic Techniques, pp. 468-499. Cham: Springer International Publishing, 2018</span>, <time datetime="2018" class="refDate">2018</time>. </dd>
+<dd class="break"></dd>
 <dt id="BK2011">[BK2011]</dt>
         <dd>
 <span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">S. Keelveedhi</span>, <span class="refTitle">"Authenticated and Misuse-Resistant Encryption of Key-Dependent Data"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2011. CRYPTO 2011. Lecture Notes in Computer Science, vol 6841. Springer, Berlin, Heidelberg.</span>, <span class="seriesInfo">DOI 10.1007/978-3-642-22792-9_35</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-642-22792-9_35">https://doi.org/10.1007/978-3-642-22792-9_35</a>&gt;</span>. </dd>
@@ -1991,7 +2008,7 @@ li > p:last-of-type {
 <dd class="break"></dd>
 <dt id="BPPS17">[BPPS17]</dt>
         <dd>
-<span class="refAuthor">Berti, F.</span>, <span class="refAuthor">Pereira, O.</span>, <span class="refAuthor">Peters, T.</span>, and <span class="refAuthor">F.X. Standaert</span>, <span class="refTitle">"On leakage-resilient authenticated encryption with decryption leakages."</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology (2017): 271-293</span>, <time datetime="2017" class="refDate">2017</time>. </dd>
+<span class="refAuthor">Berti, F.</span>, <span class="refAuthor">Pereira, O.</span>, <span class="refAuthor">Peters, T.</span>, and <span class="refAuthor">F.X. Standaert</span>, <span class="refTitle">"On leakage-resilient authenticated encryption with decryption leakages"</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology (2017): 271-293</span>, <time datetime="2017" class="refDate">2017</time>. </dd>
 <dd class="break"></dd>
 <dt id="BT16">[BT16]</dt>
         <dd>
@@ -2005,6 +2022,10 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Chan, J.</span> and <span class="refAuthor">P. Rogaway</span>, <span class="refTitle">"On Committing Authenticated-Encryption."</span>, <span class="refContent">Computer Security – ESORICS 2022. ESORICS 2022. Lecture Notes in Computer Science, vol 13555. Springer, Cham.</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-17146-8_14</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-17146-8_14">https://doi.org/10.1007/978-3-031-17146-8_14</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="D13">[D13]</dt>
+        <dd>
+<span class="refAuthor">Bernstein, D. J.</span>, <span class="refTitle">"Re: secret message numbers"</span>, <span class="refContent">Message in Google group on cryptographic competitions, October 2013. https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J. </span>, <time datetime="2013" class="refDate">2013</time>. </dd>
+<dd class="break"></dd>
 <dt id="DA03">[DA03]</dt>
         <dd>
 <span class="refAuthor">Dodis, Y.</span> and <span class="refAuthor">JH. An</span>, <span class="refTitle">"Concealment and Its Applications to Authenticated Encryption"</span>, <span class="refContent">Advances in Cryptology — EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/3-540-39200-9_19</span>, <time datetime="2003" class="refDate">2003</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-39200-9_19">https://doi.org/10.1007/3-540-39200-9_19</a>&gt;</span>. </dd>
@@ -2012,6 +2033,10 @@ li > p:last-of-type {
 <dt id="DGGK21">[DGGK21]</dt>
         <dd>
 <span class="refAuthor">Dobraunig, C.</span>, <span class="refAuthor">Grassi, L.</span>, <span class="refAuthor">Guinet, G.</span>, and <span class="refAuthor">K. Kuijsters</span>, <span class="refTitle">"CIMINION: Symmetric Encryption Based on Toffoli-Gates over Large Finite Fields"</span>, <span class="refContent">Advances in Cryptology – EUROCRYPT 2021. EUROCRYPT 2021. Lecture Notes in Computer Science(), vol 12697. Springer, Cham</span>, <span class="seriesInfo">DOI 10.1007/978-3-030-77886-6_1</span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-030-77886-6_1">https://doi.org/10.1007/978-3-030-77886-6_1</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="DGGP21">[DGGP21]</dt>
+        <dd>
+<span class="refAuthor">Degabriele, J.P.</span>, <span class="refAuthor">Govinden, J.</span>, <span class="refAuthor">Günther, F.</span>, and <span class="refAuthor">K. Paterson</span>, <span class="refTitle">"The security of ChaCha20-Poly1305 in the multi-user setting"</span>, <span class="refContent">In Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security, pp. 1981-2003. 2021.</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
 <dd class="break"></dd>
 <dt id="EV16">[EV16]</dt>
         <dd>
@@ -2053,6 +2078,10 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Hoang, VT.</span>, <span class="refAuthor">Reyhanitabar, R.</span>, <span class="refAuthor">Rogaway, P.</span>, and <span class="refAuthor">D. Vizár</span>, <span class="refTitle">"Online Authenticated-Encryption and its Nonce-Reuse Misuse-Resistance"</span>, <span class="refContent">Advances in Cryptology -- CRYPTO 2015. CRYPTO 2015. Lecture Notes in Computer Science, vol 9215. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/978-3-662-47989-6_24</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-662-47989-6_24">https://doi.org/10.1007/978-3-662-47989-6_24</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="HTT18">[HTT18]</dt>
+        <dd>
+<span class="refAuthor">Hoang, V.T.</span>, <span class="refAuthor">Tessaro, S.</span>, and <span class="refAuthor">A. Thiruvengadam</span>, <span class="refTitle">"The multi-user security of GCM, revisited: Tight bounds for nonce randomization"</span>, <span class="refContent">Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security, pp. 1429-1440. 2018</span>, <time datetime="2018" class="refDate">2018</time>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-aead-limits">[I-D.irtf-cfrg-aead-limits]</dt>
         <dd>
 <span class="refAuthor">Günther, F.</span>, <span class="refAuthor">Thomson, M.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Usage Limits on AEAD Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-aead-limits-07</span>, <time datetime="2023-05-31" class="refDate">31 May 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-07">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-07</a>&gt;</span>. </dd>
@@ -2068,6 +2097,10 @@ li > p:last-of-type {
 <dt id="LGR21">[LGR21]</dt>
         <dd>
 <span class="refAuthor">Len, J.</span>, <span class="refAuthor">Grubbs, P.</span>, and <span class="refAuthor">T. Ristenpart</span>, <span class="refTitle">"Partitioning Oracle Attacks"</span>, <span class="refContent">30th USENIX Security Symposium (USENIX Security 21), 195--212</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
+<dd class="break"></dd>
+<dt id="LMP17">[LMP17]</dt>
+        <dd>
+<span class="refAuthor">Luykx, A.</span>, <span class="refAuthor">Mennink, B.</span>, and <span class="refAuthor">K. Paterson</span>, <span class="refTitle">"Analyzing multi-key security degradation"</span>, <span class="refContent">Conference on the Theory and Applications of Cryptology and Information Security, Hong Kong, China, December 3-7, 2017, Proceedings, Part II 23, pp. 575-605. Springer International Publishing, 2017.</span>, <time datetime="2017" class="refDate">2017</time>. </dd>
 <dd class="break"></dd>
 <dt id="MBTM17">[MBTM17]</dt>
         <dd>
@@ -2111,7 +2144,7 @@ li > p:last-of-type {
 <dd class="break"></dd>
 <dt id="YSS23">[YSS23]</dt>
       <dd>
-<span class="refAuthor">Naito, Y.</span>, <span class="refAuthor">Sasaki, Y.</span>, and <span class="refAuthor">T. Sugawara</span>, <span class="refTitle">"Committing Security of Ascon: Cryptanalysis on Primitive and Proof on Mode."</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology 2023, no. 4 (2023): 420-451</span>, <time datetime="2023" class="refDate">2023</time>. </dd>
+<span class="refAuthor">Naito, Y.</span>, <span class="refAuthor">Sasaki, Y.</span>, and <span class="refAuthor">T. Sugawara</span>, <span class="refTitle">"Committing Security of Ascon: Cryptanalysis on Primitive and Proof on Mode"</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology 2023, no. 4 (2023): 420-451</span>, <time datetime="2023" class="refDate">2023</time>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

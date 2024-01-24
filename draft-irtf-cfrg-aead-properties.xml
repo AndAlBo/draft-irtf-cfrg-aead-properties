@@ -51,10 +51,10 @@
 				</t>
 				<ul>
 					<li>
-						<t>An RFC or I-D that defines an AEAD algorithm SHOULD employ the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
+						<t>For an RFC or I-D that defines an AEAD algorithm it is RECOMMENDED to employ the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
 					</li>
 					<li>
-						<t>An RFC or I-D that defines a generic protocol based on an AEAD algorithm SHOULD use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
+						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
 					</li>
 				</ul>
 			</section>
@@ -281,20 +281,40 @@
 						Definition. An AEAD algorithm Authenticated Encryption advantage increases sublinearly in the number of users.
 					</t>
 					<t>
-						Further reading. <xref target="BT16" format="default" />
+						Security model. mu-ind  <xref target="BT16" format="default" />.
+					</t>
+					<t>
+						Examples. AES-GCM [TODO]<xref target="HTT18" format="default" /><xref target="LMP17" format="default" />, ChaCha20-Poly1305 [TODO]<xref target="DGGP21" format="default" />, AES-GCM-SIV <xref target="BHT18" format="default" />, AEGIS [TODO]. 
+					</t>
+					<t>
+						Applications. Data transimission layer of secure communication protocols (e.g., TLS, IPSec, SRTP, etc.) 
+					</t>
+					<t>
+						Note. It holds that for any AEAD algorithm, Authenticated Encryption security degrades no worse than linearly. However, for some applications with a significant number of users, better multi-user guarantees are required. For example, in the TLS 1.3 protocol, to address this issue, AEAD algorithms are used with a randomized nonce (deterministically derived from a traffic secret and a sequence number). Using nonce randomization in block-cipher counter-based AEAD modes can contribute to multi-user security <xref target="BT16" format="default" />. Multi-user usage limits for AES-GCM and ChaCha20-Poly1305 are provided in <xref target="I-D.irtf-cfrg-aead-limits" format="default"/>.
+					</t>
+					<t>
+						Further reading. <xref target="BT16" format="default" />, <xref target="HTT18" format="default" />, <xref target="LMP17" format="default" />,<xref target="DGGP21" format="default" />, <xref target="BHT18" format="default" />
 					</t>
 				</section>
 				<section anchor="NonceHiding" numbered="true" toc="default">
 					<name>Nonce-Hiding</name>
 					<t>
-						Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt a plaintext.
+						Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt plaintext. The algorithm includes information equivalent to the encrypted nonce in the ciphertext and doesn't require the nonce as input for the decryption operation.
 					</t>
 					<t>
-						Note. The decryption operation in a nonce-hiding AEAD algorithm does not require the nonce as input. In nonce-hiding AEAD algorithms, the ciphertext contains information equivalent to an encrypted nonce.
+						Example. Hide-Nonce (HN) transforms <xref target="BNT19" format="default" />.
 					</t>
 					<t>
-						Further reading.
-						<xref target="BNT19" format="default" />
+						Security model. AE2 <xref target="BNT19" format="default" />.
+					</t>
+					<t>
+						Applications. Any application that can't rely on a secure "out-of-band" nonce communication.
+					</t>
+					<t>
+						Note. As discussed in <xref target="BNT19" format="default" />, adversary-visible nonces might compromise message and user privacy, similar to the way any metadata might do. As pointed out in <xref target="D13" format="default" />, even using a counter as a nonce value might compromise privacy. Designing a privacy-preserving way to manage nonces might be a challenging problem for an application.    TODO: Can I cite [TODO]?
+					</t>
+					<t>
+						Further reading. <xref target="BNT19" format="default" />.
 					</t>
 				</section>
 				<section anchor="NM" numbered="true" toc="default">
@@ -887,7 +907,7 @@
 				
 				<reference anchor="ABV21">
 					<front>
-						<title>Nonce-misuse security of the SAEF authenticated encryption mode.</title>
+						<title>Nonce-misuse security of the SAEF authenticated encryption mode</title>
 						<author initials="E." surname="Andreeva" fullname="Elena Andreeva"/>
 						<author initials="A.S." surname="Bhati" fullname="Amit Singh Bhati"/>
 						<author initials="D." surname="Vizár" fullname="Damian Vizár"/>
@@ -898,7 +918,7 @@
 				
 				<reference anchor="YSS23">
 					<front>
-						<title>Committing Security of Ascon: Cryptanalysis on Primitive and Proof on Mode.</title>
+						<title>Committing Security of Ascon: Cryptanalysis on Primitive and Proof on Mode</title>
 						<author initials="Y." surname="Naito" fullname="Yusuke Naito"/>
 						<author initials="Y." surname="Sasaki" fullname="Yu Sasaki"/>
 						<author initials="T." surname="Sugawara" fullname="Takeshi Sugawara"/>
@@ -909,7 +929,7 @@
 				
 				<reference anchor="ADGKLS22">
 					<front>
-						<title>How to abuse and fix authenticated encryption without key commitment.</title>
+						<title>How to abuse and fix authenticated encryption without key commitment</title>
 						<author initials="A." surname="Albertini" fullname="Ange Albertini"/>
 						<author initials="T." surname="Duong" fullname="Thai Duong"/>
 						<author initials="S." surname="Gueron" fullname="Shay Gueron"/>
@@ -923,7 +943,7 @@
 				
 				<reference anchor="BPPS17">
 					<front>
-						<title>On leakage-resilient authenticated encryption with decryption leakages.</title>
+						<title>On leakage-resilient authenticated encryption with decryption leakages</title>
 						<author initials="F." surname="Berti" fullname="Francesco Berti" />
 						<author initials="O." surname="Pereira" fullname="Olivier Pereira" />
 						<author initials="T." surname="Peters" fullname="Thomas Peters" />
@@ -931,6 +951,60 @@
 						<date year="2017" />
 					</front>
 					<refcontent>IACR Transactions on Symmetric Cryptology (2017): 271-293</refcontent>
+				</reference>
+				
+				<reference anchor="HTT18">
+					<front>
+						<title>The multi-user security of GCM, revisited: Tight bounds for nonce randomization</title>
+						<author initials="V.T." surname="Hoang" fullname="Viet Tung Hoang" />
+						<author initials="S." surname="Tessaro" fullname="Stefano Tessaro" />
+						<author initials="A." surname="Thiruvengadam" fullname="Aishwarya Thiruvengadam" />
+						<date year="2018" />
+					</front>
+					<refcontent>Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security, pp. 1429-1440. 2018</refcontent>
+				</reference>
+				
+				<reference anchor="BHT18">
+					<front>
+						<title>Revisiting AES-GCM-SIV: multi-user security, faster key derivation, and better bounds</title>
+						<author initials="P." surname="Bose" fullname="Priyanka Bose" />
+						<author initials="V.T." surname="Hoang" fullname="Viet Tung Hoang" />
+						<author initials="S." surname="Tessaro" fullname="Stefano Tessaro" />
+						<date year="2018" />
+					</front>
+					<refcontent>Annual International Conference on the Theory and Applications of Cryptographic Techniques, pp. 468-499. Cham: Springer International Publishing, 2018</refcontent>
+				</reference>
+				
+				<reference anchor="LMP17">
+					<front>
+						<title>Analyzing multi-key security degradation</title>
+						<author initials="A." surname="Luykx" fullname="Atul Luykx" />
+						<author initials="B." surname="Mennink" fullname="Bart Mennink" />
+						<author initials="K." surname="Paterson" fullname="Kenneth G. Paterson" />
+						<date year="2017" />
+					</front>
+					<refcontent>Conference on the Theory and Applications of Cryptology and Information Security, Hong Kong, China, December 3-7, 2017, Proceedings, Part II 23, pp. 575-605. Springer International Publishing, 2017.</refcontent>
+				</reference>
+				
+				<reference anchor="DGGP21">
+					<front>
+						<title>The security of ChaCha20-Poly1305 in the multi-user setting</title>
+						<author initials="J.P." surname="Degabriele" fullname="Jean Paul Degabriele" />
+						<author initials="J." surname="Govinden" fullname="Jérôme Govinden" />
+						<author initials="F." surname="Günther" fullname="Felix Günther" />
+						<author initials="K." surname="Paterson" fullname="Kenneth G. Paterson" />
+						<date year="2021" />
+					</front>
+					<refcontent>In Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security, pp. 1981-2003. 2021.</refcontent>
+				</reference>
+				
+				<reference anchor="D13">
+					<front>
+						<title>Re: secret message numbers</title>
+						<author initials="D. J. " surname="Bernstein" fullname="Daniel J. Bernstein." />
+						<date year="2013" />
+					</front>
+					<refcontent>Message in Google group on cryptographic competitions, October 2013. https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J. </refcontent>
 				</reference>
 				
 				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml" />
