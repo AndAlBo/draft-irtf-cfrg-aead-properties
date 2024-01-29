@@ -1195,7 +1195,7 @@ li > p:last-of-type {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bozhko</td>
-<td class="center">Expires 28 July 2024</td>
+<td class="center">Expires 1 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1208,12 +1208,12 @@ li > p:last-of-type {
 <dd class="internet-draft">draft-irtf-cfrg-aead-properties-02</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-25" class="published">25 January 2024</time>
+<time datetime="2024-01-29" class="published">29 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-28">28 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-01">1 August 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1249,7 +1249,7 @@ li > p:last-of-type {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1505,23 +1505,23 @@ li > p:last-of-type {
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-classification-of-additiona" class="section-name selfRef">Classification of additional AEAD Properties</a>
         </h3>
 <p id="section-4.1-1">
- In this document we use a high-level classification of additional properties. The classification aims to give an intuition on how one can benefit from the property. The additional properties fall into one of these three categories:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+ In this document, we employ a high-level classification of additional properties. The aim of this classification is to provide an intuition on how one can benefit from each property. The additional properties are categorized into one of these three groups:"<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">
             <p id="section-4.1-2.1.1">
- Security properties. We say that the property is a security property if it considers new threats or adversarial capabilities, in addition to those of the usual nonce-respecting adversary, which aims to break confidentiality or data integrity.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+ Security properties. We classify a property as a security property if it takes into account new threats or adversarial capabilities, in addition to those posed by the typical nonce-respecting adversary whose goal is to compromise confidentiality or data integrity.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.2">
             <p id="section-4.1-2.2.1">
- Implementation properties. We say that the property is an implementation property if it allows for more efficient implementations of the AEAD algorithm in special cases or environments.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
+ Implementation properties. We classify a property as an implementation property if it enables more efficient implementations of the AEAD algorithm in specific cases or environments.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.3">
             <p id="section-4.1-2.3.1">
- Additional functionality properties. We say that the property is an additional functionality property if it provides new features in addition to the regular authenticated encryption with associated data.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+ Additional functionality properties. We classify a property as an additional functionality property if it introduces new features in addition to the standard authenticated encryption with associated data.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-4.1-3">
- We notice that the distinction between the security and additional functionality properties might be vague. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Hence, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms and, in contrast to security properties, not the extended ones. For that reason we are not considering additional functionality properties, they are not discussed in this section. In section <a href="#AddProp" class="auto internal xref">Appendix A</a>, some examples of AEAD algorithms with additional functionality are provided.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+ We observe that the distinction between security and additional functionality properties may be somewhat ambiguous. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Consequently, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms, in contrast to security properties, which consider the extended ones. For this reason, we do not address additional functionality properties in this section. <a href="#AddProp" class="auto internal xref">Appendix A</a> provides some examples of AEAD algorithms with additional functionality.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Base">
@@ -1572,7 +1572,7 @@ li > p:last-of-type {
 <p id="section-4.3.1-2">
  Security notion. D-LORS-BCPA for confidentiality, B-INT-CTXT for integrity <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>; OAE1 <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span> (stronger notion; originally, OAE in <span>[<a href="#FFL12" class="cite xref">FFL12</a>]</span>).<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-3">
- Examples. Deoxys [TODO], SAEF <span>[<a href="#ABV21" class="cite xref">ABV21</a>]</span>.<a href="#section-4.3.1-3" class="pilcrow">¶</a></p>
+ Examples. Deoxys <span>[<a href="#JNPS21" class="cite xref">JNPS21</a>]</span>, SAEF <span>[<a href="#ABV21" class="cite xref">ABV21</a>]</span>.<a href="#section-4.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-4">
  Note. Blockwise security is highly relevant for online AEAD algorithms (see <a href="#Online" class="auto internal xref">Section 4.4.4</a>). OAE1 (OAE) security notion <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span>, and OAE2 notion <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span> are tailored for online AEAD algorithms. Blockwise security follows from security in the OAE notion <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>. For discussion on security notions for online AEAD algorithms see <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span>.<a href="#section-4.3.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-5"> 
@@ -1593,7 +1593,7 @@ li > p:last-of-type {
 <p id="section-4.3.2-2">
  Security notion. CMT-4 <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>.<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-3">
- Examples. ASCON [TODO]<span>[<a href="#YSS23" class="cite xref">YSS23</a>]</span>, full commiting versions of GCM and GCM-SIV <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>, generic constructions from <span>[<a href="#BH22" class="cite xref">BH22</a>]</span><span>[<a href="#CR22" class="cite xref">CR22</a>]</span>.<a href="#section-4.3.2-3" class="pilcrow">¶</a></p>
+ Examples. Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span><span>[<a href="#YSS23" class="cite xref">YSS23</a>]</span>, full commiting versions of GCM and GCM-SIV <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>, generic constructions <span>[<a href="#BH22" class="cite xref">BH22</a>]</span><span>[<a href="#CR22" class="cite xref">CR22</a>]</span>.<a href="#section-4.3.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-4">
  Note. Full commitment can be considered in a weaker setting, where certain restrictions on the tuples produced by an adversary are imposed <span>[<a href="#MLGR23" class="cite xref">MLGR23</a>]</span>. For instance, an adversary must find tuples that all share the same associated data value. In such cases, an AEAD algorithm is said to provide full (key) commitment in a restricted setting. The imposed restrictions MUST be listed.<a href="#section-4.3.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-5">
@@ -1613,7 +1613,7 @@ li > p:last-of-type {
 <p id="section-4.3.3-2">
  Security notion. CMT-1 <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>.<a href="#section-4.3.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.3-3">
- Examples. ASCON [TODO]<span>[<a href="#YSS23" class="cite xref">YSS23</a>]</span>, generic constructions from <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>,<span>[<a href="#CR22" class="cite xref">CR22</a>]</span>.<a href="#section-4.3.3-3" class="pilcrow">¶</a></p>
+ Examples. Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span><span>[<a href="#YSS23" class="cite xref">YSS23</a>]</span>, generic constructions from <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>,<span>[<a href="#CR22" class="cite xref">CR22</a>]</span>.<a href="#section-4.3.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.3-4">
  Synonyms. Key-robustness,  key collision resistance.<a href="#section-4.3.3-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.3-5">
@@ -1635,15 +1635,15 @@ li > p:last-of-type {
 <p id="section-4.3.4-2">
  Security notion. CIL1 <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span> (CIML2 <span>[<a href="#BPPS17" class="cite xref">BPPS17</a>]</span> with leakages in decryption) for intergity, CCAL1 <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span> (CCAmL2 <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span> with leakages in decryption) for Authenticated Encryption security.<a href="#section-4.3.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-3">
- Examples. ASCON [TODO] (integrity with leakages in both encryption and decryption operations, confidentiality with leakages in encryption), TEDT <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span>.<a href="#section-4.3.4-3" class="pilcrow">¶</a></p>
+ Examples. Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span> (integrity with leakages in both encryption and decryption operations, confidentiality with leakages in encryption), TEDT <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span>.<a href="#section-4.3.4-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-4">
  Applications. Encryption on smart cards, Internet-of-things devices or other constrained devices.<a href="#section-4.3.4-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-5">
- Note. Leakages during AEAD operations executions are implementation-dependent. It is possible to implement symmetric algorithms in a way that every possible physical leakage is completely independent of the secret inputs of the algorithm (for example, with a masking technique [TODO]). However, such implementations are generally very resource-consuming. In a case when an AEAD can achieve leakage resistance only with such an implementation, we don't say that it provides leakage resistance since it is considered that an adversary doesn't obtain any additional information via side-channel leakages from such implementations. Leakage-resistant AEAD algorithms aim to place as mild requirements on implementation as possible to achieve leakage resistance. These requirements SHOULD be listed.<a href="#section-4.3.4-5" class="pilcrow">¶</a></p>
+ Note. Leakages during AEAD operations executions are implementation-dependent. It is possible to implement symmetric algorithms in a way that every possible physical leakage is completely independent of the secret inputs of the algorithm (for example, with a masking technique <span>[<a href="#CJRR99" class="cite xref">CJRR99</a>]</span>). However, such implementations are generally very resource-consuming. In a case when an AEAD can achieve leakage resistance only with such an implementation, we don't say that it provides leakage resistance since it is considered that an adversary doesn't obtain any additional information via side-channel leakages from such implementations. Leakage-resistant AEAD algorithms aim to place as mild requirements on implementation as possible to achieve leakage resistance. These requirements SHOULD be listed.<a href="#section-4.3.4-5" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-6">
  Confidentiality of plaintext in the presence of leakages in the encryption operation is unachievable if an adversary can repeat the nonce used to encrypt the plaintext in other encryption queries. Confidentiality can be achieved only for plaintexts encrypted with fresh nonces (analogically to nonce-misuse resilience, see <a href="#NM" class="auto internal xref">Section 4.3.7</a>). For discussion see <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span> and <span>[<a href="#B20" class="cite xref">B20</a>]</span>.<a href="#section-4.3.4-6" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-7"> 
- For primitive-based AEAD algorithms, key evolution (internal re-keying [TODO]) can contribute to achieving leakage resistance without leakages in decryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <span>[<a href="#B20" class="cite xref">B20</a>]</span>.<a href="#section-4.3.4-7" class="pilcrow">¶</a></p>
+ For primitive-based AEAD algorithms, key evolution (internal re-keying <span>[<a href="#RFC8645" class="cite xref">RFC8645</a>]</span>) can contribute to achieving leakage resistance without leakages in decryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <span>[<a href="#B20" class="cite xref">B20</a>]</span>.<a href="#section-4.3.4-7" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-8">
  Further reading. <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span>, <span>[<a href="#B20" class="cite xref">B20</a>]</span>, <span>[<a href="#BPPS17" class="cite xref">BPPS17</a>]</span>.<a href="#section-4.3.4-8" class="pilcrow">¶</a></p>
 </section>
@@ -1658,7 +1658,7 @@ li > p:last-of-type {
 <p id="section-4.3.5-2">
  Security notion. mu-ind  <span>[<a href="#BT16" class="cite xref">BT16</a>]</span>.<a href="#section-4.3.5-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.5-3">
- Examples. AES-GCM [TODO]<span>[<a href="#HTT18" class="cite xref">HTT18</a>]</span><span>[<a href="#LMP17" class="cite xref">LMP17</a>]</span>, ChaCha20-Poly1305 [TODO]<span>[<a href="#DGGP21" class="cite xref">DGGP21</a>]</span>, AES-GCM-SIV <span>[<a href="#BHT18" class="cite xref">BHT18</a>]</span>, AEGIS [TODO].<a href="#section-4.3.5-3" class="pilcrow">¶</a></p>
+ Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, AES-GCM-SIV <span>[<a href="#RFC8452" class="cite xref">RFC8452</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.5-4">
  Applications. Data transimission layer of secure communication protocols (e.g., TLS, IPSec, SRTP, etc.)<a href="#section-4.3.5-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.5-5">
@@ -1699,14 +1699,14 @@ li > p:last-of-type {
 <li class="normal" id="section-4.3.7-3.1">
               <p id="section-4.3.7-3.1.1">Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.<a href="#section-4.3.7-3.1.1" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-3.1.2">
- Examples. ChaCha20-Poly1305 [TODO], AES-GCM [TODO] (only confidentiality).<a href="#section-4.3.7-3.1.2" class="pilcrow">¶</a></p>
+ Examples. ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span> (only confidentiality).<a href="#section-4.3.7-3.1.2" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-3.1.3">
  Security notion. CPA resilience (confidentiality), authenticity resilience (integrity), CCA resilience (authenticated encryption) <span>[<a href="#ADL17" class="cite xref">ADL17</a>]</span>.<a href="#section-4.3.7-3.1.3" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.3.7-3.2">
               <p id="section-4.3.7-3.2.1">Nonce misuse resistance. Security is provided for all messages.<a href="#section-4.3.7-3.2.1" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-3.2.2">
- Examples. AES-GCM-SIV [TODO], Deoxys-II [TODO].<a href="#section-4.3.7-3.2.2" class="pilcrow">¶</a></p>
+ Examples. AES-GCM-SIV <span>[<a href="#RFC8452" class="cite xref">RFC8452</a>]</span>, Deoxys-II <span>[<a href="#JNPS21" class="cite xref">JNPS21</a>]</span>.<a href="#section-4.3.7-3.2.2" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-3.2.3">
  Security notion. MRAE <span>[<a href="#RS06" class="cite xref">RS06</a>]</span>.<a href="#section-4.3.7-3.2.3" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-3.2.4">
@@ -1731,7 +1731,7 @@ li > p:last-of-type {
 <li class="normal" id="section-4.3.8-2.1">
               <p id="section-4.3.8-2.1.1">Q1 model.  An adversary has access to local quantum computational power. It has classical access to encryption and decryption oracles.<a href="#section-4.3.8-2.1.1" class="pilcrow">¶</a></p>
 <p id="section-4.3.8-2.1.2">Synonyms. Post-quantum security.<a href="#section-4.3.8-2.1.2" class="pilcrow">¶</a></p>
-<p id="section-4.3.8-2.1.3">Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AES-GCM-SIV [TODO], AEGIS [TODO].<a href="#section-4.3.8-2.1.3" class="pilcrow">¶</a></p>
+<p id="section-4.3.8-2.1.3">Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, MGM <span>[<a href="#RFC9058" class="cite xref">RFC9058</a>]</span>, AES-GCM-SIV <span>[<a href="#RFC8452" class="cite xref">RFC8452</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.3.8-2.1.3" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.3.8-2.2">
               <p id="section-4.3.8-2.2.1">Q2 model. An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles; it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.<a href="#section-4.3.8-2.2.1" class="pilcrow">¶</a></p>
@@ -1755,7 +1755,7 @@ li > p:last-of-type {
 <p id="section-4.3.9-2">
  Security notion. j-Int-CTXT <span>[<a href="#FLLW17" class="cite xref">FLLW17</a>]</span>.<a href="#section-4.3.9-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.9-3">
- Examples. Deoxys [TODO], AEGIS [TODO], ASCON [TODO].<a href="#section-4.3.9-3" class="pilcrow">¶</a></p>
+ Examples. Deoxys <span>[<a href="#JNPS21" class="cite xref">JNPS21</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>, Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span>.<a href="#section-4.3.9-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.9-4">
  Functional applications. VoIP, real-time streaming in a lightweight setting, apllications which require small ciphertext overhead (i.e., short tags).<a href="#section-4.3.9-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.9-5">
@@ -1798,9 +1798,9 @@ li > p:last-of-type {
 <a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-hardware-efficiency" class="section-name selfRef">Hardware efficiency</a>
           </h4>
 <p id="section-4.4.1-1">
- Definition. An AEAD algorithm is designed to optimize efficiency on specific classes of hardware.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm ensures optimal performance when operating on hardware that complies with the specified requirements.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.1-2">
- Note. Different classes of hardware can be considered. Some AEAD algorithms are tailored to achieve optimal efficiency on CPUs equipped with dedicated cryptographic instructions (e.g., AES-NI). Conversely, others are designed to deliver uniform efficiency across arbitrary hardware, while some are optimized for a particular type of resource-constrained hardware. It is RECOMMENDED to specify the targeted hardware classes.<a href="#section-4.4.1-2" class="pilcrow">¶</a></p>
+ Note. Various classes of hardware may be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is recommended to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims.<a href="#section-4.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Inverse">
@@ -1811,7 +1811,7 @@ li > p:last-of-type {
 <p id="section-4.4.2-1">
  Definition. A primitive-based AEAD algorithm can be securely implemented without evaluating the primitive inverse.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.2-2">
- Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO]<a href="#section-4.4.2-2" class="pilcrow">¶</a></p>
+ Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, MGM <span>[<a href="#RFC9058" class="cite xref">RFC9058</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.4.2-3">
  Note. In a sponge-based AEAD algorithm, an underlying permutation is viewed as a primitive.<a href="#section-4.4.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -1824,7 +1824,7 @@ li > p:last-of-type {
 <p id="section-4.4.3-1">
  Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST Lightweight Cryptography competition <span>[<a href="#MBTM17" class="cite xref">MBTM17</a>]</span>.<a href="#section-4.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.3-2">
- Examples. OCB [TODO], Ascon [TODO].<a href="#section-4.4.3-2" class="pilcrow">¶</a></p>
+ Examples. OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span>.<a href="#section-4.4.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.4.3-3">
  Further reading.
  <span>[<a href="#MBTM17" class="cite xref">MBTM17</a>]</span><a href="#section-4.4.3-3" class="pilcrow">¶</a></p>
@@ -1838,7 +1838,7 @@ li > p:last-of-type {
 <p id="section-4.4.4-1">
  Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory usage and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.<a href="#section-4.4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.4-2">
- Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO], Ascon [TODO].<a href="#section-4.4.4-2" class="pilcrow">¶</a></p>
+ Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, MGM <span>[<a href="#RFC9058" class="cite xref">RFC9058</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>, Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span>.<a href="#section-4.4.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.4.4-3">
  Applications. Real-time streaming protocols, resource-constrained devices.<a href="#section-4.4.4-3" class="pilcrow">¶</a></p>
 <p id="section-4.4.4-4">
@@ -1858,7 +1858,7 @@ li > p:last-of-type {
 <p id="section-4.4.5-2">
  Synonyms. Pipelineable.<a href="#section-4.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-4.4.5-3">
- Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO]<a href="#section-4.4.5-3" class="pilcrow">¶</a></p>
+ Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, MGM <span>[<a href="#RFC9058" class="cite xref">RFC9058</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.4.5-3" class="pilcrow">¶</a></p>
 <p id="section-4.4.5-4">
  Further reading.
  <span>[<a href="#C20" class="cite xref">C20</a>]</span><a href="#section-4.4.5-4" class="pilcrow">¶</a></p>
@@ -1872,7 +1872,7 @@ li > p:last-of-type {
 <p id="section-4.4.6-1">
  Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).<a href="#section-4.4.6-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.6-2">
- Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO]<a href="#section-4.4.6-2" class="pilcrow">¶</a></p>
+ Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, MGM <span>[<a href="#RFC9058" class="cite xref">RFC9058</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.4.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="StaticAD">
@@ -1883,7 +1883,7 @@ li > p:last-of-type {
 <p id="section-4.4.7-1">
  Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational cost of encryption.<a href="#section-4.4.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.7-2">
- Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO]<a href="#section-4.4.7-2" class="pilcrow">¶</a></p>
+ Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>.<a href="#section-4.4.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ZK">
@@ -1975,7 +1975,7 @@ li > p:last-of-type {
 <dd class="break"></dd>
 <dt id="B13">[B13]</dt>
         <dd>
-<span class="refAuthor">Bernstein, D. J.</span>, <span class="refTitle">"Re: secret message numbers"</span>, <span class="refContent">Message in Google group on cryptographic competitions, October 2013. https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J. </span>, <time datetime="2013" class="refDate">2013</time>. </dd>
+<span class="refAuthor">Bernstein, D. J.</span>, <span class="refTitle">"Re: secret message numbers"</span>, <span class="refContent">Message in Google group on cryptographic competitions, October 2013.</span>, <time datetime="2013" class="refDate">2013</time>, <span>&lt;<a href="https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J">https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="B20">[B20]</dt>
         <dd>
@@ -1989,10 +1989,6 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Forler, C.</span> and <span class="refAuthor">E. List</span>, <span class="refTitle">"MAC Reforgeability"</span>, <span class="refContent">Fast Software Encryption. FSE 2009. Lecture Notes in Computer Science, vol 5665. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/978-3-642-03317-9_21</span>, <time datetime="2009" class="refDate">2009</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-642-03317-9_21">https://doi.org/10.1007/978-3-642-03317-9_21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="BFN98">[BFN98]</dt>
-        <dd>
-<span class="refAuthor">Blaze, M.</span>, <span class="refAuthor">Feigenbaum, J.</span>, and <span class="refAuthor">M. Naor</span>, <span class="refTitle">"A formal treatment of remotely keyed encryption"</span>, <span class="refContent">Advances in Cryptology — EUROCRYPT'98. EUROCRYPT 1998. Lecture Notes in Computer Science, vol 1403. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/BFb0054131</span>, <time datetime="1998" class="refDate">1998</time>, <span>&lt;<a href="https://doi.org/10.1007/BFb0054131">https://doi.org/10.1007/BFb0054131</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="BH22">[BH22]</dt>
         <dd>
 <span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">V.T. Hoang</span>, <span class="refTitle">"Efficient schemes for committing authenticated encryption."</span>, <span class="refContent">Advances in Cryptology – EUROCRYPT 2022. EUROCRYPT 2022. Lecture Notes in Computer Science, vol 13276. Springer, Cham.</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-07085-3_29</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-07085-3_29">https://doi.org/10.1007/978-3-031-07085-3_29</a>&gt;</span>. </dd>
@@ -2000,10 +1996,6 @@ li > p:last-of-type {
 <dt id="BHT18">[BHT18]</dt>
         <dd>
 <span class="refAuthor">Bose, P.</span>, <span class="refAuthor">Hoang, V.T.</span>, and <span class="refAuthor">S. Tessaro</span>, <span class="refTitle">"Revisiting AES-GCM-SIV: multi-user security, faster key derivation, and better bounds"</span>, <span class="refContent">Annual International Conference on the Theory and Applications of Cryptographic Techniques, pp. 468-499. Cham: Springer International Publishing, 2018</span>, <time datetime="2018" class="refDate">2018</time>. </dd>
-<dd class="break"></dd>
-<dt id="BK2011">[BK2011]</dt>
-        <dd>
-<span class="refAuthor">Bellare, M.</span> and <span class="refAuthor">S. Keelveedhi</span>, <span class="refTitle">"Authenticated and Misuse-Resistant Encryption of Key-Dependent Data"</span>, <span class="refContent">Advances in Cryptology – CRYPTO 2011. CRYPTO 2011. Lecture Notes in Computer Science, vol 6841. Springer, Berlin, Heidelberg.</span>, <span class="seriesInfo">DOI 10.1007/978-3-642-22792-9_35</span>, <time datetime="2011" class="refDate">2011</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-642-22792-9_35">https://doi.org/10.1007/978-3-642-22792-9_35</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="BKY02">[BKY02]</dt>
         <dd>
@@ -2033,13 +2025,21 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Chakraborti, A.</span>, <span class="refAuthor">Datta, N.</span>, <span class="refAuthor">Jha, A.</span>, <span class="refAuthor">Mancillas-López, C.</span>, <span class="refAuthor">Nandi, M.</span>, and <span class="refAuthor">Y. Sasaki</span>, <span class="refTitle">"INT-RUP Secure Lightweight Parallel AE Modes"</span>, <span class="refContent">IACR Transactions on Symmetric Cryptology, 2019(4), 81–118</span>, <span class="seriesInfo">DOI 10.13154/tosc.v2019.i4.81-118</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://doi.org/10.13154/tosc.v2019.i4.81-118">https://doi.org/10.13154/tosc.v2019.i4.81-118</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="CJRR99">[CJRR99]</dt>
+        <dd>
+<span class="refAuthor">Chari, S.</span>, <span class="refAuthor">Jutla, C.S.</span>, <span class="refAuthor">Rao, J.R.</span>, and <span class="refAuthor">P. Rohatgi</span>, <span class="refTitle">"Towards sound approaches to counteract power-analysis attacks."</span>, <span class="refContent">Advances in Cryptology—CRYPTO’99: 19th Annual International Cryptology Conference Santa Barbara, California, USA, August 15–19, 1999 Proceedings 19, pp. 398-412. Springer Berlin Heidelberg, 1999.</span>, <span class="seriesInfo">DOI 10.1007/3-540-48405-1_26</span>, <time datetime="1999" class="refDate">1999</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-48405-1_26">https://doi.org/10.1007/3-540-48405-1_26</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="CR22">[CR22]</dt>
         <dd>
 <span class="refAuthor">Chan, J.</span> and <span class="refAuthor">P. Rogaway</span>, <span class="refTitle">"On Committing Authenticated-Encryption."</span>, <span class="refContent">Computer Security – ESORICS 2022. ESORICS 2022. Lecture Notes in Computer Science, vol 13555. Springer, Cham.</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-17146-8_14</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-17146-8_14">https://doi.org/10.1007/978-3-031-17146-8_14</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="DA03">[DA03]</dt>
+<dt id="DEMS21a">[DEMS21a]</dt>
         <dd>
-<span class="refAuthor">Dodis, Y.</span> and <span class="refAuthor">JH. An</span>, <span class="refTitle">"Concealment and Its Applications to Authenticated Encryption"</span>, <span class="refContent">Advances in Cryptology — EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/3-540-39200-9_19</span>, <time datetime="2003" class="refDate">2003</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-39200-9_19">https://doi.org/10.1007/3-540-39200-9_19</a>&gt;</span>. </dd>
+<span class="refAuthor">Dobraunig, C.</span>, <span class="refAuthor">Eichlseder, M.</span>, <span class="refAuthor">Mendel, F.</span>, and <span class="refAuthor">M. Schläffer</span>, <span class="refTitle">"Ascon v1.2: Lightweight Authenticated Encryption and Hashing"</span>, <span class="refContent">Journal of Cryptology 34 (2021): 1-42.</span>, <span class="seriesInfo">DOI 10.1007/s00145-021-09398-9</span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://doi.org/10.1007/s00145-021-09398-9">https://doi.org/10.1007/s00145-021-09398-9</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="DEMS21b">[DEMS21b]</dt>
+        <dd>
+<span class="refAuthor">Dobraunig, C.</span>, <span class="refAuthor">Eichlseder, M.</span>, <span class="refAuthor">Mendel, F.</span>, and <span class="refAuthor">M. Schläffer</span>, <span class="refTitle">"Ascon v1.2"</span>, <span class="refContent">Submission to the NIST LWC Competition</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
 <dd class="break"></dd>
 <dt id="DGGK21">[DGGK21]</dt>
         <dd>
@@ -2097,9 +2097,17 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Günther, F.</span>, <span class="refAuthor">Thomson, M.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Usage Limits on AEAD Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-aead-limits-07</span>, <time datetime="2023-05-31" class="refDate">31 May 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-07">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aead-limits-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.irtf-cfrg-aegis-aead">[I-D.irtf-cfrg-aegis-aead]</dt>
+        <dd>
+<span class="refAuthor">Denis, F.</span> and <span class="refAuthor">S. Lucas</span>, <span class="refTitle">"The AEGIS Family of Authenticated Encryption Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-aegis-aead-10</span>, <time datetime="2024-01-20" class="refDate">20 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead-10">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead-10</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="JMV2002">[JMV2002]</dt>
         <dd>
 <span class="refAuthor">Joux, A.</span>, <span class="refAuthor">Martinet, G.</span>, and <span class="refAuthor">F. Valette</span>, <span class="refTitle">"Blockwise-Adaptive Attackers Revisiting the (In)Security of Some Provably Secure Encryption Modes: CBC, GEM, IACBC"</span>, <span class="refContent">Advances in Cryptology — CRYPTO 2002. CRYPTO 2002. Lecture Notes in Computer Science, vol 2442. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/3-540-45708-9_2</span>, <time datetime="2002" class="refDate">2002</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-45708-9_2">https://doi.org/10.1007/3-540-45708-9_2</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="JNPS21">[JNPS21]</dt>
+        <dd>
+<span class="refAuthor">Jean, M.</span>, <span class="refAuthor">Nikolić, I.</span>, <span class="refAuthor">Peyrin, T.</span>, and <span class="refAuthor">Y. Seurin</span>, <span class="refTitle">"The Deoxys AEAD family"</span>, <span class="refContent">Journal of Cryptology 34, no. 3 (2021): 31.</span>, <time datetime="2021" class="refDate">2021</time>. </dd>
 <dd class="break"></dd>
 <dt id="KLLNP16">[KLLNP16]</dt>
         <dd>
@@ -2129,21 +2137,37 @@ li > p:last-of-type {
         <dd>
 <span class="refAuthor">Kent, S.</span>, <span class="refTitle">"IP Encapsulating Security Payload (ESP)"</span>, <span class="seriesInfo">RFC 4303</span>, <span class="seriesInfo">DOI 10.17487/RFC4303</span>, <time datetime="2005-12" class="refDate">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4303">https://www.rfc-editor.org/info/rfc4303</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC5652">[RFC5652]</dt>
+<dt id="RFC7253">[RFC7253]</dt>
         <dd>
-<span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">STD 70</span>, <span class="seriesInfo">RFC 5652</span>, <span class="seriesInfo">DOI 10.17487/RFC5652</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5652">https://www.rfc-editor.org/info/rfc5652</a>&gt;</span>. </dd>
+<span class="refAuthor">Krovetz, T.</span> and <span class="refAuthor">P. Rogaway</span>, <span class="refTitle">"The OCB Authenticated-Encryption Algorithm"</span>, <span class="seriesInfo">RFC 7253</span>, <span class="seriesInfo">DOI 10.17487/RFC7253</span>, <time datetime="2014-05" class="refDate">May 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7253">https://www.rfc-editor.org/info/rfc7253</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8221">[RFC8221]</dt>
         <dd>
 <span class="refAuthor">Wouters, P.</span>, <span class="refAuthor">Migault, D.</span>, <span class="refAuthor">Mattsson, J.</span>, <span class="refAuthor">Nir, Y.</span>, and <span class="refAuthor">T. Kivinen</span>, <span class="refTitle">"Cryptographic Algorithm Implementation Requirements and Usage Guidance for Encapsulating Security Payload (ESP) and Authentication Header (AH)"</span>, <span class="seriesInfo">RFC 8221</span>, <span class="seriesInfo">DOI 10.17487/RFC8221</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8221">https://www.rfc-editor.org/info/rfc8221</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8439">[RFC8439]</dt>
+        <dd>
+<span class="refAuthor">Nir, Y.</span> and <span class="refAuthor">A. Langley</span>, <span class="refTitle">"ChaCha20 and Poly1305 for IETF Protocols"</span>, <span class="seriesInfo">RFC 8439</span>, <span class="seriesInfo">DOI 10.17487/RFC8439</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8439">https://www.rfc-editor.org/info/rfc8439</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8446">[RFC8446]</dt>
         <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8452">[RFC8452]</dt>
+        <dd>
+<span class="refAuthor">Gueron, S.</span>, <span class="refAuthor">Langley, A.</span>, and <span class="refAuthor">Y. Lindell</span>, <span class="refTitle">"AES-GCM-SIV: Nonce Misuse-Resistant Authenticated Encryption"</span>, <span class="seriesInfo">RFC 8452</span>, <span class="seriesInfo">DOI 10.17487/RFC8452</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8452">https://www.rfc-editor.org/info/rfc8452</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8645">[RFC8645]</dt>
+        <dd>
+<span class="refAuthor">Smyshlyaev, S., Ed.</span>, <span class="refTitle">"Re-keying Mechanisms for Symmetric Keys"</span>, <span class="seriesInfo">RFC 8645</span>, <span class="seriesInfo">DOI 10.17487/RFC8645</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8645">https://www.rfc-editor.org/info/rfc8645</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9000">[RFC9000]</dt>
         <dd>
 <span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9000">https://www.rfc-editor.org/info/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9058">[RFC9058]</dt>
+        <dd>
+<span class="refAuthor">Smyshlyaev, S., Ed.</span>, <span class="refAuthor">Nozdrunov, V.</span>, <span class="refAuthor">Shishkin, V.</span>, and <span class="refAuthor">E. Griboedova</span>, <span class="refTitle">"Multilinear Galois Mode (MGM)"</span>, <span class="seriesInfo">RFC 9058</span>, <span class="seriesInfo">DOI 10.17487/RFC9058</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9058">https://www.rfc-editor.org/info/rfc9058</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RS06">[RS06]</dt>
         <dd>
@@ -2195,13 +2219,13 @@ li > p:last-of-type {
 <a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-robust" class="section-name selfRef">Robust</a>
         </h3>
 <p id="appendix-A.2-1">
- Definition. An AEAD algorithm allows users to choose a desired ciphertext expansion (the difference between the length of plaintext and corresponding ciphertext) along with an input to the encryption operation. This feature enables the regulation of desired security guarantees for each particular application while using the same algorithm implementation.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm allows users to choose a desired ciphertext expansion (the difference between the length of plaintext and corresponding ciphertext) along with an input to the encryption operation. This feature enables the regulation of desired data integrity guarantees, which depend on ciphertext expansion, for each particular application while using the same algorithm implementation.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-2">
  Examples. AEZ <span>[<a href="#HKR2015" class="cite xref">HKR2015</a>]</span>.<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-3">
  Security notion. RAE <span>[<a href="#HKR2015" class="cite xref">HKR2015</a>]</span>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-4">
- Note. The security goal of robust AEAD algorithms is to ensure the best possible security, even with small ciphertext expansion (referred to as stretch). For instance, analyzing any AEAD algorithm with a one-byte stretch for conventional integrity reveals insecurity, as the probability of forging a ciphertext is no less than 1/256. Nonetheless, from the robust AEAD perspective, an algorithm with such forgery probability for a one-byte ciphertext expansion is deemed secure, representing the best achievable security in that scenario.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
+ Note. The security goal of robust AEAD algorithms is to ensure the best possible security, even with small ciphertext expansion (referred to as stretch). For instance, analyzing any AEAD algorithm with a one-byte stretch for conventional integrity reveals insecurity, as the probability of forging a ciphertext is no less than 1/256. Nonetheless, from the robust AEAD perspective, an algorithm with such forgery probability for a one-byte ciphertext expansion is secure, representing the best achievable security in that scenario.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-5">
  Further reading.
  <span>[<a href="#HKR2015" class="cite xref">HKR2015</a>]</span><a href="#appendix-A.2-5" class="pilcrow">¶</a></p>

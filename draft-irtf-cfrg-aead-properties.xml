@@ -105,27 +105,27 @@
 			<section anchor="Classification" numbered="true" toc="default">
 				<name>Classification of additional AEAD Properties</name>
 				<t>
-					In this document we use a high-level classification of additional properties. The classification aims to give an intuition on how one can benefit from the property. The additional properties fall into one of these three categories:
+					In this document, we employ a high-level classification of additional properties. The aim of this classification is to provide an intuition on how one can benefit from each property. The additional properties are categorized into one of these three groups:"
 				</t>
 				<ul>
 					<li>
 						<t>
-							Security properties. We say that the property is a security property if it considers new threats or adversarial capabilities, in addition to those of the usual nonce-respecting adversary, which aims to break confidentiality or data integrity.
+							Security properties. We classify a property as a security property if it takes into account new threats or adversarial capabilities, in addition to those posed by the typical nonce-respecting adversary whose goal is to compromise confidentiality or data integrity.
 						</t>
 					</li>
 					<li>
 						<t>
-							Implementation properties. We say that the property is an implementation property if it allows for more efficient implementations of the AEAD algorithm in special cases or environments.
+							Implementation properties. We classify a property as an implementation property if it enables more efficient implementations of the AEAD algorithm in specific cases or environments.
 						</t>
 					</li>
 					<li>
 						<t>
-							Additional functionality properties. We say that the property is an additional functionality property if it provides new features in addition to the regular authenticated encryption with associated data.
+							Additional functionality properties. We classify a property as an additional functionality property if it introduces new features in addition to the standard authenticated encryption with associated data.
 						</t>
 					</li>
 				</ul>
 				<t>
-					We notice that the distinction between the security and additional functionality properties might be vague. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Hence, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms and, in contrast to security properties, not the extended ones. For that reason we are not considering additional functionality properties, they are not discussed in this section. In section <xref target="AddProp" format="default"/>, some examples of AEAD algorithms with additional functionality are provided.
+					We observe that the distinction between security and additional functionality properties may be somewhat ambiguous. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of algorithms, which is not a subclass of regular AEAD. Consequently, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms, in contrast to security properties, which consider the extended ones. For this reason, we do not address additional functionality properties in this section. <xref target="AddProp" format="default"/> provides some examples of AEAD algorithms with additional functionality.
 				</t>
 			</section>
       
@@ -169,7 +169,7 @@
 						Security notion. D-LORS-BCPA for confidentiality, B-INT-CTXT for integrity <xref target="EV16" format="default"/>; OAE1 <xref target="HRRV15" format="default"/> (stronger notion; originally, OAE in <xref target="FFL12" format="default"/>). 
 					</t>
 					<t>
-						Examples. Deoxys [TODO], SAEF <xref target="ABV21" format="default"/>.
+						Examples. Deoxys <xref target="JNPS21" format="default"/>, SAEF <xref target="ABV21" format="default"/>.
 					</t>
 					<t>
 						Note. Blockwise security is highly relevant for online AEAD algorithms (see <xref target="Online" format="default"/>). OAE1 (OAE) security notion <xref target="HRRV15" format="default"/>, and OAE2 notion <xref target="HRRV15" format="default"/> are tailored for online AEAD algorithms. Blockwise security follows from security in the OAE notion <xref target="EV16" format="default"/>. For discussion on security notions for online AEAD algorithms see <xref target="HRRV15" format="default"/>.	
@@ -194,7 +194,7 @@
 						Security notion. CMT-4 <xref target="BH22" format="default"/>.
 					</t>
 					<t>
-						Examples. ASCON [TODO]<xref target="YSS23" format="default"/>, full commiting versions of GCM and GCM-SIV <xref target="BH22" format="default"/>, generic constructions from <xref target="BH22" format="default"/><xref target="CR22" format="default" />.
+						Examples. Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/><xref target="YSS23" format="default"/>, full commiting versions of GCM and GCM-SIV <xref target="BH22" format="default"/>, generic constructions <xref target="BH22" format="default"/><xref target="CR22" format="default" />.
 					</t>
 					<t>
 						Note. Full commitment can be considered in a weaker setting, where certain restrictions on the tuples produced by an adversary are imposed <xref target="MLGR23" format="default" />. For instance, an adversary must find tuples that all share the same associated data value. In such cases, an AEAD algorithm is said to provide full (key) commitment in a restricted setting. The imposed restrictions MUST be listed.
@@ -216,7 +216,7 @@
 						Security notion. CMT-1 <xref target="BH22" format="default"/>.
 					</t>
 					<t>
-						Examples. ASCON [TODO]<xref target="YSS23" format="default"/>, generic constructions from <xref target="BH22" format="default"/>,<xref target="CR22" format="default"/>.
+						Examples. Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/><xref target="YSS23" format="default"/>, generic constructions from <xref target="BH22" format="default"/>,<xref target="CR22" format="default"/>.
 					</t>
 					<t>
 						Synonyms. Key-robustness,  key collision resistance.
@@ -242,19 +242,19 @@
 						Security notion. CIL1 <xref target="GPPS19" format="default" /> (CIML2 <xref target="BPPS17" format="default" /> with leakages in decryption) for intergity, CCAL1 <xref target="GPPS19" format="default" /> (CCAmL2 <xref target="GPPS19" format="default" /> with leakages in decryption) for Authenticated Encryption security. 
 					</t>
 					<t>
-						Examples. ASCON [TODO] (integrity with leakages in both encryption and decryption operations, confidentiality with leakages in encryption), TEDT <xref target="GPPS19" format="default" />.
+						Examples. Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/> (integrity with leakages in both encryption and decryption operations, confidentiality with leakages in encryption), TEDT <xref target="GPPS19" format="default" />.
 					</t>
 					<t>
 						Applications. Encryption on smart cards, Internet-of-things devices or other constrained devices.  	
 					</t>
 					<t>
-						Note. Leakages during AEAD operations executions are implementation-dependent. It is possible to implement symmetric algorithms in a way that every possible physical leakage is completely independent of the secret inputs of the algorithm (for example, with a masking technique [TODO]). However, such implementations are generally very resource-consuming. In a case when an AEAD can achieve leakage resistance only with such an implementation, we don't say that it provides leakage resistance since it is considered that an adversary doesn't obtain any additional information via side-channel leakages from such implementations. Leakage-resistant AEAD algorithms aim to place as mild requirements on implementation as possible to achieve leakage resistance. These requirements SHOULD be listed.          
+						Note. Leakages during AEAD operations executions are implementation-dependent. It is possible to implement symmetric algorithms in a way that every possible physical leakage is completely independent of the secret inputs of the algorithm (for example, with a masking technique <xref target="CJRR99" format="default" />). However, such implementations are generally very resource-consuming. In a case when an AEAD can achieve leakage resistance only with such an implementation, we don't say that it provides leakage resistance since it is considered that an adversary doesn't obtain any additional information via side-channel leakages from such implementations. Leakage-resistant AEAD algorithms aim to place as mild requirements on implementation as possible to achieve leakage resistance. These requirements SHOULD be listed.          
 					</t>	
 					<t>
 						Confidentiality of plaintext in the presence of leakages in the encryption operation is unachievable if an adversary can repeat the nonce used to encrypt the plaintext in other encryption queries. Confidentiality can be achieved only for plaintexts encrypted with fresh nonces (analogically to nonce-misuse resilience, see <xref target="NM" format="default" />). For discussion see <xref target="GPPS19" format="default" /> and <xref target="B20" format="default" />.  
 					</t>
 					<t>					
-						For primitive-based AEAD algorithms, key evolution (internal re-keying [TODO]) can contribute to achieving leakage resistance without leakages in decryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <xref target="B20" format="default" />.                  
+						For primitive-based AEAD algorithms, key evolution (internal re-keying <xref target="RFC8645" format="default" />) can contribute to achieving leakage resistance without leakages in decryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <xref target="B20" format="default" />.                  
 					</t>
 					<t>
 						Further reading. <xref target="GPPS19" format="default" />, <xref target="B20" format="default" />, <xref target="BPPS17" format="default" />.
@@ -269,7 +269,7 @@
 						Security notion. mu-ind  <xref target="BT16" format="default" />.
 					</t>
 					<t>
-						Examples. AES-GCM [TODO]<xref target="HTT18" format="default" /><xref target="LMP17" format="default" />, ChaCha20-Poly1305 [TODO]<xref target="DGGP21" format="default" />, AES-GCM-SIV <xref target="BHT18" format="default" />, AEGIS [TODO]. 
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>. 
 					</t>
 					<t>
 						Applications. Data transimission layer of secure communication protocols (e.g., TLS, IPSec, SRTP, etc.) 
@@ -314,7 +314,7 @@
 						<li>
 							<t>Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.</t>
 							<t>
-								Examples. ChaCha20-Poly1305 [TODO], AES-GCM [TODO] (only confidentiality).
+								Examples. ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, AES-GCM <xref target="RFC5116" format="default"/> (only confidentiality).
 							</t>
 							<t>
 								Security notion. CPA resilience (confidentiality), authenticity resilience (integrity), CCA resilience (authenticated encryption) <xref target="ADL17" format="default" />.
@@ -323,7 +323,7 @@
 						<li>
 							<t>Nonce misuse resistance. Security is provided for all messages.</t>
 							<t>
-								Examples. AES-GCM-SIV [TODO], Deoxys-II [TODO].
+								Examples. AES-GCM-SIV <xref target="RFC8452" format="default"/>, Deoxys-II <xref target="JNPS21" format="default"/>.
 							</t>
 							<t>
 								Security notion. MRAE <xref target="RS06" format="default" />.
@@ -353,7 +353,7 @@
 							
 							<t>Synonyms. Post-quantum security.</t>
 							
-							<t>Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AES-GCM-SIV [TODO], AEGIS [TODO].</t>
+							<t>Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.</t>
 						</li>
 						<li>
 							<t>Q2 model. An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles; it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.</t>
@@ -380,7 +380,7 @@
 						Security notion. j-Int-CTXT <xref target="FLLW17" format="default" />.
 					</t>
 					<t>
-						Examples. Deoxys [TODO], AEGIS [TODO], ASCON [TODO].
+						Examples. Deoxys <xref target="JNPS21" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
 					</t>
 					<t>
 						Functional applications. VoIP, real-time streaming in a lightweight setting, apllications which require small ciphertext overhead (i.e., short tags).
@@ -422,10 +422,10 @@
 				<section anchor="HardEff" numbered="true" toc="default">
 					<name>Hardware efficiency</name>
 					<t>
-						Definition. An AEAD algorithm is designed to optimize efficiency on specific classes of hardware.
+						Definition. An AEAD algorithm ensures optimal performance when operating on hardware that complies with the specified requirements.
 					</t>
 					<t>
-						Note. Different classes of hardware can be considered. Some AEAD algorithms are tailored to achieve optimal efficiency on CPUs equipped with dedicated cryptographic instructions (e.g., AES-NI). Conversely, others are designed to deliver uniform efficiency across arbitrary hardware, while some are optimized for a particular type of resource-constrained hardware. It is RECOMMENDED to specify the targeted hardware classes. 
+						Note. Various classes of hardware may be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is recommended to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims.
 					</t>
 				</section>
 				
@@ -435,7 +435,7 @@
 						Definition. A primitive-based AEAD algorithm can be securely implemented without evaluating the primitive inverse.
 					</t>
 					<t>
-						Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO]
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 					<t>
 						Note. In a sponge-based AEAD algorithm, an underlying permutation is viewed as a primitive.
@@ -447,7 +447,7 @@
 						Definition. An AEAD algorithm can be efficiently and securely implemented on resource-constrained devices. In particular, it meets the criteria required in the NIST Lightweight Cryptography competition <xref target="MBTM17" format="default" />.
 					</t>
 					<t>
-						Examples. OCB [TODO], Ascon [TODO].
+						Examples. OCB <xref target="RFC7253" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
 					</t>
 					<t>
 						Further reading.
@@ -460,7 +460,7 @@
 						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a constant memory usage and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
 					</t>
 					<t>
-						Examples. AES-GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO], Ascon [TODO].
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
 					</t>
 					<t>
 						Applications. Real-time streaming protocols, resource-constrained devices.
@@ -482,7 +482,7 @@
 						Synonyms. Pipelineable.
 					</t>
 					<t>
-						Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO]
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 					<t>
 						Further reading.
@@ -495,7 +495,7 @@
 						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).
 					</t>
 					<t>
-						Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO], MGM [TODO], AEGIS [TODO]
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 				</section>
 				<section anchor="StaticAD" numbered="true" toc="default">
@@ -504,7 +504,7 @@
 						Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static AD doesn't significantly contribute to the computational cost of encryption.
 					</t>
 					<t>
-						Examples. GCM [TODO], ChaCha20-Poly1305 [TODO], OCB [TODO]
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>.
 					</t>
 				</section>
 				<section anchor="ZK" numbered="true" toc="default">
@@ -556,7 +556,21 @@
 			</references>
 			<references>
 				<name>Informative References</name>
+				
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4303.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8221.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9000.xml" />
+<!--				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5652.xml" />-->
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8439.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8645.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8452.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7253.xml" />
+				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9058.xml" />
+				
 				<xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-irtf-cfrg-aead-limits.xml" />
+				<xi:include href="https://datatracker.ietf.org/doc/bibxml3/draft-irtf-cfrg-aegis-aead.xml" />
+				
 				<reference anchor="R2002">
 					<front>
 						<title>Authenticated-encryption with associated-data.</title>
@@ -600,7 +614,7 @@
 					<seriesInfo name="DOI" value="10.1007/978-3-540-24654-1_11" />
 					<refcontent>Selected Areas in Cryptography. SAC 2003. Lecture Notes in Computer Science, vol 3006. Springer, Berlin, Heidelberg.</refcontent>
 				</reference>
-				<reference anchor="BK2011">
+<!--				<reference anchor="BK2011">
 					<front>
 						<title>Authenticated and Misuse-Resistant Encryption of Key-Dependent Data</title>
 						<author initials="M." surname="Bellare" fullname="Mihir Bellare" />
@@ -610,6 +624,7 @@
 					<seriesInfo name="DOI" value="10.1007/978-3-642-22792-9_35" />
 					<refcontent>Advances in Cryptology – CRYPTO 2011. CRYPTO 2011. Lecture Notes in Computer Science, vol 6841. Springer, Berlin, Heidelberg.</refcontent>
 				</reference>
+-->
 				<reference anchor="FOR17">
 					<front>
 						<title>Authenticated and Misuse-Resistant Encryption of Key-Dependent DataSecurity of Symmetric Primitives under Incorrect Usage of Keys</title>
@@ -839,7 +854,7 @@
 					<seriesInfo name="DOI" value="10.1007/978-3-031-17146-8_14" />
 					<refcontent>Computer Security – ESORICS 2022. ESORICS 2022. Lecture Notes in Computer Science, vol 13555. Springer, Cham.</refcontent>
 				</reference>
-				<reference anchor="BFN98">
+<!--				<reference anchor="BFN98">
 					<front>
 						<title>A formal treatment of remotely keyed encryption</title>
 						<author initials="M." surname="Blaze" fullname="Matt Blaze" />
@@ -850,7 +865,8 @@
 					<seriesInfo name="DOI" value="10.1007/BFb0054131" />
 					<refcontent>Advances in Cryptology — EUROCRYPT'98. EUROCRYPT 1998. Lecture Notes in Computer Science, vol 1403. Springer, Berlin, Heidelberg</refcontent>
 				</reference>
-				<reference anchor="DA03">
+-->				
+<!--				<reference anchor="DA03">
 					<front>
 						<title>Concealment and Its Applications to Authenticated Encryption</title>
 						<author initials="Y." surname="Dodis" fullname="Yevgeniy Dodis" />
@@ -859,7 +875,8 @@
 					</front>
 					<seriesInfo name="DOI" value="10.1007/3-540-39200-9_19" />
 					<refcontent>Advances in Cryptology — EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</refcontent>
-				</reference>
+			</reference>
+-->				
 				<reference anchor="HKR2015">
 					<front>
 						<title>Robust Authenticated-Encryption AEZ and the Problem That It Solves</title>
@@ -1036,13 +1053,13 @@
 					<refcontent>In Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security, pp. 1981-2003. 2021.</refcontent>
 				</reference>
 				
-				<reference anchor="B13">
+				<reference anchor="B13" target="https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J">
 					<front>
 						<title>Re: secret message numbers</title>
 						<author initials="D. J. " surname="Bernstein" fullname="Daniel J. Bernstein" />
 						<date year="2013" />
 					</front>
-					<refcontent>Message in Google group on cryptographic competitions, October 2013. https://groups.google.com/d/msg/crypto-competitions/n5ECGwYr6Vk/bsEfPWqSAU4J. </refcontent>
+					<refcontent>Message in Google group on cryptographic competitions, October 2013.</refcontent>
 				</reference>
 				
 				<reference anchor="BM18">
@@ -1055,11 +1072,56 @@
 					<refcontent>Advances in Cryptology–CRYPTO 2018: 38th Annual International Cryptology Conference, Santa Barbara, CA, USA, August 19–23, 2018, Proceedings, Part I 38, pp. 187-220. Springer International Publishing, 2018. </refcontent>
 				</reference>
 				
-				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml" />
-				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4303.xml" />
-				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8221.xml" />
-				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9000.xml" />
-				<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5652.xml" />
+				<reference anchor="JNPS21">
+					<front>
+						<title>The Deoxys AEAD family</title>
+						<author initials="M." surname="Jean" fullname="Jérémy Jean" />
+						<author initials="I." surname="Nikolić" fullname="Ivica Nikolić" />
+						<author initials="T." surname="Peyrin" fullname="Thomas Peyrin" />
+						<author initials="Y." surname="Seurin" fullname="Yannick Seurin" />
+						<date year="2021" />
+					</front>
+					<refcontent>Journal of Cryptology 34, no. 3 (2021): 31.</refcontent>
+				</reference>
+				
+				<reference anchor="DEMS21a">
+					<front>
+						<title>Ascon v1.2: Lightweight Authenticated Encryption and Hashing</title>
+						<author initials="C." surname="Dobraunig" fullname="Christoph Dobraunig" />
+						<author initials="M." surname="Eichlseder" fullname="Maria Eichlseder" />
+						<author initials="F." surname="Mendel" fullname="Florian Mendel" />
+						<author initials="M." surname="Schläffer" fullname="Martin Schläffer" />
+						<date year="2021" />
+					</front>
+					<seriesInfo name="DOI" value="10.1007/s00145-021-09398-9" />
+					<refcontent>Journal of Cryptology 34 (2021): 1-42.</refcontent>
+				</reference>
+				
+				<reference anchor="DEMS21b">
+					<front>
+						<title>Ascon v1.2</title>
+						<author initials="C." surname="Dobraunig" fullname="Christoph Dobraunig" />
+						<author initials="M." surname="Eichlseder" fullname="Maria Eichlseder" />
+						<author initials="F." surname="Mendel" fullname="Florian Mendel" />
+						<author initials="M." surname="Schläffer" fullname="Martin Schläffer" />
+						<date year="2021" />
+					</front>
+					<refcontent>Submission to the NIST LWC Competition</refcontent>
+				</reference>
+				
+				<reference anchor="CJRR99">
+					<front>
+						<title>Towards sound approaches to counteract power-analysis attacks.</title>
+						<author initials="S." surname="Chari" fullname="Suresh Chari" />
+						<author initials="C.S." surname="Jutla" fullname="Charanjit S. Jutla" />
+						<author initials="J.R." surname="Rao" fullname="Josyula R. Rao" />
+						<author initials="P." surname="Rohatgi" fullname="Pankaj Rohatgi" />
+						<date year="1999" />
+					</front>
+					<seriesInfo name="DOI" value="10.1007/3-540-48405-1_26" />
+					<refcontent>Advances in Cryptology—CRYPTO’99: 19th Annual International Cryptology Conference Santa Barbara, California, USA, August 15–19, 1999 Proceedings 19, pp. 398-412. Springer Berlin Heidelberg, 1999.</refcontent>
+				</reference>
+				
 			</references>
 		</references>
 		
@@ -1096,7 +1158,7 @@
 			<section anchor="Robust" numbered="true" toc="default">
 				<name>Robust</name>
 				<t>
-					Definition. An AEAD algorithm allows users to choose a desired ciphertext expansion (the difference between the length of plaintext and corresponding ciphertext) along with an input to the encryption operation. This feature enables the regulation of desired security guarantees for each particular application while using the same algorithm implementation.
+					Definition. An AEAD algorithm allows users to choose a desired ciphertext expansion (the difference between the length of plaintext and corresponding ciphertext) along with an input to the encryption operation. This feature enables the regulation of desired data integrity guarantees, which depend on ciphertext expansion, for each particular application while using the same algorithm implementation.
 				</t>
 				<t>
 					Examples. AEZ <xref target="HKR2015" format="default" />.
@@ -1105,7 +1167,7 @@
 					Security notion. RAE <xref target="HKR2015" format="default" />.
 				</t>
 				<t>
-					Note. The security goal of robust AEAD algorithms is to ensure the best possible security, even with small ciphertext expansion (referred to as stretch). For instance, analyzing any AEAD algorithm with a one-byte stretch for conventional integrity reveals insecurity, as the probability of forging a ciphertext is no less than 1/256. Nonetheless, from the robust AEAD perspective, an algorithm with such forgery probability for a one-byte ciphertext expansion is deemed secure, representing the best achievable security in that scenario.
+					Note. The security goal of robust AEAD algorithms is to ensure the best possible security, even with small ciphertext expansion (referred to as stretch). For instance, analyzing any AEAD algorithm with a one-byte stretch for conventional integrity reveals insecurity, as the probability of forging a ciphertext is no less than 1/256. Nonetheless, from the robust AEAD perspective, an algorithm with such forgery probability for a one-byte ciphertext expansion is secure, representing the best achievable security in that scenario.
 				</t>
 				<t>
 					Further reading.
