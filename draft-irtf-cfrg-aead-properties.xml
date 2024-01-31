@@ -31,27 +31,26 @@
 			<t>An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption, which provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some associated data (sometimes called Header). AEAD algorithms play a crucial role in various applications and have emerged as a significant focus in cryptographic research.</t>
 			<section anchor="IntBack" numbered="true" toc="default">
 				<name>Background</name>
-				<t>
-					AEAD algorithms are formally defined in <xref target="RFC5116" format="default"/>. The main benefit of AEAD algorithms is that they provide data confidentiality and integrity and have a simple unified interface.
+				 <t>
+					AEAD algorithms are formally defined in <xref target="RFC5116" format="default"/>.  The main benefit of AEAD algorithms is that they simultaniously provide data confidentiality and integrity and have a simple unified interface. In contrast to generic compositions of MAC and encryption algorithms, AEAD algorithm allows for a reduction in key and state sizes, improving the data processing speed. Most AEAD algorithms usually come with security analysis, usage guidelines, and reference implementations. Consequently, their integration into high-level schemes and protocols is highly transparent. For instance, AEAD algorithms are mandatory in TLS 1.3 <xref target="RFC8446" format="default" />, IPsec ESP <xref target="RFC4303" format="default" /><xref target="RFC8221" format="default" />, and QUIC <xref target="RFC9000" format="default" />.
 				</t>
 				<t>
-					The importance of the AEAD algorithms is primarily attributed to their simplicity of exploitation: they have a unified interface and easily understandable security guarantees, and they are much easier to implement correctly than MAC and encryption algorithms used independently. Additionally, employing AEAD algorithms allows for a reduction in key and state sizes, improving the data processing speed. Most AEAD algorithms usually come with security analysis, usage guidelines, and reference implementations. Consequently, their integration into high-level schemes and protocols is highly transparent. For instance, AEAD algorithms are mandatory in TLS 1.3 <xref target="RFC8446" format="default" />, IPsec ESP <xref target="RFC4303" format="default" /><xref target="RFC8221" format="default" />, and QUIC <xref target="RFC9000" format="default" />.
-				</t>
-				<t>
-					While the basic properties of AEAD algorithms suffice for many applications, some environments demand other uncommon cryptographic properties. These often require additional analysis and research. As the number of such properties and corresponding research papers grows, inevitable misunderstandings and confusion arise. Some properties may be interpreted in various ways; for some, only non-trivial formal security notions are provided, while others require modifications or extensions of the standard AEAD interface to support additional functionality. Consequently, the risk of misusing AEAD algorithms increases, potentially resulting in security issues.
+					While confidentiality and data integrity, being the conventional properties of AEAD algorithms, suffice for many applications, some environments demand other uncommon cryptographic properties. These often require additional analysis and research. As the number of such properties and corresponding research papers grows, inevitable misunderstandings and confusion arise. It is common situation when related but formally different properties are named identically, or some security properties only have folklore understanding and are not formally defined. Consequently, the risk of misusing AEAD algorithms increases, potentially resulting in security issues.
 				</t>
 			</section>
 			<section anchor="IntScope" numbered="true" toc="default">
 				<name>Scope</name>
 				<t>
-					In the following document, we provide a brief overview of the most common additional properties of AEAD algorithms. We present high-level definitions of these properties in <xref target="Properties" format="default"/>. For each property, when possible, we offer additional information such as synonymous names, examples of algorithms that provide the property, applications that might necessitate such a property from an AEAD algorithm, and references for further reading. The 'Notes' section provides additional information outside these categories. In the 'Security Notion' section, we reference an informative source where a formal game-based security notion is defined.
+					In the following document, in <xref target="Properties" format="default"/>, we provide the list of the of the most common additional properties of AEAD algorithms. The properties are devided into two categories, namely, security properies (see <xref target="SecurityProp" format="default"/>) and implementation properties (see <xref target="ImpProp" format="default"/>). 
+
+					For each property we provide a high-level definition, for security properties we also reference an informative source where a formal game-based security notion is defined. When possible, we offer additional information: synonymous names, examples of algorithms that provide the property, applications that might necessitate such a property from an AEAD algorithm, references for further reading and additional notes containing information outside these categories.
 				</t>
 				<t>
-					The document's objective is to enhance clarity and establish a common language in the field. However, the primary application of the document lies in the following two use cases within the IETF documents development process:			
+					The document's objective is to enhance clarity and establish a common language in the field. In particular, the primary application of the document lies in the following two use cases within the IETF documents development process:			
 				</t>
 				<ul>
 					<li>
-						<t>For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to employ the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
+						<t>For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
 					</li>
 					<li>
 						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
@@ -90,16 +89,13 @@
 			<t>
 				Throughout this document, by default, we will consider nonce-based AEAD algorithms, which have an interface from the definition above, and give no other restrictions on their structure. However, some properties considered in the document apply only to particular classes of such algorithms, like block cipher-based AEAD algorithms (such algorithms use block cipher as a building block). If that is the case, we explicitly point that out in the corresponding section.
 			</t>
-			<t>
-				We note that in the literature, there are certain properties that, conversely, require an extension of the standard AEAD interface. We refer to these properties as "Additional Functionality Properties" and label an extension of an AEAD algorithm that provides such a property as an "AEAD algorithm with additional functionality." In this document, we do not primarily concentrate on these properties and their corresponding classes. However, for the sake of completeness, in <xref target="AddProp" format="default"/>, we briefly present two examples of AEAD algorithms with additional functionality classes.
-			</t>
 		</section>
 		<section anchor="Properties" numbered="true" toc="default">
 			<name>AEAD Properties</name>
 			<section anchor="Classification" numbered="true" toc="default">
 				<name>Classification of additional AEAD Properties</name>
 				<t>
-					In this document, we employ a high-level classification of additional properties. This classification aims to provide an intuition on how one can benefit from each property. The additional properties are categorized into one of these three groups:
+					In this document, we employ a high-level classification of additional properties. This classification aims to provide insight into how one can benefit from each property. The additional properties in this section are categorized into one of these two groups:
 				</t>
 				<ul>
 					<li>
@@ -112,6 +108,12 @@
 							Implementation properties. We classify a property as an implementation property if it enables more efficient implementations of the AEAD algorithm in specific cases or environments.
 						</t>
 					</li>
+				</ul>
+				<t>
+					We note that some additional properties of AEAD algorithms found in the literature could not be allocated to either of these two groups. The observation is that such properties require an extension of the conventional AEAD interface. We refer to these properties as 'additional functionality properties' and define the corresponding group as follows:
+				</t>
+				<ul>
+
 					<li>
 						<t>
 							Additional functionality properties. We classify a property as an additional functionality property if it introduces new features in addition to the standard authenticated encryption with associated data.
@@ -119,14 +121,14 @@
 					</li>
 				</ul>
 				<t>
-					We observe that the distinction between security and additional functionality properties may be somewhat ambiguous. The convention in this document is that additional functionality requires some extension of the standard AEAD interface. Each additional functionality property defines a new class of cryptographic algorithms. Consequently, the basic threats and adversarial capabilities must be redefined for each of these classes. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms, in contrast to security properties, which consider the extended ones. For this reason, we do not address additional functionality properties in this section. <xref target="AddProp" format="default"/> provides two examples of AEAD algorithms with additional functionality.
+					With the extension of the conventional AEAD interface, each additional functionality property defines a new class of cryptographic algorithms. Consequently, the basic threats and adversarial capabilities must be redefined for each class. As a result, additional functionality properties consider the basic threats and adversarial capabilities for their class of algorithms, in contrast to security properties, which consider the extended ones. For this reason, we do not focus on additional functionality properties in this document. However, for the sake of completeness, in <xref target="AddProp" format="default"/>, we briefly present two classes of AEAD algorithms with additional functionality.
 				</t>
 			</section>
       
 			<section anchor="Base" numbered="true" toc="default">
-				<name>Basic Properties</name>
+				<name>Conventional Properties</name>
 				<t>
-					In this section, we recall the basic properties of an AEAD algorithm. The typical nonce-respecting adversaries in a single-key setting are considered. 
+					In this section, we recall the conventional properties of an AEAD algorithm. The typical nonce-respecting adversaries in a single-key setting are considered. 
 				</t>
 				<section anchor="Conf" numbered="true" toc="default">
 					<name>Confidentiality</name>
@@ -1186,10 +1188,10 @@
 				In this section, we briefly discuss AEAD algorithms that provide additional functionality. As noted in <xref target="Classification" format="default" />, each additional functionality requires a redefinition of the conventional AEAD interface; thus, each additional functionality property defines a new class of cryptographic algorithms.
 			</t>
 			<t>
-				Most importantly, for every Additional Functionality AEAD class, basic security properties must be redefined concerning the targeted additional functionality and the new interface. Although it might be possible to consider a particular Additional Functionality AEAD algorithm as a conventional AEAD algorithm and study it for the conventional confidentiality and integrity, security (or insecurity) in that sense won't be sufficient to label that algorithm as a secure (or insecure) Additional Functionality AEAD. Only security in the sense of the redefined basic properties would suffice.
+				Most importantly, for every Additional Functionality AEAD class, conventional security properties must be redefined concerning the targeted additional functionality and the new interface. Although it might be possible to consider a particular Additional Functionality AEAD algorithm as a conventional AEAD algorithm and study it for the conventional confidentiality and integrity, security (or insecurity) in that sense won't be sufficient to label that algorithm as a secure (or insecure) Additional Functionality AEAD. Only security in the sense of the redefined conventional properties would suffice.
 			</t>
 			<t>
-				For the examples given in this section, we leave it out of scope how to concretely redefine basic security for these classes; we only briefly describe the additional functionality they offer and provide further references.			
+				For the examples given in this section, we leave it out of scope how to concretely redefine conventional security for these classes; we only briefly describe the additional functionality they offer and provide further references.			
 			</t>
 			<section anchor="Incremental" numbered="true" toc="default">
 				<name>Incremental Authenticated Encryption</name>
