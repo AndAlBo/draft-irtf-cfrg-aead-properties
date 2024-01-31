@@ -8,18 +8,18 @@ Intended status: Informational                           31 January 2024
 Expires: 3 August 2024
 
 
-                     Properties of AEAD algorithms
+                     Properties of AEAD Algorithms
                    draft-irtf-cfrg-aead-properties-03
 
 Abstract
 
    Authenticated Encryption with Associated Data (AEAD) algorithms
-   provide confidentiality and integrity of data.  The widespread use of
-   AEAD algorithms in various applications has led to an increased
-   demand for AEAD algorithms with additional properties, driving
-   research in the field.  This document provides definitions for the
-   most common of those properties, aiming to improve consistency in the
-   field.
+   provide both confidentiality and integrity of data.  The widespread
+   use of AEAD algorithms in various applications has led to an
+   increased demand for AEAD algorithms with additional properties,
+   driving research in the field.  This document provides definitions
+   for the most common of those properties, aiming to improve
+   consistency in the field.
 
 Status of This Memo
 
@@ -189,7 +189,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
    documents development process:
 
    *  For an RFC or I-D that defines an AEAD algorithm, it is
-      RECOMMENDED to employ the notations of Section 4when listing
+      RECOMMENDED to employ the notations of Section 4 when listing
       additional properties of the algorithm.
 
    *  For an RFC or I-D that defines a generic protocol based on an AEAD
@@ -881,7 +881,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
    property.  We only consider game-based notions and security
    properties that can be formalized using this approach.  However,
    there are different approaches to formalizing AEAD security, like the
-   indifferentiablity framework [BM18]; security in such notions should
+   indifferentiability framework [BM18]; security in such notions should
    be studied separately.
 
 
@@ -1485,8 +1485,8 @@ A.2.  Robust Authenticated Encryption
 
 Acknowledgments
 
-   This document benefited greatly from the comments recieved from the
-   CFRG community, for which we are very greatful.  We would also like
+   This document benefited greatly from the comments received from the
+   CFRG community, for which we are very grateful.  We would also like
    to extend special appreciation to Liliya Akhmetzyanova, Evgeny
    Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel
    Lucas, Christopher Patton, and Christopher Wood for their thoughtful

@@ -7,7 +7,7 @@
 ]>
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-03" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 	<front>
-		<title abbrev="Properties of AEAD algorithms">Properties of AEAD algorithms</title>
+		<title abbrev="Properties of AEAD algorithms">Properties of AEAD Algorithms</title>
 		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-03" />
 		<author fullname="Andrey Bozhko" initials="A.A." role="editor" surname="Bozhko">
 			<organization>CryptoPro</organization>
@@ -21,7 +21,7 @@
 		<keyword>authenticated encryption, mode of operation, AEAD, properties</keyword>
 		<abstract>
 			<t>
-				Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.
+				Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.
 			</t>
 		</abstract>
 	</front>
@@ -51,7 +51,7 @@
 				</t>
 				<ul>
 					<li>
-						<t>For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to employ the notations of <xref target="Properties" format="default"/>when listing additional properties of the algorithm.</t>
+						<t>For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to employ the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
 					</li>
 					<li>
 						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
@@ -561,7 +561,7 @@
 		<section anchor="Security" numbered="true" toc="default">
 			<name>Security Considerations</name>
 			<t>
-				This document gives high-level definitions of AEAD properties. For each security property, we provide an informational reference to a game-based security notion (or security notions if there are separate notions for integrity and confidentiality) that formalizes the property. We only consider game-based notions and security properties that can be formalized using this approach. However, there are different approaches to formalizing AEAD security, like the indifferentiablity framework <xref target="BM18" format="default" />; security in such notions should be studied separately.
+				This document gives high-level definitions of AEAD properties. For each security property, we provide an informational reference to a game-based security notion (or security notions if there are separate notions for integrity and confidentiality) that formalizes the property. We only consider game-based notions and security properties that can be formalized using this approach. However, there are different approaches to formalizing AEAD security, like the indifferentiability framework <xref target="BM18" format="default" />; security in such notions should be studied separately.
 			</t>
 			<t>
 				Every claimed security property in an AEAD algorithm MUST undergo security analysis within a relevant notion. For some security properties, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated. It’s RECOMMENDED to use the security notions referenced in the draft, and if an alternative one is used, that SHOULD also be noted.
@@ -1234,7 +1234,7 @@
 		<section anchor="Acknowledgments" numbered="false" toc="default">
 			<name>Acknowledgments</name>
 			<t>
-				This document benefited greatly from the comments recieved from the CFRG community, for which we are very greatful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel Lucas, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.
+				This document benefited greatly from the comments received from the CFRG community, for which we are very grateful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel Lucas, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.
 			</t>
 		</section>
 		

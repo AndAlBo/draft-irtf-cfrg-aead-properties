@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Properties of AEAD algorithms</title>
+<title>Properties of AEAD Algorithms</title>
 <meta content="Andrey Bozhko" name="author">
 <meta content="
        
- Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.
+ Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.
        
     " name="description">
 <meta content="xml2rfc 3.15.1" name="generator">
@@ -1224,11 +1224,11 @@ li > p:last-of-type {
 </dd>
 </dl>
 </div>
-<h1 id="title">Properties of AEAD algorithms</h1>
+<h1 id="title">Properties of AEAD Algorithms</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">
- Authenticated Encryption with Associated Data (AEAD) algorithms provide confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+ Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1452,7 +1452,7 @@ li > p:last-of-type {
  The document's objective is to enhance clarity and establish a common language in the field. However, the primary application of the document lies in the following two use cases within the IETF documents development process:<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.2-3.1">
-            <p id="section-1.2-3.1.1">For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to employ the notations of <a href="#Properties" class="auto internal xref">Section 4</a>when listing additional properties of the algorithm.<a href="#section-1.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-3.1.1">For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to employ the notations of <a href="#Properties" class="auto internal xref">Section 4</a> when listing additional properties of the algorithm.<a href="#section-1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-3.2">
             <p id="section-1.2-3.2.1">For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is RECOMMENDED to use the notations of <a href="#Properties" class="auto internal xref">Section 4</a> if any additional properties are required from the algorithm.<a href="#section-1.2-3.2.1" class="pilcrow">¶</a></p>
@@ -1947,7 +1947,7 @@ li > p:last-of-type {
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-5-1">
- This document gives high-level definitions of AEAD properties. For each security property, we provide an informational reference to a game-based security notion (or security notions if there are separate notions for integrity and confidentiality) that formalizes the property. We only consider game-based notions and security properties that can be formalized using this approach. However, there are different approaches to formalizing AEAD security, like the indifferentiablity framework <span>[<a href="#BM18" class="cite xref">BM18</a>]</span>; security in such notions should be studied separately.<a href="#section-5-1" class="pilcrow">¶</a></p>
+ This document gives high-level definitions of AEAD properties. For each security property, we provide an informational reference to a game-based security notion (or security notions if there are separate notions for integrity and confidentiality) that formalizes the property. We only consider game-based notions and security properties that can be formalized using this approach. However, there are different approaches to formalizing AEAD security, like the indifferentiability framework <span>[<a href="#BM18" class="cite xref">BM18</a>]</span>; security in such notions should be studied separately.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">
  Every claimed security property in an AEAD algorithm MUST undergo security analysis within a relevant notion. For some security properties, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated. It's RECOMMENDED to use the security notions referenced in the draft, and if an alternative one is used, that SHOULD also be noted.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">
@@ -2278,7 +2278,7 @@ li > p:last-of-type {
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-B-1">
- This document benefited greatly from the comments recieved from the CFRG community, for which we are very greatful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel Lucas, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+ This document benefited greatly from the comments received from the CFRG community, for which we are very grateful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel Lucas, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
