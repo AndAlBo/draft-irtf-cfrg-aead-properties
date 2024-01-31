@@ -2,7 +2,7 @@
 
 
 
-Network Working Group                                   A.A. Bozhko, Ed.
+Crypto Forum                                            A.A. Bozhko, Ed.
 Internet-Draft                                                 CryptoPro
 Intended status: Informational                           31 January 2024
 Expires: 3 August 2024
@@ -902,7 +902,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
    security analysis within a relevant notion.  For some security
    properties, consideration of integrity and confidentiality separately
    may be relevant.  If the algorithm provides only one of these, that
-   SHOULD be indicated.  It's RECOMMENDED to use the security notions
+   SHOULD be indicated.  It’s RECOMMENDED to use the security notions
    referenced in the draft, and if an alternative one is used, that
    SHOULD also be noted.
 
