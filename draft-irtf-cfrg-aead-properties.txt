@@ -231,7 +231,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
       length, a nonce N, associated data A, and a plaintext P.  The
       plaintext contains the data to be encrypted and authenticated, and
       the associated data contains the data to be authenticated only.
-      Each nonce value must be unique in every distinct invocation of
+      Each nonce value MUST be unique in every distinct invocation of
       the operation for any particular value of the key.  The
       authenticated encryption operation outputs a ciphertext C.
 
@@ -244,7 +244,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
       returns a plaintext P.
 
    We note that specifications of AEAD algorithms that use
-   authentication tags to ensure integrity may define it as an
+   authentication tags to ensure integrity MAY define it as an
    independent output of the encryption operation and as an independent
    input of the decryption operation.  Throughout this document, by
    default, we will consider the authentication tag as part of the
@@ -747,7 +747,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
    Definition.  An AEAD algorithm ensures optimal performance when
    operating on hardware that complies with the specified requirements.
 
-   Notes.  Various classes of hardware may be taken into consideration.
+   Notes.  Various classes of hardware MAY be taken into consideration.
    Certain algorithms are tailored to minimize the area of dedicated
    hardware implementations, while others are intended to capitalize on
    general-purpose CPUs, with or without specific instruction sets.  It
@@ -902,7 +902,7 @@ Internet-Draft        Properties of AEAD algorithms         January 2024
    security analysis within a relevant notion.  For some security
    properties, consideration of integrity and confidentiality separately
    may be relevant.  If the algorithm provides only one of these, that
-   SHOULD be indicated.  It's RECOMMENDED to use the security notions
+   SHOULD be indicated.  It’s RECOMMENDED to use the security notions
    referenced in the draft, and if an alternative one is used, that
    SHOULD also be noted.
 
