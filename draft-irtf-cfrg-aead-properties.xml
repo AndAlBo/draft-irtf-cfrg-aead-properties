@@ -126,7 +126,7 @@
 			<section anchor="Base" numbered="true" toc="default">
 				<name>Basic Properties</name>
 				<t>
-					In this section, we recall the basic properties of an AEAD algorithm. The typical nonce-respecting adversaries in a single-key setting are considered.
+					In this section, we recall the basic properties of an AEAD algorithm. The typical nonce-respecting adversaries in a single-key setting are considered. 
 				</t>
 				<section anchor="Conf" numbered="true" toc="default">
 					<name>Confidentiality</name>
@@ -169,6 +169,9 @@
 						Security notion. IND-CCA <xref target="BN2000" format="default"/>.
 					</t>
 					<t>
+						Note. Please refer to <xref target="I-D.irtf-cfrg-aead-limits" format="default"/> for usage limits on modern AEAD algorithms used in IETF protocols.
+					</t>
+					<t>
 						Further reading. <xref target="R02" format="default"/>, <xref target="BN2000" format="default"/>.
 					</t>
 				</section>
@@ -178,7 +181,7 @@
 			<section anchor="SecurityProp" numbered="true" toc="default">
 				<name>Security Properties</name>
 				<t>
-					When considering additional security properties, we state that an AEAD algorithm provides a property if it ensures confidentiality and data integrity against adversaries with (possibly) extended capabilities associated with that property, and remains secure against new threats corresponding to it. It's important to note that some properties only extend adversarial capabilities, while others define new threats 
+					When considering additional security properties, we say that an AEAD algorithm provides a property if it ensures confidentiality and data integrity against adversaries with (possibly) extended capabilities associated with that property, and remains secure against new threats corresponding to it. It's important to note that some properties only extend adversarial capabilities, while others characterize new threats. 
 				</t>
 				<t>
 					While our default approach is to define additional properties in a way that requires both confidentiality and data integrity, there are cases for certain properties and applications where it might be relevant to consider only confidentiality or data integrity. This aspect is further discussed in <xref target="Security"/>. 
@@ -195,7 +198,7 @@
 						Examples. Deoxys <xref target="JNPS21" format="default"/>, SAEF <xref target="ABV21" format="default"/>.
 					</t>
 					<t>
-						Notes. Blockwise security is highly relevant for online AEAD algorithms (see <xref target="Online" format="default"/>). OAE1 (OAE) security notion <xref target="HRRV15" format="default"/>, and OAE2 notion <xref target="HRRV15" format="default"/> are tailored for online AEAD algorithms. Blockwise security follows from security in the OAE notion <xref target="EV16" format="default"/>. For a discussion on security notions for online AEAD algorithms see <xref target="HRRV15" format="default"/>.	
+						Notes. Blockwise security is highly relevant for streamable AEAD algorithms (see <xref target="Online" format="default"/>). OAE1 (OAE) security notion <xref target="HRRV15" format="default"/>, and OAE2 notion <xref target="HRRV15" format="default"/> are tailored for streamable AEAD algorithms. Blockwise security follows from security in the OAE notion <xref target="EV16" format="default"/>. For a discussion on security notions for streamable AEAD algorithms see <xref target="HRRV15" format="default"/>.	
 					</t>	
 					<t>	
 						The case when an adversary can adaptively choose the next block of the ciphertext depending on already computed blocks of the plaintext, which appear in the device memory before the integrity verification during the decryption, can also be considered. This case is strongly related to RUP security, defined in <xref target="RUP" format="default"/>.
@@ -446,7 +449,7 @@
 						Definition. An AEAD algorithm ensures optimal performance when operating on hardware that complies with the specified requirements.
 					</t>
 					<t>
-						Notes. Various classes of hardware may be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is RECOMMENDED to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims.
+						Notes. Various classes of hardware may be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is RECOMMENDED to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims. 
 					</t>
 				</section>
 				
@@ -474,28 +477,10 @@
 						Further reading. <xref target="MBTM17" format="default" />.
 					</t>
 				</section>
-				<section anchor="Online" numbered="true" toc="default">
-					<name>Online</name>
-					<t>
-						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with constant memory usage and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
-					</t>
-					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
-					</t>
-					<t>
-						Applications. Real-time streaming protocols, resource-constrained devices.
-					</t>
-					<t>
-						Notes. Blockwise security (see <xref target="BWsec" format="default" />) might be a relevant security property for online AEAD algorithms in certain applications. 
-					</t>
-					<t>
-						Further reading. <xref target="HRRV15" format="default" />, <xref target="FJMV2004" format="default" />.
-					</t>
-				</section>
 				<section anchor="Parallelizable" numbered="true" toc="default">
 					<name>Parallelizable</name>
 					<t>
-						Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure.
+						Definition. An AEAD algorithm can fully exploit the parallel computation infrastructure. In other words, a parallelizable AEAD algorithm allows for the computation of ciphertext segments (plaintext segments for decryption) in parallel, meaning that ciphertext segments are computed independently. 
 					</t>
 					<t>
 						Synonyms. Pipelineable.
@@ -507,6 +492,15 @@
 						Further reading. <xref target="C20" format="default" />.
 					</t>
 				</section>
+				<section anchor="SetupFree" numbered="true" toc="default">
+					<name>Setup-Free</name>
+					<t>
+						Definition. An AEAD algorithm's operations can be implemented in a way that using a new key incurs either no overhead or negligible overhead compared to the reuse of a previous key. Overhead may involve additional computations or increased storage space, such as precomputing a key schedule.
+					</t>
+					<t>
+						Examples. ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
+					</t>
+				</section>				
 				<section anchor="SinglePass" numbered="true" toc="default">
 					<name>Single Pass</name>
 					<t>
@@ -525,20 +519,41 @@
 						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>.
 					</t>
 				</section>
+				<section anchor="Online" numbered="true" toc="default">
+					<name>Streamable</name>
+					<t>
+						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with constant memory usage and a single one-direction pass over the plaintext (ciphertext), writing out the result during that pass.
+					</t>
+					<t>
+						Synonyms. Online.
+					</t>
+					<t>
+						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
+					</t>
+					<t>
+						Applications. Real-time streaming protocols, resource-constrained devices.
+					</t>
+					<t>
+						Notes. Blockwise security (see <xref target="BWsec" format="default" />) might be a relevant security property for streamable AEAD algorithms in certain applications. 
+					</t>
+					<t>
+						Further reading. <xref target="HRRV15" format="default" />, <xref target="FJMV2004" format="default" />.
+					</t>
+				</section>
 				<section anchor="ZK" numbered="true" toc="default">
 					<name>ZK-Friendly</name>
 					<t>
 						Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.
 					</t>
 					<t>
-						Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity
+						Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity.
 					</t>
 					<t>
-						Example. Ciminion with Wegman-Carter MAC <xref target="DGGK21" format="default"/>
+						Example. Ciminion with Wegman-Carter MAC <xref target="DGGK21" format="default"/>.
 					</t>
 					<t>
 						Further reading.
-						<xref target="DGGK21" format="default" />
+						<xref target="DGGK21" format="default" />.
 					</t>
 				</section>
 			</section>
@@ -555,7 +570,7 @@
 				When specifying security requirements for an AEAD algorithm in an application, it SHOULD be indicated, for every required security property, whether only integrity or confidentiality is necessary. Additionally, for each security property, it SHOULD be specified whether an analysis in an alternative security notion is required.
 			</t>
 			<t>
-				For some properties, examples of AEAD algorithms that provide them are given, with standardized AEAD algorithms referenced in most cases. However, for certain properties, only theoretical or generic algorithms exist. Implementing such algorithms requires careful consideration, and it is advised to contact the algorithm designers for reference implementations and implementation guidelines.
+				For some properties, examples of AEAD algorithms that provide them are given, with standardized AEAD algorithms preferred for commonly encountered properties. However, for certain properties, only theoretical or generic algorithms exist. Implementing such algorithms requires careful consideration, and it is advised to contact the algorithm designers for reference implementations and implementation guidelines.
 			</t>
 		</section>
 		<section anchor="IANACON" numbered="true" toc="default">
@@ -1177,7 +1192,7 @@
 				For the examples given in this section, we leave it out of scope how to concretely redefine basic security for these classes; we only briefly describe the additional functionality they offer and provide further references.			
 			</t>
 			<section anchor="Incremental" numbered="true" toc="default">
-				<name>Incremental</name>
+				<name>Incremental Authenticated Encryption</name>
 				<t>
 					Definition. An AEAD algorithm allows re-encrypting and authenticating a message (associated data and a plaintext pair), which only partly differs from some previous message, faster than processing it from scratch.
 				</t>
@@ -1196,7 +1211,7 @@
 				</t>
 			</section>
 			<section anchor="Robust" numbered="true" toc="default">
-				<name>Robust</name>
+				<name>Robust Authenticated Encryption</name>
 				<t>
 					Definition. An AEAD algorithm allows users to choose a desired ciphertext expansion (the difference between the length of plaintext and corresponding ciphertext) along with an input to the encryption operation. This feature enables the regulation of desired data integrity guarantees, which depend on ciphertext expansion, for each particular application while using the same algorithm implementation.
 				</t>
@@ -1217,7 +1232,10 @@
 		</section>
 		
 		<section anchor="Acknowledgments" numbered="false" toc="default">
-			<name>Contributors</name>
+			<name>Acknowledgments</name>
+			<t>
+				This document benefited greatly from the comments recieved from the CFRG community, for which we are very greatful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel Lucas, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.
+			</t>
 		</section>
 		
 	</back>
