@@ -75,14 +75,14 @@
 			</t>
 				<ul>
 					<li>
-						<t>A deterministic operation of authenticated encryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a plaintext P. The plaintext contains the data to be encrypted and authenticated, and the associated data contains the data to be authenticated only. Each nonce value must be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.</t>
+						<t>A deterministic operation of authenticated encryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a plaintext P. The plaintext contains the data to be encrypted and authenticated, and the associated data contains the data to be authenticated only. Each nonce value MUST be unique in every distinct invocation of the operation for any particular value of the key. The authenticated encryption operation outputs a ciphertext C.</t>
 					</li>
 					<li>
 						<t>A deterministic operation of authenticated decryption has four inputs, each a binary string: a secret key K of a fixed bit length, a nonce N, associated data A, and a ciphertext C. The operation verifies the integrity of the ciphertext and associated data and decrypts the ciphertext. It returns a special symbol FAIL if the inputs are not authentic; otherwise, the operation returns a plaintext P.</t>
 					</li>
 				</ul>
 			<t>
-				We note that specifications of AEAD algorithms that use authentication tags to ensure integrity may define it as an independent output of the encryption operation and as an independent input of the decryption operation. Throughout this document, by default, we will consider the authentication tag as part of the ciphertext unless stated otherwise.
+				We note that specifications of AEAD algorithms that use authentication tags to ensure integrity MAY define it as an independent output of the encryption operation and as an independent input of the decryption operation. Throughout this document, by default, we will consider the authentication tag as part of the ciphertext unless stated otherwise.
 			</t>	
 			<t>
 				For more details on the AEAD definition, please refer to <xref target="RFC5116" format="default" />.
@@ -449,7 +449,7 @@
 						Definition. An AEAD algorithm ensures optimal performance when operating on hardware that complies with the specified requirements.
 					</t>
 					<t>
-						Notes. Various classes of hardware may be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is RECOMMENDED to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims. 
+						Notes. Various classes of hardware MAY be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is RECOMMENDED to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims.
 					</t>
 				</section>
 				
