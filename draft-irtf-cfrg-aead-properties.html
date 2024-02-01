@@ -11,24 +11,26 @@
  Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.
        
     " name="description">
-<meta content="xml2rfc 3.19.1" name="generator">
+<meta content="xml2rfc 3.15.1" name="generator">
 <meta content="authenticated encryption, mode of operation, AEAD, properties" name="keyword">
 <meta content="draft-irtf-cfrg-aead-properties-03" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.1
-    Python 3.11.7
-    ConfigArgParse 1.7
-    google-i18n-address 3.1.0
+  xml2rfc 3.15.1
+    Python 3.8.2
+    appdirs 1.4.4
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
+    html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 3.1.3
-    lxml 4.9.4
-    platformdirs 4.2.0
-    pycountry 23.12.11
-    PyYAML 6.0.1
-    requests 2.31.0
-    setuptools 69.0.2
-    six 1.16.0
-    wcwidth 0.2.13
+    Jinja2 3.1.2
+    kitchen 1.2.6
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
+    PyYAML 5.3.1
+    requests 2.22.0
+    setuptools 45.2.0
+    six 1.14.0
 -->
 <link href="draft-irtf-cfrg-aead-properties.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -40,7 +42,7 @@
   this can be consolidated so that style settings occur only in one place, but
   for now the contents of this file consists first of the initial CSS work as
   provided to the RFC Formatter (xml2rfc) work, followed by itemized and
-  commented changes found necessary during the development of the v3
+  commented changes found necssary during the development of the v3
   formatters.
 
 */
@@ -50,14 +52,9 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
 
-:root {
-  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
-  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
-  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
-}
-
 @viewport {
   zoom: 1.0;
+  width: extend-to-zoom;
 }
 @-ms-viewport {
   width: extend-to-zoom;
@@ -72,10 +69,9 @@ body {
   color: #222;
   background-color: #fff;
   font-size: 14px;
-  font-family: var(--font-sans);
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
   line-height: 1.6;
   scroll-behavior: smooth;
-  overflow-wrap: break-word;
 }
 .ears {
   display: none;
@@ -161,15 +157,6 @@ div {
 }
 svg {
   display: block;
-}
-svg[font-family~="serif" i], svg [font-family~="serif" i] {
-  font-family: var(--font-serif);
-}
-svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
-  font-family: var(--font-sans);
-}
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
 }
 .alignCenter.art-text {
   background-color: #f9f9f9;
@@ -266,7 +253,7 @@ a.selfRef:hover {
 /* Figures */
 tt, code, pre {
   background-color: #f9f9f9;
-  font-family: var(--font-mono);
+  font-family: 'Roboto Mono', monospace;
 }
 pre {
   border: 1px solid #eee;
@@ -305,9 +292,6 @@ blockquote {
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 1em 0;
-}
-blockquote > *:last-child {
-  margin-bottom: 0;
 }
 cite {
   display: block;
@@ -506,7 +490,7 @@ address.vcard .nameRole {
   margin-left: 0;
 }
 address.vcard .label {
-  font-family: var(--font-sans);
+  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
   margin: 0.5em 0;
 }
 address.vcard .type {
@@ -646,6 +630,7 @@ hr.addr {
 /* pagination */
 @media print {
   body {
+
     width: 100%;
   }
   p {
@@ -668,7 +653,7 @@ hr.addr {
   figure {
     overflow: scroll;
   }
-  .breakable pre {
+  pre.breakable {
     break-inside: auto;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -738,7 +723,7 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-  /* The following is commented out here, but set appropriately by in code, as
+  /* The follwing is commented out here, but set appropriately by in code, as
      the content depends on the document */
   /*
   @top-left {
@@ -843,7 +828,7 @@ tt, code, pre {
 }
 
 /* Fix the height/width aspect for ascii art*/
-.sourcecode pre,
+pre.sourcecode,
 .art-text pre {
   line-height: 1.12;
 }
@@ -879,7 +864,7 @@ table th.text-right {
   text-align: right;
 }
 
-/* Make the alternative author contact information look less like just another
+/* Make the alternative author contact informatio look less like just another
    author, and group it closer with the primary author contact information */
 .alternative-contact {
   margin: 0.5em 0 0.25em 0;
@@ -1076,7 +1061,7 @@ ol.type-A { list-style-type: upper-alpha; }
 ol.type-i { list-style-type: lower-roman; }
 ol.type-I { list-style-type: lower-roman; }
 /* Apply the print table and row borders in general, on request from the RPC,
-and increase the contrast between border and odd row background slightly */
+and increase the contrast between border and odd row background sligthtly */
 table {
   border: 1px solid #ddd;
 }
@@ -1136,7 +1121,7 @@ span.break, dd.break {
     break-before: auto;
   }
 }
-/* Text in compact lists should not get extra bottom margin space,
+/* Text in compact lists should not get extra bottim margin space,
    since that would makes the list not compact */
 ul.compact p, .ulCompact p,
 ol.compact p, .olCompact p {
@@ -1161,7 +1146,7 @@ p tt, p code, li tt, li code {
 pre {
    margin-top: 0.5px;
 }
-/* Tweak the compact list text */
+/* Tweak the comact list text */
 ul.compact, .ulCompact,
 ol.compact, .olCompact,
 dl.compact, .dlCompact {
@@ -1179,7 +1164,7 @@ dd > div.artwork:first-child,
 dd > aside:first-child,
 dd > figure:first-child,
 dd > ol:first-child,
-dd > div.sourcecode:first-child,
+dd > div:first-child > pre.sourcecode,
 dd > table:first-child,
 dd > ul:first-child {
   clear: left;
@@ -1193,7 +1178,7 @@ li > p {
   margin-bottom: 0.5em
 }
 /* Don't let p margin spill out from inside list items */
-li > p:last-of-type:only-child {
+li > p:last-of-type {
   margin-bottom: 0;
 }
 </style>
@@ -1206,11 +1191,11 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Properties of AEAD algorithms</td>
-<td class="right">January 2024</td>
+<td class="right">February 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bozhko</td>
-<td class="center">Expires 3 August 2024</td>
+<td class="center">Expires 4 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1223,12 +1208,12 @@ li > p:last-of-type:only-child {
 <dd class="internet-draft">draft-irtf-cfrg-aead-properties-03</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-31" class="published">31 January 2024</time>
+<time datetime="2024-02-01" class="published">1 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-08-03">3 August 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-04">4 August 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1264,7 +1249,7 @@ li > p:last-of-type:only-child {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1361,7 +1346,7 @@ li > p:last-of-type:only-child {
                     <p id="section-toc.1-1.4.2.3.2.9.1"><a href="#section-4.3.9" class="auto internal xref">4.3.9</a>.  <a href="#name-reforgeability-resilience" class="internal xref">Reforgeability Resilience</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.10">
-                    <p id="section-toc.1-1.4.2.3.2.10.1"><a href="#section-4.3.10" class="auto internal xref">4.3.10</a>. <a href="#name-release-of-unverified-plain" class="internal xref">Release of Unverified Plaintext (RUP) Security</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.10.1"><a href="#section-4.3.10" class="auto internal xref">4.3.10</a>. <a href="#name-release-of-unverified-plain" class="internal xref">Release of Unverified Plaintext (RUP) Integrity</a></p>
 </li>
                 </ul>
 </li>
@@ -1369,7 +1354,7 @@ li > p:last-of-type:only-child {
                 <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-implementation-properties" class="internal xref">Implementation Properties</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.1">
-                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-hardware-efficiency" class="internal xref">Hardware efficiency</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-hardware-efficient" class="internal xref">Hardware efficient</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.2">
                     <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-inverse-free" class="internal xref">Inverse-Free</a></p>
@@ -1387,7 +1372,7 @@ li > p:last-of-type:only-child {
                     <p id="section-toc.1-1.4.2.4.2.6.1"><a href="#section-4.4.6" class="auto internal xref">4.4.6</a>.  <a href="#name-single-pass" class="internal xref">Single Pass</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.7">
-                    <p id="section-toc.1-1.4.2.4.2.7.1"><a href="#section-4.4.7" class="auto internal xref">4.4.7</a>.  <a href="#name-static-associated-data" class="internal xref">Static Associated Data</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.7.1"><a href="#section-4.4.7" class="auto internal xref">4.4.7</a>.  <a href="#name-static-associated-data-effi" class="internal xref">Static Associated Data Efficient</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.8">
                     <p id="section-toc.1-1.4.2.4.2.8.1"><a href="#section-4.4.8" class="auto internal xref">4.4.8</a>.  <a href="#name-streamable" class="internal xref">Streamable</a></p>
@@ -1449,9 +1434,9 @@ li > p:last-of-type:only-child {
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-background" class="section-name selfRef">Background</a>
         </h3>
 <p id="section-1.1-1">
- AEAD algorithms are formally defined in <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>.  The main benefit of AEAD algorithms is that they simultaniously provide data confidentiality and integrity and have a simple unified interface. In contrast to generic compositions of MAC and encryption algorithms, AEAD algorithm allows for a reduction in key and state sizes, improving the data processing speed. Most AEAD algorithms usually come with security analysis, usage guidelines, and reference implementations. Consequently, their integration into high-level schemes and protocols is highly transparent. For instance, AEAD algorithms are mandatory in TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, IPsec ESP <span>[<a href="#RFC4303" class="cite xref">RFC4303</a>]</span><span>[<a href="#RFC8221" class="cite xref">RFC8221</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+ AEAD algorithms are formally defined in <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>. The main benefit of AEAD algorithms is that they simultaneously provide data confidentiality and integrity and have a simple unified interface. In contrast to generic compositions of MAC and encryption algorithms, an AEAD algorithm allows for a reduction in key and state sizes, improving the data processing speed. Most AEAD algorithms usually come with security analysis, usage guidelines, and reference implementations. Consequently, their integration into high-level schemes and protocols is highly transparent. For instance, AEAD algorithms are mandatory in TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, IPsec ESP <span>[<a href="#RFC4303" class="cite xref">RFC4303</a>]</span><span>[<a href="#RFC8221" class="cite xref">RFC8221</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">
- While confidentiality and data integrity, being the conventional properties of AEAD algorithms, suffice for many applications, some environments demand other uncommon cryptographic properties. These often require additional analysis and research. As the number of such properties and corresponding research papers grows, inevitable misunderstandings and confusion arise. It is common situation when related but formally different properties are named identically, or some security properties only have folklore understanding and are not formally defined. Consequently, the risk of misusing AEAD algorithms increases, potentially resulting in security issues.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+ While confidentiality and data integrity, being the conventional properties of AEAD algorithms, suffice for many applications, some environments demand other uncommon cryptographic properties. These often require additional analysis and research. As the number of such properties and corresponding research papers grows, inevitable misunderstandings and confusion arise. It is a common situation when related but formally different properties are named identically, or some security properties only have folklore understanding and are not formally defined. Consequently, the risk of misusing AEAD algorithms increases, potentially resulting in security issues.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="IntScope">
@@ -1460,9 +1445,9 @@ li > p:last-of-type:only-child {
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
         </h3>
 <p id="section-1.2-1">
- In the following document, in <a href="#Properties" class="auto internal xref">Section 4</a>, we provide the list of the of the most common additional properties of AEAD algorithms. The properties are devided into two categories, namely, security properies (see <a href="#SecurityProp" class="auto internal xref">Section 4.3</a>) and implementation properties (see <a href="#ImpProp" class="auto internal xref">Section 4.4</a>). 
+ In the following document, in <a href="#Properties" class="auto internal xref">Section 4</a>, we provide the list of the most common additional properties of AEAD algorithms. The properties are divided into two categories, namely security properties (see <a href="#SecurityProp" class="auto internal xref">Section 4.3</a>) and implementation properties (see <a href="#ImpProp" class="auto internal xref">Section 4.4</a>). 
 
- For each property we provide a high-level definition, for security properties we also reference an informative source where a formal game-based security notion is defined. When possible, we offer additional information: synonymous names, examples of algorithms that provide the property, applications that might necessitate such a property from an AEAD algorithm, references for further reading and additional notes containing information outside these categories.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+ We provide a high-level definition for each property; for security properties, we also reference an informative source where a formal game-based security notion is defined. When possible, we offer additional information: synonymous names, examples of algorithms that provide the property, applications that might necessitate such property from an AEAD algorithm, references for further reading, and additional notes containing information outside these categories.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">
  The document's objective is to enhance clarity and establish a common language in the field. In particular, the primary application of the document lies in the following two use cases within the IETF documents development process:<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1524,7 +1509,7 @@ li > p:last-of-type:only-child {
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">
             <p id="section-4.1-2.1.1">
- Security properties. We classify a property as a security property if it takes into account new threats or adversarial capabilities, in addition to those posed by the typical nonce-respecting adversary whose goal is to compromise confidentiality or data integrity.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+ Security properties. We classify a property as a security property if it either takes into account new threats or extends adversarial capabilities, in addition to those posed by the typical nonce-respecting adversary whose goal is to compromise confidentiality or data integrity.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.2">
             <p id="section-4.1-2.2.1">
@@ -1549,20 +1534,24 @@ li > p:last-of-type:only-child {
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-conventional-properties" class="section-name selfRef">Conventional Properties</a>
         </h3>
 <p id="section-4.2-1">
- In this section, we recall the conventional properties of an AEAD algorithm. The typical nonce-respecting adversaries in a single-key setting are considered.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+ In this section, we recall the conventional properties of an AEAD algorithm. Active nonce-respecting adversaries in a single-key setting are considered.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">
+ We say that an AEAD algorithm provides security if it provides conventional properties listed in this section.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <div id="Conf">
 <section id="section-4.2.1">
           <h4 id="name-confidentiality">
 <a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-confidentiality" class="section-name selfRef">Confidentiality</a>
           </h4>
 <p id="section-4.2.1-1">
- Definition. An AEAD algorithm guarantees that the plaintext is not available to a passive, nonce-respecting adversary.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm guarantees that the plaintext is not available to an active, nonce-respecting adversary.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-2">
- Security notion. IND-CPA <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+ Security notion. IND-CCA <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span> (or IND-CCA2 <span>[<a href="#S04" class="cite xref">S04</a>]</span>).<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-3">
  Synonyms. Message privacy.<a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-4">
- Further reading. <span>[<a href="#R02" class="cite xref">R02</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>.<a href="#section-4.2.1-4" class="pilcrow">¶</a></p>
+ Note. Confidentiality against passive adversaries can also be considered. The corresponding security notion is IND-CPA <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span><span>[<a href="#R02" class="cite xref">R02</a>]</span>.<a href="#section-4.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-5">
+ Further reading. <span>[<a href="#R02" class="cite xref">R02</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>, <span>[<a href="#S04" class="cite xref">S04</a>]</span>.<a href="#section-4.2.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Int">
@@ -1571,13 +1560,13 @@ li > p:last-of-type:only-child {
 <a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-data-integrity" class="section-name selfRef">Data Integrity</a>
           </h4>
 <p id="section-4.2.2-1">
- Definition. An AEAD algorithm guarantees that the plaintext and the associated data have not been changed or forged by an active, nonce-respecting adversary.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm guarantees that the ciphertext and the associated data have not been changed or forged by an active, nonce-respecting adversary.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-2">
- Security notion. IND-CTXT <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+ Security notion. IND-CTXT <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span> (or AUTH <span>[<a href="#R02" class="cite xref">R02</a>]</span>).<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-3">
- Synonyms. Message authentication.<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+ Synonyms. Message authentication, authenticity.<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-4">
- Further reading. <span>[<a href="#R02" class="cite xref">R02</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>.<a href="#section-4.2.2-4" class="pilcrow">¶</a></p>
+ Further reading. <span>[<a href="#R02" class="cite xref">R02</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>, <span>[<a href="#S04" class="cite xref">S04</a>]</span>.<a href="#section-4.2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="AE">
@@ -1588,11 +1577,11 @@ li > p:last-of-type:only-child {
 <p id="section-4.2.3-1">
  Definition. An AEAD algorithm provides confidentiality and data integrity against active, nonce-respecting adversaries.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.3-2">
- Security notion. IND-CCA <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>.<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
+ Security notion. IND-CPA and IND-CTXT <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span><span>[<a href="#R02" class="cite xref">R02</a>]</span> (or equivalently IND-CCA3 <span>[<a href="#S04" class="cite xref">S04</a>]</span>).<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.2.3-3">
  Note. Please refer to <span>[<a href="#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span> for usage limits on modern AEAD algorithms used in IETF protocols.<a href="#section-4.2.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.2.3-4">
- Further reading. <span>[<a href="#R02" class="cite xref">R02</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>.<a href="#section-4.2.3-4" class="pilcrow">¶</a></p>
+ Further reading. <span>[<a href="#R02" class="cite xref">R02</a>]</span>, <span>[<a href="#BN2000" class="cite xref">BN2000</a>]</span>, <span>[<a href="#S04" class="cite xref">S04</a>]</span>.<a href="#section-4.2.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1602,10 +1591,6 @@ li > p:last-of-type:only-child {
         <h3 id="name-security-properties">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-security-properties" class="section-name selfRef">Security Properties</a>
         </h3>
-<p id="section-4.3-1">
- When considering additional security properties, we say that an AEAD algorithm provides a property if it ensures confidentiality and data integrity against adversaries with (possibly) extended capabilities associated with that property, and remains secure against new threats corresponding to it. It's important to note that some properties only extend adversarial capabilities, while others characterize new threats.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">
- While our default approach is to define additional properties in a way that requires both confidentiality and data integrity, there are cases for certain properties and applications where it might be relevant to consider only confidentiality or data integrity. This aspect is further discussed in <a href="#Security" class="auto internal xref">Section 5</a>.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <div id="BWsec">
 <section id="section-4.3.1">
           <h4 id="name-blockwise-security">
@@ -1614,17 +1599,15 @@ li > p:last-of-type:only-child {
 <p id="section-4.3.1-1">
  Definition. An AEAD algorithm provides security even if an adversary can adaptively choose the next part of the plaintext depending on already computed ciphertext parts during an encryption operation.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-2">
- Security notion. D-LORS-BCPA for confidentiality, B-INT-CTXT for integrity <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>; OAE1 <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span> (stronger notion; originally, OAE in <span>[<a href="#FFL12" class="cite xref">FFL12</a>]</span>).<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
+ Security notion. D-LORS-BCPA for confidentiality against passive adversaries, B-INT-CTXT for integrity <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>; OAE1 <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span> (stronger notion; originally, OAE in <span>[<a href="#FFL12" class="cite xref">FFL12</a>]</span>).<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-3">
  Examples. Deoxys <span>[<a href="#JNPS21" class="cite xref">JNPS21</a>]</span>, SAEF <span>[<a href="#ABV21" class="cite xref">ABV21</a>]</span>.<a href="#section-4.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-4">
  Notes. Blockwise security is highly relevant for streamable AEAD algorithms (see <a href="#Online" class="auto internal xref">Section 4.4.8</a>). OAE1 (OAE) security notion <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span>, and OAE2 notion <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span> are tailored for streamable AEAD algorithms. Blockwise security follows from security in the OAE notion <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>. For a discussion on security notions for streamable AEAD algorithms see <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span>.<a href="#section-4.3.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.3.1-5"> 
- The case when an adversary can adaptively choose the next block of the ciphertext depending on already computed blocks of the plaintext, which appear in the device memory before the integrity verification during the decryption, can also be considered. This case is strongly related to RUP security, defined in <a href="#RUP" class="auto internal xref">Section 4.3.10</a>.<a href="#section-4.3.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-5">
+ Applications. Real-time streaming protocols, encryption on resource-constrained devices.<a href="#section-4.3.1-5" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-6">
- Applications. Real-time streaming protocols, encryption on resource-constrained devices.<a href="#section-4.3.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.3.1-7">
- Further reading. <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>, <span>[<a href="#JMV2002" class="cite xref">JMV2002</a>]</span>, <span>[<a href="#FJMV2004" class="cite xref">FJMV2004</a>]</span>, <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span><a href="#section-4.3.1-7" class="pilcrow">¶</a></p>
+ Further reading. <span>[<a href="#EV16" class="cite xref">EV16</a>]</span>, <span>[<a href="#JMV2002" class="cite xref">JMV2002</a>]</span>, <span>[<a href="#FJMV2004" class="cite xref">FJMV2004</a>]</span>, <span>[<a href="#HRRV15" class="cite xref">HRRV15</a>]</span><a href="#section-4.3.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="FullComm">
@@ -1633,13 +1616,13 @@ li > p:last-of-type:only-child {
 <a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-full-commitment" class="section-name selfRef">Full Commitment</a>
           </h4>
 <p id="section-4.3.2-1">
- Definition. An AEAD algorithm guarantees that it is difficult to find two or more different tuples of the key, nonce, associated data, and plaintext such that they encrypt to the same ciphertext. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to all inputs of an authenticated encryption operation.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm guarantees that it is hard to find two or more different tuples of the key, nonce, associated data, and plaintext such that they encrypt to the same ciphertext. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to all inputs of an authenticated encryption operation.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-2">
  Security notion. CMT-4 <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>, generalized CMT for a restricted setting (see the notes below) <span>[<a href="#MLGR23" class="cite xref">MLGR23</a>]</span>.<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-3">
  Examples. Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span><span>[<a href="#YSS23" class="cite xref">YSS23</a>]</span>, full commiting versions of GCM and GCM-SIV <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>, generic constructions <span>[<a href="#BH22" class="cite xref">BH22</a>]</span><span>[<a href="#CR22" class="cite xref">CR22</a>]</span>.<a href="#section-4.3.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-4">
- Notes. Full commitment can be considered in a weaker setting, where certain restrictions on the tuples produced by an adversary are imposed <span>[<a href="#MLGR23" class="cite xref">MLGR23</a>]</span>. For instance, an adversary must find tuples that all share the same associated data value. In such cases, an AEAD algorithm is said to provide full (key) commitment in a restricted setting. The imposed restrictions MUST be listed.<a href="#section-4.3.2-4" class="pilcrow">¶</a></p>
+ Notes. Full commitment can be considered in a weaker setting, where certain restrictions on the tuples produced by an adversary are imposed <span>[<a href="#MLGR23" class="cite xref">MLGR23</a>]</span>. For instance, an adversary must find tuples that all share the same associated data value. In such cases, an AEAD algorithm is said to provide full commitment in a restricted setting. The imposed restrictions MUST be listed.<a href="#section-4.3.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-5">
  Applications. Message franking <span>[<a href="#GLR17" class="cite xref">GLR17</a>]</span>.<a href="#section-4.3.2-5" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-6">
@@ -1653,7 +1636,7 @@ li > p:last-of-type:only-child {
 <a href="#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="#name-key-commitment" class="section-name selfRef">Key Commitment</a>
           </h4>
 <p id="section-4.3.3-1">
- Definition. An AEAD algorithm guarantees that it is difficult to find two or more different keys and the same number of potentially equal triples of nonce, associated data, and plaintext such that they encrypt to the same ciphertext under corresponding keys. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to the key used for an authenticated encryption operation.<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm guarantees that it is hard to find two or more different keys and the same number of potentially equal triples of nonce, associated data, and plaintext such that they encrypt to the same ciphertext under corresponding keys. In other words, an AEAD scheme guarantees that a ciphertext is a commitment to the key used for an authenticated encryption operation.<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.3-2">
  Security notion. CMT-1 <span>[<a href="#BH22" class="cite xref">BH22</a>]</span>.<a href="#section-4.3.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.3-3">
@@ -1685,7 +1668,7 @@ li > p:last-of-type:only-child {
 <p id="section-4.3.4-5">
  Confidentiality of plaintext in the presence of leakages in the encryption operation is unachievable if an adversary can repeat the nonce used to encrypt the plaintext in other encryption queries. Confidentiality can be achieved only for plaintexts encrypted with fresh nonces (analogously to nonce-misuse resilience, see <a href="#NM" class="auto internal xref">Section 4.3.7</a>). For further discussions, see <span>[<a href="#GPPS19" class="cite xref">GPPS19</a>]</span> and <span>[<a href="#B20" class="cite xref">B20</a>]</span>.<a href="#section-4.3.4-5" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-6"> 
- For primitive-based AEAD algorithms, key evolution (internal re-keying <span>[<a href="#RFC8645" class="cite xref">RFC8645</a>]</span>) can contribute to achieving leakage resistance without leakages in decryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <span>[<a href="#B20" class="cite xref">B20</a>]</span>.<a href="#section-4.3.4-6" class="pilcrow">¶</a></p>
+ For primitive-based AEAD algorithms, key evolution (internal re-keying <span>[<a href="#RFC8645" class="cite xref">RFC8645</a>]</span>) can contribute to achieving leakage resistance with leakages in encryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <span>[<a href="#B20" class="cite xref">B20</a>]</span>.<a href="#section-4.3.4-6" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-7">
  Applications. Encryption on smart cards, Internet-of-things devices, or other constrained devices.<a href="#section-4.3.4-7" class="pilcrow">¶</a></p>
 <p id="section-4.3.4-8">
@@ -1704,7 +1687,7 @@ li > p:last-of-type:only-child {
 <p id="section-4.3.5-3">
  Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, AES-GCM-SIV <span>[<a href="#RFC8452" class="cite xref">RFC8452</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.5-4">
- Notes. It holds that for any AEAD algorithm security degrades no worse than linearly with an increase in the number of users. However, for some applications with a significant number of users, better multi-user guarantees are required. For example, in the TLS 1.3 protocol, to address this issue, AEAD algorithms are used with a randomized nonce (deterministically derived from a traffic secret and a sequence number). Using nonce randomization in block-cipher counter-based AEAD modes can contribute to multi-user security <span>[<a href="#BT16" class="cite xref">BT16</a>]</span>. Multi-user usage limits for AES-GCM and ChaCha20-Poly1305 are provided in <span>[<a href="#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span>.<a href="#section-4.3.5-4" class="pilcrow">¶</a></p>
+ Notes. It holds that for any AEAD algorithm security degrades no worse than linearly with an increase in the number of users. However, for some applications with a significant number of users, better multi-user guarantees are required. For example, in the TLS 1.3 protocol, to address this issue, AEAD algorithms are used with a randomized nonce (deterministically derived from a traffic secret and a sequence number). Using nonce randomization in block cipher counter-based AEAD modes can contribute to multi-user security <span>[<a href="#BT16" class="cite xref">BT16</a>]</span>. Multi-user usage limits for AES-GCM and ChaCha20-Poly1305 are provided in <span>[<a href="#I-D.irtf-cfrg-aead-limits" class="cite xref">I-D.irtf-cfrg-aead-limits</a>]</span>.<a href="#section-4.3.5-4" class="pilcrow">¶</a></p>
 <p id="section-4.3.5-5">
  Applications. Data transmission layer of secure communication protocols (e.g., TLS, IPSec, SRTP, etc.)<a href="#section-4.3.5-5" class="pilcrow">¶</a></p>
 <p id="section-4.3.5-6">
@@ -1717,7 +1700,7 @@ li > p:last-of-type:only-child {
 <a href="#section-4.3.6" class="section-number selfRef">4.3.6. </a><a href="#name-nonce-hiding" class="section-name selfRef">Nonce-Hiding</a>
           </h4>
 <p id="section-4.3.6-1">
- Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt plaintext. The algorithm includes information equivalent to the encrypted nonce in the ciphertext and doesn't require the nonce as input for the decryption operation.<a href="#section-4.3.6-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm provides confidentiality for the nonce value used to encrypt plaintext. The algorithm includes information about the nonce in the ciphertext and doesn't require the nonce as input for the decryption operation.<a href="#section-4.3.6-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.6-2">
  Security notion. AE2 <span>[<a href="#BNT19" class="cite xref">BNT19</a>]</span>.<a href="#section-4.3.6-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.6-3">
@@ -1739,14 +1722,14 @@ li > p:last-of-type:only-child {
  Definition. An AEAD algorithm provides security (resilience or resistance) even if an adversary can repeat nonces in its encryption queries. Nonce misuse resilience and resistance are defined as follows:<a href="#section-4.3.7-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.3.7-2.1">
-              <p id="section-4.3.7-2.1.1">Nonce misuse resilience. Security is provided only for messages encrypted with unique nonces.<a href="#section-4.3.7-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.3.7-2.1.1">Nonce misuse resilience. Security is provided only for messages encrypted with fresh nonces (correctly encrypted messages).<a href="#section-4.3.7-2.1.1" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-2.1.2">
  Security notion. CPA resilience (confidentiality), authenticity resilience (integrity), CCA resilience (authenticated encryption) <span>[<a href="#ADL17" class="cite xref">ADL17</a>]</span>.<a href="#section-4.3.7-2.1.2" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-2.1.3">
  Examples. ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span> (only confidentiality).<a href="#section-4.3.7-2.1.3" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.3.7-2.2">
-              <p id="section-4.3.7-2.2.1">Nonce misuse resistance. Security is provided for all messages.<a href="#section-4.3.7-2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.3.7-2.2.1">Nonce misuse resistance. Security is provided for all messages that were not encrypted with the same nonce value more than once.<a href="#section-4.3.7-2.2.1" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-2.2.2">
  Security notion. MRAE <span>[<a href="#RS06" class="cite xref">RS06</a>]</span>.<a href="#section-4.3.7-2.2.2" class="pilcrow">¶</a></p>
 <p id="section-4.3.7-2.2.3">
@@ -1809,7 +1792,7 @@ li > p:last-of-type:only-child {
 <div id="RUP">
 <section id="section-4.3.10">
           <h4 id="name-release-of-unverified-plain">
-<a href="#section-4.3.10" class="section-number selfRef">4.3.10. </a><a href="#name-release-of-unverified-plain" class="section-name selfRef">Release of Unverified Plaintext (RUP) Security</a>
+<a href="#section-4.3.10" class="section-number selfRef">4.3.10. </a><a href="#name-release-of-unverified-plain" class="section-name selfRef">Release of Unverified Plaintext (RUP) Integrity</a>
           </h4>
 <p id="section-4.3.10-1">
  Definition. An AEAD algorithm provides data integrity even if plaintext is released for every ciphertext, including those with failed integrity verification.<a href="#section-4.3.10-1" class="pilcrow">¶</a></p>
@@ -1836,8 +1819,8 @@ li > p:last-of-type:only-child {
         </h3>
 <div id="HardEff">
 <section id="section-4.4.1">
-          <h4 id="name-hardware-efficiency">
-<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-hardware-efficiency" class="section-name selfRef">Hardware efficiency</a>
+          <h4 id="name-hardware-efficient">
+<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-hardware-efficient" class="section-name selfRef">Hardware efficient</a>
           </h4>
 <p id="section-4.4.1-1">
  Definition. An AEAD algorithm ensures optimal performance when operating on hardware that complies with the specified requirements.<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
@@ -1851,7 +1834,7 @@ li > p:last-of-type:only-child {
 <a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-inverse-free" class="section-name selfRef">Inverse-Free</a>
           </h4>
 <p id="section-4.4.2-1">
- Definition. A primitive-based AEAD algorithm can be implemented without evaluating the primitive inverse.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm that is based on some primitive can be implemented without evaluating the inverse of that primitive.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.2-2">
  Examples. AES-GCM <span>[<a href="#RFC5116" class="cite xref">RFC5116</a>]</span>, ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, OCB <span>[<a href="#RFC7253" class="cite xref">RFC7253</a>]</span>, MGM <span>[<a href="#RFC9058" class="cite xref">RFC9058</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>.<a href="#section-4.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.4.2-3">
@@ -1892,9 +1875,9 @@ li > p:last-of-type:only-child {
 <a href="#section-4.4.5" class="section-number selfRef">4.4.5. </a><a href="#name-setup-free" class="section-name selfRef">Setup-Free</a>
           </h4>
 <p id="section-4.4.5-1">
- Definition. An AEAD algorithm's operations can be implemented in a way that using a new key incurs either no overhead or negligible overhead compared to the reuse of a previous key. Overhead may involve additional computations or increased storage space, such as precomputing a key schedule.<a href="#section-4.4.5-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm's operations can be implemented in a way that using a new key incurs either no overhead or negligible overhead compared to the reuse of a previous key. Overhead may involve additional computations or increased storage space, such as precomputing a key schedule for a block cipher.<a href="#section-4.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.5-2">
- Examples. ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span>.<a href="#section-4.4.5-2" class="pilcrow">¶</a></p>
+ Examples. ChaCha20-Poly1305 <span>[<a href="#RFC8439" class="cite xref">RFC8439</a>]</span>, AEGIS <span>[<a href="#I-D.irtf-cfrg-aegis-aead" class="cite xref">I-D.irtf-cfrg-aegis-aead</a>]</span>, Ascon <span>[<a href="#DEMS21a" class="cite xref">DEMS21a</a>]</span><span>[<a href="#DEMS21b" class="cite xref">DEMS21b</a>]</span>.<a href="#section-4.4.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="SinglePass">
@@ -1910,8 +1893,8 @@ li > p:last-of-type:only-child {
 </div>
 <div id="StaticAD">
 <section id="section-4.4.7">
-          <h4 id="name-static-associated-data">
-<a href="#section-4.4.7" class="section-number selfRef">4.4.7. </a><a href="#name-static-associated-data" class="section-name selfRef">Static Associated Data</a>
+          <h4 id="name-static-associated-data-effi">
+<a href="#section-4.4.7" class="section-number selfRef">4.4.7. </a><a href="#name-static-associated-data-effi" class="section-name selfRef">Static Associated Data Efficient</a>
           </h4>
 <p id="section-4.4.7-1">
  Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static associated data doesn't significantly contribute to the computational cost of encryption.<a href="#section-4.4.7-1" class="pilcrow">¶</a></p>
@@ -1944,14 +1927,16 @@ li > p:last-of-type:only-child {
 <a href="#section-4.4.9" class="section-number selfRef">4.4.9. </a><a href="#name-zk-friendly" class="section-name selfRef">ZK-Friendly</a>
           </h4>
 <p id="section-4.4.9-1">
- Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). Thus, it allows efficient implementation using a domain-specific language (DSL) for writing zk-SNARKs circuits.<a href="#section-4.4.9-1" class="pilcrow">¶</a></p>
+ Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity).<a href="#section-4.4.9-1" class="pilcrow">¶</a></p>
 <p id="section-4.4.9-2">
  Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity.<a href="#section-4.4.9-2" class="pilcrow">¶</a></p>
 <p id="section-4.4.9-3">
  Example. Ciminion with Wegman-Carter MAC <span>[<a href="#DGGK21" class="cite xref">DGGK21</a>]</span>.<a href="#section-4.4.9-3" class="pilcrow">¶</a></p>
 <p id="section-4.4.9-4">
+ Note. Low multiplicative complexity allows for efficient implementation of Zero-Knowledge proofs.<a href="#section-4.4.9-4" class="pilcrow">¶</a></p>
+<p id="section-4.4.9-5">
  Further reading.
- <span>[<a href="#DGGK21" class="cite xref">DGGK21</a>]</span>.<a href="#section-4.4.9-4" class="pilcrow">¶</a></p>
+ <span>[<a href="#DGGK21" class="cite xref">DGGK21</a>]</span>.<a href="#section-4.4.9-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1966,11 +1951,11 @@ li > p:last-of-type:only-child {
 <p id="section-5-1">
  This document gives high-level definitions of AEAD properties. For each security property, we provide an informational reference to a game-based security notion (or security notions if there are separate notions for integrity and confidentiality) that formalizes the property. We only consider game-based notions and security properties that can be formalized using this approach. However, there are different approaches to formalizing AEAD security, like the indifferentiability framework <span>[<a href="#BM18" class="cite xref">BM18</a>]</span>; security in such notions should be studied separately.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">
- Every claimed security property in an AEAD algorithm MUST undergo security analysis within a relevant notion. For some security properties, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated. It’s RECOMMENDED to use the security notions referenced in the draft, and if an alternative one is used, that SHOULD also be noted.<a href="#section-5-2" class="pilcrow">¶</a></p>
+ Every claimed security property of an AEAD algorithm MUST undergo security analysis within a relevant notion. It's RECOMMENDED to use the security notions referenced in the document. If an alternative notion is used, there MUST exist proof of equivalence or it SHOULD be indicated that a non-equivalent notion is used. For security properties that extend adversarial capabilities, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">
  When specifying security requirements for an AEAD algorithm in an application, it SHOULD be indicated, for every required security property, whether only integrity or confidentiality is necessary. Additionally, for each security property, it SHOULD be specified whether an analysis in an alternative security notion is required.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">
- For some properties, examples of AEAD algorithms that provide them are given, with standardized AEAD algorithms preferred for commonly encountered properties. However, for certain properties, only theoretical or generic algorithms exist. Implementing such algorithms requires careful consideration, and it is advised to contact the algorithm designers for reference implementations and implementation guidelines.<a href="#section-5-4" class="pilcrow">¶</a></p>
+ For some properties, examples of AEAD algorithms that provide them are given, with standardized AEAD algorithms preferred for commonly encountered properties. However, for certain properties, only non-standardized algorithms exist. Implementing such algorithms requires careful consideration, and it is advised to contact the algorithm designers for reference implementations and implementation guidelines.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="IANACON">
@@ -2175,7 +2160,7 @@ li > p:last-of-type:only-child {
 <dd class="break"></dd>
 <dt id="M05">[M05]</dt>
         <dd>
-<span class="refAuthor">McGrew, D.</span>, <span class="refTitle">"Efficient authentication of large, dynamic data sets using Galois/Counter Mode (GCM)."</span>, <span class="refContent">hird IEEE International Security in Storage Workshop (SISW'05), pp. 6-pp. IEEE, 2005.</span>, <span class="seriesInfo">DOI 10.1109/SISW.2005.3</span>, <time datetime="2005" class="refDate">2005</time>, <span>&lt;<a href="https://doi.org/10.1109/SISW.2005.3">https://doi.org/10.1109/SISW.2005.3</a>&gt;</span>. </dd>
+<span class="refAuthor">McGrew, D.</span>, <span class="refTitle">"Efficient authentication of large, dynamic data sets using Galois/Counter Mode (GCM)."</span>, <span class="refContent">Third IEEE International Security in Storage Workshop (SISW'05), pp. 6-pp. IEEE, 2005.</span>, <span class="seriesInfo">DOI 10.1109/SISW.2005.3</span>, <time datetime="2005" class="refDate">2005</time>, <span>&lt;<a href="https://doi.org/10.1109/SISW.2005.3">https://doi.org/10.1109/SISW.2005.3</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="MBTM17">[MBTM17]</dt>
         <dd>
@@ -2228,6 +2213,10 @@ li > p:last-of-type:only-child {
 <dt id="RS06">[RS06]</dt>
         <dd>
 <span class="refAuthor">Rogaway, R.</span> and <span class="refAuthor">T. Shrimpton</span>, <span class="refTitle">"A Provable-Security Treatment of the Key-Wrap Problem"</span>, <span class="refContent">Advances in Cryptology - EUROCRYPT 2006. EUROCRYPT 2006. Lecture Notes in Computer Science, vol 4004. Springer, Berlin, Heidelberg</span>, <span class="seriesInfo">DOI 10.1007/11761679_23</span>, <time datetime="2016" class="refDate">2016</time>, <span>&lt;<a href="https://doi.org/10.1007/11761679_23">https://doi.org/10.1007/11761679_23</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="S04">[S04]</dt>
+        <dd>
+<span class="refAuthor">Shrimpton, T.</span>, <span class="refTitle">"A Characterization of Authenticated-Encryption as a Form of Chosen-Ciphertext Security"</span>, <span class="refContent">Cryptology ePrint Archive, Paper 2004/272</span>, <time datetime="2004" class="refDate">2004</time>, <span>&lt;<a href="https://eprint.iacr.org/2004/272">https://eprint.iacr.org/2004/272</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SY16">[SY16]</dt>
         <dd>
@@ -2295,7 +2284,7 @@ li > p:last-of-type:only-child {
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-B-1">
- This document benefited greatly from the comments received from the CFRG community, for which we are very grateful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Sergey Kyazhin, Samuel Lucas, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+ This document benefited greatly from the comments received from the CFRG community, for which we are very grateful. We would also like to extend special appreciation to Liliya Akhmetzyanova, Evgeny Alekseev, Alexandra Babueva, Frank Denis, Kirill Kutsenok, Sergey Kyazhin, Samuel Lucas, Grigory Marshalko, Christopher Patton, and Christopher Wood for their thoughtful comments, proposals, and discussions.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
