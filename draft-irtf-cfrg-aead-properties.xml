@@ -21,18 +21,18 @@
 		<keyword>authenticated encryption, mode of operation, AEAD, properties</keyword>
 		<abstract>
 			<t>
-				Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the field.
+				Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the terminology used in documentation.
 			</t>
 		</abstract>
 	</front>
 	<middle>
 		<section anchor="Introduction" numbered="true" toc="default">
 			<name>Introduction</name>
-			<t>An Authenticated Encryption with Associated Data (AEAD) algorithm is an extension of authenticated encryption, which provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some associated data (sometimes called Header). AEAD algorithms play a crucial role in various applications and have emerged as a significant focus in cryptographic research.</t>
+			<t>An Authenticated Encryption with Associated Data (AEAD) algorithm provides confidentiality for the plaintext to be encrypted and integrity for the plaintext and some associated data (sometimes called Header). AEAD algorithms play a crucial role in various applications and have emerged as a significant focus in cryptographic research.</t>
 			<section anchor="IntBack" numbered="true" toc="default">
 				<name>Background</name>
 				 <t>
-					AEAD algorithms are formally defined in <xref target="RFC5116" format="default"/>. The main benefit of AEAD algorithms is that they simultaneously provide data confidentiality and integrity and have a simple unified interface. In contrast to generic compositions of MAC and encryption algorithms, an AEAD algorithm allows for a reduction in key and state sizes, improving the data processing speed. Most AEAD algorithms usually come with security analysis, usage guidelines, and reference implementations. Consequently, their integration into high-level schemes and protocols is highly transparent. For instance, AEAD algorithms are mandatory in TLS 1.3 <xref target="RFC8446" format="default" />, IPsec ESP <xref target="RFC4303" format="default" /><xref target="RFC8221" format="default" />, and QUIC <xref target="RFC9000" format="default" />.
+					AEAD algorithms are formally defined in <xref target="RFC5116" format="default"/>. The main benefit of AEAD algorithms is that they simultaneously provide data confidentiality and integrity and have a simple unified interface. In contrast to generic compositions of Message Authentication Code (MAC) and encryption algorithms, an AEAD algorithm allows for a reduction in key and state sizes, improving the data processing speed. Most AEAD algorithms come with security analysis, usage guidelines, and reference implementations. Consequently, their integration into high-level schemes and protocols is highly transparent. For instance, AEAD algorithms are mandatory in TLS 1.3 <xref target="RFC8446" format="default" />, IPsec ESP <xref target="RFC4303" format="default" /><xref target="RFC8221" format="default" />, and QUIC <xref target="RFC9000" format="default" />.
 				</t>
 				<t>
 					While confidentiality and data integrity, being the conventional properties of AEAD algorithms, suffice for many applications, some environments demand other uncommon cryptographic properties. These often require additional analysis and research. As the number of such properties and corresponding research papers grows, inevitable misunderstandings and confusion arise. It is a common situation when related but formally different properties are named identically, or some security properties only have folklore understanding and are not formally defined. Consequently, the risk of misusing AEAD algorithms increases, potentially resulting in security issues.
@@ -41,19 +41,19 @@
 			<section anchor="IntScope" numbered="true" toc="default">
 				<name>Scope</name>
 				<t>
-					In the following document, in <xref target="Properties" format="default"/>, we provide the list of the most common additional properties of AEAD algorithms. The properties are divided into two categories, namely security properties (see <xref target="SecurityProp" format="default"/>) and implementation properties (see <xref target="ImpProp" format="default"/>). 
+					In this document, in <xref target="Properties" format="default"/>, we provide the list of the most common additional properties of AEAD algorithms. The properties are divided into two categories, namely security properties (see <xref target="SecurityProp" format="default"/>) and implementation properties (see <xref target="ImpProp" format="default"/>).
 
 					We provide a high-level definition for each property; for security properties, we also reference an informative source where a formal game-based security notion is defined. When possible, we offer additional information: synonymous names, examples of algorithms that provide the property, applications that might necessitate such property from an AEAD algorithm, references for further reading, and additional notes containing information outside these categories.
 				</t>
 				<t>
-					The document's objective is to enhance clarity and establish a common language in the field. In particular, the primary application of the document lies in the following two use cases within the IETF documents development process:			
+					The objective of this document is to enhance clarity and establish a common language in the field. In particular, the primary application of the document lies in the following two use cases within the IETF documents development process:
 				</t>
 				<ul>
 					<li>
-						<t>For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
+						<t>For an RFC or I-D that defines an AEAD algorithm, it is recommended to use the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
 					</li>
 					<li>
-						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
+						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is recommended to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
 					</li>
 				</ul>
 			</section>
@@ -448,7 +448,7 @@
 						Definition. An AEAD algorithm ensures optimal performance when operating on hardware that complies with the specified requirements.
 					</t>
 					<t>
-						Notes. Various classes of hardware MAY be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is RECOMMENDED to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims.
+						Notes. Various classes of hardware may be taken into consideration. Certain algorithms are tailored to minimize the area of dedicated hardware implementations, while others are intended to capitalize on general-purpose CPUs, with or without specific instruction sets. It is RECOMMENDED to specify the minimum platform requirements for the AEAD to fulfill its intended purpose, as well as to match its performance and security claims.
 					</t>
 				</section>
 				
