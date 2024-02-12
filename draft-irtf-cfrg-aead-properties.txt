@@ -4,8 +4,8 @@
 
 Crypto Forum                                            A.A. Bozhko, Ed.
 Internet-Draft                                                 CryptoPro
-Intended status: Informational                           1 February 2024
-Expires: 4 August 2024
+Intended status: Informational                          12 February 2024
+Expires: 15 August 2024
 
 
                      Properties of AEAD Algorithms
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 August 2024.
+   This Internet-Draft will expire on 15 August 2024.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 1]
+Bozhko                   Expires 15 August 2024                 [Page 1]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 2]
+Bozhko                   Expires 15 August 2024                 [Page 2]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -165,7 +165,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 3]
+Bozhko                   Expires 15 August 2024                 [Page 3]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -221,7 +221,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 4]
+Bozhko                   Expires 15 August 2024                 [Page 4]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -277,7 +277,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 5]
+Bozhko                   Expires 15 August 2024                 [Page 5]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -333,7 +333,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 6]
+Bozhko                   Expires 15 August 2024                 [Page 6]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -389,7 +389,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 7]
+Bozhko                   Expires 15 August 2024                 [Page 7]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -445,7 +445,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 8]
+Bozhko                   Expires 15 August 2024                 [Page 8]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -501,7 +501,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                 [Page 9]
+Bozhko                   Expires 15 August 2024                 [Page 9]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -513,8 +513,8 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
    Security notion. mu-ind [BT16].
 
-   Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], AES-GCM-
-   SIV [RFC8452], AEGIS [I-D.irtf-cfrg-aegis-aead].
+   Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], AES-GCM-SIV
+   [RFC8452], AEGIS [I-D.irtf-cfrg-aegis-aead].
 
    Notes.  It holds that for any AEAD algorithm security degrades no
    worse than linearly with an increase in the number of users.
@@ -557,7 +557,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 10]
+Bozhko                   Expires 15 August 2024                [Page 10]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -576,7 +576,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
       resilience (integrity), CCA resilience (authenticated encryption)
       [ADL17].
 
-      Examples.  ChaCha20-Poly1305 [RFC8439], AES-GCM [RFC5116] (only
+      Examples.  ChaCha20-Poly1305 [RFC8439], AES-GCM [D07] (only
       confidentiality).
 
    *  Nonce misuse resistance.  Security is provided for all messages
@@ -613,12 +613,12 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 11]
+Bozhko                   Expires 15 August 2024                [Page 11]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
-      Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], OCB
+      Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB
       [RFC7253], MGM [RFC9058], AES-GCM-SIV [RFC8452], AEGIS
       [I-D.irtf-cfrg-aegis-aead].
 
@@ -669,7 +669,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 12]
+Bozhko                   Expires 15 August 2024                [Page 12]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -712,8 +712,8 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
    Definition.  An AEAD algorithm that is based on some primitive can be
    implemented without evaluating the inverse of that primitive.
 
-   Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], OCB
-   [RFC7253], MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
+   Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253],
+   MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
 
    Notes.  In a sponge-based AEAD algorithm, an underlying permutation
    is viewed as a primitive.
@@ -725,7 +725,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 13]
+Bozhko                   Expires 15 August 2024                [Page 13]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -751,8 +751,8 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
    Synonyms.  Pipelineable.
 
-   Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], OCB
-   [RFC7253], MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
+   Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253],
+   MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
 
    Further reading.  [C20].
 
@@ -772,8 +772,8 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
    Definition.  An AEAD algorithm encryption (decryption) operation can
    be implemented with a single pass over the plaintext (ciphertext).
 
-   Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], OCB
-   [RFC7253], MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
+   Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253],
+   MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
 
 
 
@@ -781,7 +781,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 14]
+Bozhko                   Expires 15 August 2024                [Page 14]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -792,8 +792,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
    repeating) associated data so that static associated data doesn't
    significantly contribute to the computational cost of encryption.
 
-   Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], OCB
-   [RFC7253].
+   Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253].
 
 4.4.8.  Streamable
 
@@ -804,8 +803,8 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
    Synonyms.  Online.
 
-   Examples.  AES-GCM [RFC5116], ChaCha20-Poly1305 [RFC8439], OCB
-   [RFC7253], MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead], Ascon
+   Examples.  AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253],
+   MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead], Ascon
    [DEMS21a][DEMS21b].
 
    Applications.  Real-time streaming protocols, resource-constrained
@@ -837,7 +836,8 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 15]
+
+Bozhko                   Expires 15 August 2024                [Page 15]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -855,7 +855,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
    be studied separately.
 
    Every claimed security property of an AEAD algorithm MUST undergo
-   security analysis within a relevant notion.  It's RECOMMENDED to use
+   security analysis within a relevant notion.  It’s RECOMMENDED to use
    the security notions referenced in the document.  If an alternative
    notion is used, there MUST exist proof of equivalence or it SHOULD be
    indicated that a non-equivalent notion is used.  For security
@@ -885,18 +885,23 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 7.1.  Normative References
 
+   [D07]      Dworkin, M., "Recommendation for Block Cipher Modes of
+              Operation: Galois/Counter Mode (GCM) and GMAC", NIST
+              Special Publication 800-38D, DOI 10.6028/NIST.SP.800-38D,
+              2007, <https://csrc.nist.gov/pubs/sp/800/38/d/final>.
+
+
+
+
+Bozhko                   Expires 15 August 2024                [Page 16]
+
+Internet-Draft        Properties of AEAD algorithms        February 2024
+
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-Bozhko                    Expires 4 August 2024                [Page 16]
-
-Internet-Draft        Properties of AEAD algorithms        February 2024
-
 
    [RFC5116]  McGrew, D., "An Interface and Algorithms for Authenticated
               Encryption", RFC 5116, DOI 10.17487/RFC5116, January 2008,
@@ -942,18 +947,17 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
               2013, <https://groups.google.com/d/msg/crypto-
               competitions/n5ECGwYr6Vk/bsEfPWqSAU4J>.
 
-   [B20]      Bellizia, D., Bronchain, O., Cassiers, G., Grosso, V.,
-              Guo, C., Momin, C., Pereira, O., Peters, T., and FX.
-              Standaert, "Mode-Level vs. Implementation-Level Physical
-              Security in Symmetric Cryptography: A Practical Guide
 
 
-
-Bozhko                    Expires 4 August 2024                [Page 17]
+Bozhko                   Expires 15 August 2024                [Page 17]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
+   [B20]      Bellizia, D., Bronchain, O., Cassiers, G., Grosso, V.,
+              Guo, C., Momin, C., Pereira, O., Peters, T., and FX.
+              Standaert, "Mode-Level vs. Implementation-Level Physical
+              Security in Symmetric Cryptography: A Practical Guide
               Through the Leakage-Resistance Jungle", Advances in
               Cryptology – CRYPTO 2020. CRYPTO 2020. Lecture Notes in
               Computer Science, vol 12170. Springer, Cham,
@@ -1001,11 +1005,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-
-
-
-
-Bozhko                    Expires 4 August 2024                [Page 18]
+Bozhko                   Expires 15 August 2024                [Page 18]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1061,7 +1061,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 19]
+Bozhko                   Expires 15 August 2024                [Page 19]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1117,7 +1117,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 20]
+Bozhko                   Expires 15 August 2024                [Page 20]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1173,7 +1173,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 21]
+Bozhko                   Expires 15 August 2024                [Page 21]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1229,7 +1229,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 22]
+Bozhko                   Expires 15 August 2024                [Page 22]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1285,7 +1285,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 23]
+Bozhko                   Expires 15 August 2024                [Page 23]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1341,7 +1341,7 @@ Internet-Draft        Properties of AEAD algorithms        February 2024
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 24]
+Bozhko                   Expires 15 August 2024                [Page 24]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1397,7 +1397,7 @@ A.1.  Incremental Authenticated Encryption
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 25]
+Bozhko                   Expires 15 August 2024                [Page 25]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1453,7 +1453,7 @@ Acknowledgments
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 26]
+Bozhko                   Expires 15 August 2024                [Page 26]
 
 Internet-Draft        Properties of AEAD algorithms        February 2024
 
@@ -1509,4 +1509,4 @@ Author's Address
 
 
 
-Bozhko                    Expires 4 August 2024                [Page 27]
+Bozhko                   Expires 15 August 2024                [Page 27]

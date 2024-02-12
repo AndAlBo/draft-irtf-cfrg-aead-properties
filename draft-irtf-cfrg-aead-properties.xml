@@ -294,7 +294,7 @@
 						Security notion. mu-ind  <xref target="BT16" format="default" />.
 					</t>
 					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>. 
+						Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 					<t>
 						Notes. It holds that for any AEAD algorithm security degrades no worse than linearly with an increase in the number of users. However, for some applications with a significant number of users, better multi-user guarantees are required. For example, in the TLS 1.3 protocol, to address this issue, AEAD algorithms are used with a randomized nonce (deterministically derived from a traffic secret and a sequence number). Using nonce randomization in block cipher counter-based AEAD modes can contribute to multi-user security <xref target="BT16" format="default" />. Multi-user usage limits for AES-GCM and ChaCha20-Poly1305 are provided in <xref target="I-D.irtf-cfrg-aead-limits" format="default"/>.
@@ -339,7 +339,7 @@
 								Security notion. CPA resilience (confidentiality), authenticity resilience (integrity), CCA resilience (authenticated encryption) <xref target="ADL17" format="default" />.
 							</t>
 							<t>
-								Examples. ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, AES-GCM <xref target="RFC5116" format="default"/> (only confidentiality).
+								Examples. ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, AES-GCM <xref target="D07" format="default"/> (only confidentiality).
 							</t>
 						</li>
 						<li>
@@ -378,7 +378,7 @@
 							
 							<t>Synonyms. Post-quantum security.</t>
 							
-							<t>Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.</t>
+							<t>Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.</t>
 						</li>
 						<li>
 							<t>Q2 model. An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles; it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.</t>
@@ -458,7 +458,7 @@
 						Definition. An AEAD algorithm that is based on some primitive can be implemented without evaluating the inverse of that primitive.
 					</t>
 					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
+						Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 					<t>
 						Notes. In a sponge-based AEAD algorithm, an underlying permutation is viewed as a primitive.
@@ -485,7 +485,7 @@
 						Synonyms. Pipelineable.
 					</t>
 					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
+						Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 					<t>
 						Further reading. <xref target="C20" format="default" />.
@@ -506,7 +506,7 @@
 						Definition. An AEAD algorithm encryption (decryption) operation can be implemented with a single pass over the plaintext (ciphertext).
 					</t>
 					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
+						Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
 					</t>
 				</section>
 				<section anchor="StaticAD" numbered="true" toc="default">
@@ -515,7 +515,7 @@
 						Definition. An AEAD algorithm allows pre-computation for static (or repeating) associated data so that static associated data doesn't significantly contribute to the computational cost of encryption.
 					</t>
 					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>.
+						Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>.
 					</t>
 				</section>
 				<section anchor="Online" numbered="true" toc="default">
@@ -527,7 +527,7 @@
 						Synonyms. Online.
 					</t>
 					<t>
-						Examples. AES-GCM <xref target="RFC5116" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
+						Examples. AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>, Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/>.
 					</t>
 					<t>
 						Applications. Real-time streaming protocols, resource-constrained devices.
@@ -589,6 +589,16 @@
 				<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml" />
 				<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml" />
 				<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5116.xml" />
+				<reference anchor="D07" target="https://csrc.nist.gov/pubs/sp/800/38/d/final">
+					<front>
+						<title>Recommendation for Block Cipher Modes of Operation: Galois/Counter
+							Mode (GCM) and GMAC</title>
+						<author initials="M." surname="Dworkin" fullname="Morris Dworkin" />
+						<date year="2007" />
+					</front>
+					<seriesInfo name="DOI" value="10.6028/NIST.SP.800-38D" />
+					<refcontent>NIST Special Publication 800-38D</refcontent>
+				</reference>
 			</references>
 			<references>
 				<name>Informative References</name>
