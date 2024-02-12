@@ -50,10 +50,10 @@
 				</t>
 				<ul>
 					<li>
-						<t>For an RFC or I-D that defines an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
+						<t>For an RFC or I-D that defines an AEAD algorithm, it is recommended to use the notations of <xref target="Properties" format="default"/> when listing additional properties of the algorithm.</t>
 					</li>
 					<li>
-						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is RECOMMENDED to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
+						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is recommended to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
 					</li>
 				</ul>
 			</section>
