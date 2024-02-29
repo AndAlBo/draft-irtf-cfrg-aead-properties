@@ -539,25 +539,6 @@
 						Further reading. <xref target="HRRV15" format="default" />, <xref target="FJMV2004" format="default" />.
 					</t>
 				</section>
-				<section anchor="ZK" numbered="true" toc="default">
-					<name>ZK-Friendly</name>
-					<t>
-						Definition. An AEAD algorithm operates on binary and prime fields with a low number of non-linear operations (often called multiplicative complexity). 
-					</t>
-					<t>
-						Synonyms. ZK-focused, Arithmetization-oriented, Low Multiplicative Complexity.
-					</t>
-					<t>
-						Example. Ciminion with Wegman-Carter MAC <xref target="DGGK21" format="default"/>.
-					</t>
-					<t>
-						Note. Low multiplicative complexity allows for efficient implementation of Zero-Knowledge proofs.
-					</t>
-					<t>
-						Further reading.
-						<xref target="DGGK21" format="default" />.
-					</t>
-				</section>
 			</section>
 		</section>
 		<section anchor="Security" numbered="true" toc="default">
@@ -836,7 +817,8 @@
 					<seriesInfo name="DOI" value="10.13154/tosc.v2019.i4.81-118" />
 					<refcontent>IACR Transactions on Symmetric Cryptology, 2019(4), 81–118</refcontent>
 				</reference>
-				<reference anchor="DGGK21">
+<!--				
+					<reference anchor="DGGK21">
 					<front>
 						<title>CIMINION: Symmetric Encryption Based on Toffoli-Gates over Large Finite Fields</title>
 						<author initials="C." surname="Dobraunig" fullname="Christoph Dobraunig" />
@@ -848,6 +830,7 @@
 					<seriesInfo name="DOI" value="10.1007/978-3-030-77886-6_1" />
 					<refcontent>Advances in Cryptology – EUROCRYPT 2021. EUROCRYPT 2021. Lecture Notes in Computer Science(), vol 12697. Springer, Cham</refcontent>
 				</reference>
+-->
 				<reference anchor="BKY02">
 					<front>
 						<title>Incremental Unforgeable Encryption</title>
