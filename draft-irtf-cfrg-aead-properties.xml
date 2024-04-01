@@ -5,10 +5,10 @@
   <!ENTITY nbhy   "&#8209;">
   <!ENTITY wj     "&#8288;">
 ]>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-05" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-06" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 	<front>
 		<title abbrev="Properties of AEAD algorithms">Properties of AEAD Algorithms</title>
-		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-05" />
+		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-06" />
 		<author fullname="Andrey Bozhko" initials="A.A." role="editor" surname="Bozhko">
 			<organization>CryptoPro</organization>
 			<address>
@@ -219,7 +219,7 @@
 						Security notion: CMT-4 <xref target="BH22" format="default"/>, generalized CMT for a restricted setting (see the notes below) <xref target="MLGR23" format="default" />.
 					</t>
 					<t>
-						Examples: Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/><xref target="YSS23" format="default"/>, full commiting versions of GCM and GCM-SIV <xref target="BH22" format="default"/>, generic constructions <xref target="BH22" format="default"/><xref target="CR22" format="default" />.
+						Examples: Ascon <xref target="DEMS21a" format="default"/><xref target="DEMS21b" format="default"/><xref target="YSS23" format="default"/>, full committing versions of GCM and GCM-SIV <xref target="BH22" format="default"/>, generic constructions <xref target="BH22" format="default"/><xref target="CR22" format="default" />.
 					</t>
 					<t>
 						Notes: Full commitment can be considered in a weaker setting, where certain restrictions on the tuples produced by an adversary are imposed <xref target="MLGR23" format="default" />. For instance, an adversary must find tuples that all share the same associated data value. In such cases, an AEAD algorithm is said to provide full commitment in a restricted setting. The imposed restrictions MUST be listed.
@@ -279,10 +279,13 @@
 						For primitive-based AEAD algorithms, key evolution (internal re-keying <xref target="RFC8645" format="default" />) can contribute to achieving leakage resistance with leakages in encryption. Confidentiality in the presence of decryption leakages can be achieved by two-pass AEAD algorithms with key evolution, which compute independent ephemeral key values for encryption and tag generation, where the computation of these keys is implemented without any leakages. For more discussions on achieving leakage resistance see <xref target="B20" format="default" />.                  
 					</t>
 					<t>
+						A well-known weaker property, Leakage Resilience, introduced in <xref target="BMOS17" format="default" />, can also be considered. However, this document makes a conscious choice to focus on the stronger Leakage Resistance, following the framework established in <xref target="GPPS19" format="default" />, <xref target="B20" format="default" />, for its enhanced practicality and comprehensiveness.
+					</t>
+					<t>
 						Applications: Encryption on smart cards, Internet-of-things devices, or other constrained devices.  	
 					</t>
 					<t>
-						Further reading: <xref target="GPPS19" format="default" />, <xref target="B20" format="default" />, <xref target="BPPS17" format="default" />.
+						Further reading: <xref target="GPPS19" format="default" />, <xref target="B20" format="default" />, <xref target="BPPS17" format="default" />, <xref target="BMOS17" format="default" />.
 					</t>
 				</section>
 				<section anchor="Mu-sec" numbered="true" toc="default">
@@ -298,6 +301,9 @@
 					</t>
 					<t>
 						Notes: It holds that for any AEAD algorithm security degrades no worse than linearly with an increase in the number of users <xref target="BT16" format="default" />. However, for some applications with a significant number of users, better multi-user guarantees are required. For example, in the TLS 1.3 protocol, to address this issue, AEAD algorithms are used with a randomized nonce (deterministically derived from a traffic secret and a sequence number). Using nonce randomization in block cipher counter-based AEAD modes can contribute to multi-user security <xref target="BT16" format="default" />. Multi-user usage limits for AES-GCM and ChaCha20-Poly1305 are provided in <xref target="I-D.irtf-cfrg-aead-limits" format="default"/>.
+					</t>
+					<t>
+						A weaker security notion, multi-user key recovery, is also introduced and thoroughly studied in <xref target="BT16" format="default" />. While this document focuses on indistinguishability for security notions, key recovery might be relevant and valuable to study alongside indistinguishability.
 					</t>
 					<t>
 						Applications: Data transmission layer of secure communication protocols (e.g., TLS, IPSec, SRTP, etc.) 
@@ -381,7 +387,7 @@
 							<t>Examples: AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AES-GCM-SIV <xref target="RFC8452" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.</t>
 						</li>
 						<li>
-							<t>Q2 model: An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles, i.e, it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.</t>
+							<t>Q2 model: An adversary has access to local quantum computational power. It has quantum access to encryption and decryption oracles, i.e., it can query encryption and decryption oracles with quantum superpositions of inputs to receive quantum superpositions of the outputs.</t>
 							
 							<t>Synonyms: Superposition-based quantum security.</t>
 							
@@ -1180,7 +1186,19 @@
 					</front>
 					<refcontent>Cryptology ePrint Archive, Paper 2004/272</refcontent>
 				</reference>
-				
+
+				<reference anchor="BMOS17">
+					<front>
+						<title>Authenticated encryption in the face of protocol and side channel leakage.</title>
+						<author initials="G." surname="Barwell" fullname="Guy Barwell" />
+						<author initials="D.P." surname="Martin" fullname="Daniel P. Martin" />
+						<author initials="E." surname="Oswald" fullname="Elisabeth Oswald" />
+						<author initials="M." surname="Stam" fullname="Martijn Stam" />
+						<date year="2017" />
+					</front>
+					<seriesInfo name="DOI" value="10.1007/978-3-319-70694-8_24" />
+					<refcontent>Advances in Cryptology – ASIACRYPT 2017. ASIACRYPT 2017. Lecture Notes in Computer Science, vol 10624. Springer, Cham</refcontent>
+				</reference>
 			</references>
 		</references>
 		
