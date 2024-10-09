@@ -5,10 +5,17 @@
   <!ENTITY nbhy   "&#8209;">
   <!ENTITY wj     "&#8288;">
 ]>
+<<<<<<< Updated upstream
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-06" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 	<front>
 		<title abbrev="Properties of AEAD algorithms">Properties of AEAD Algorithms</title>
 		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-06" />
+=======
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-08" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
+	<front>
+		<title abbrev="Properties of AEAD algorithms">Properties of AEAD Algorithms</title>
+		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-08" />
+>>>>>>> Stashed changes
 		<author fullname="Andrey Bozhko" initials="A.A." role="editor" surname="Bozhko">
 			<organization>CryptoPro</organization>
 			<address>
@@ -21,7 +28,7 @@
 		<keyword>authenticated encryption, mode of operation, AEAD, properties</keyword>
 		<abstract>
 			<t>
-				Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the terminology used in documentation.
+				Authenticated Encryption with Associated Data (AEAD) algorithms provide both confidentiality and integrity of data. The widespread use of AEAD algorithms in various applications has led to an increased demand for AEAD algorithms with additional properties, driving research in the field. This document provides definitions for the most common of those properties, aiming to improve consistency in the terminology used in documentation. This document is a product of the Crypto Forum Research Group.
 			</t>
 		</abstract>
 	</front>
@@ -43,10 +50,10 @@
 				<t>
 					In this document, in <xref target="Properties" format="default"/>, we provide the list of the most common additional properties of AEAD algorithms. The properties are divided into two categories, namely security properties (see <xref target="SecurityProp" format="default"/>) and implementation properties (see <xref target="ImpProp" format="default"/>).
 
-					We provide a high-level definition for each property; for security properties, we also reference an informative source where a formal game-based security notion is defined. When possible, we offer additional information: synonymous names, examples of algorithms that provide the property, applications that might necessitate such property from an AEAD algorithm, references for further reading, and additional notes containing information outside these categories.
+					We provide a high-level definition for each property. For security properties, we also reference an informative source where a formal game-based security notion is defined; we do not consider security properties for which no game-based formalization exists. When possible, we offer additional information: synonymous names, examples of algorithms that provide the property, applications that might necessitate such property from an AEAD algorithm, references for further reading, and additional notes containing information outside these categories.
 				</t>
 				<t>
-					The objective of this document is to enhance clarity and establish a common language in the field. In particular, the primary application of the document lies in the following two use cases within the IETF documents development process:
+					The objective of this document is to enhance clarity and establish a common language in the field. In particular, the primary application of the document lies in the following two use cases within the IRTF or the IETF documents development process:
 				</t>
 				<ul>
 					<li>
@@ -56,6 +63,9 @@
 						<t>For an RFC or I-D that defines a generic protocol based on an AEAD algorithm, it is recommended to use the notations of <xref target="Properties" format="default"/> if any additional properties are required from the algorithm.</t>
 					</li>
 				</ul>
+				<t>
+					This document represents the consensus of the Crypto Forum Research Group (CFRG). This document is not an IETF product and is not a standard.
+				</t>
 			</section>
 		</section>
 		<section numbered="true" toc="default">
@@ -194,13 +204,13 @@
 						Definition: An AEAD algorithm provides security even if an adversary can adaptively choose the next part of the plaintext depending on already computed ciphertext parts during an encryption operation.
 					</t>
 					<t>
-						Security notion: D-LORS-BCPA for confidentiality against passive adversaries, B-INT-CTXT for integrity <xref target="EV16" format="default"/>; OAE1 <xref target="HRRV15" format="default"/> (stronger notion; originally, OAE in <xref target="FFL12" format="default"/>). 
+						Security notion: D-LORS-BCPA for confidentiality against passive adversaries, B-INT-CTXT for integrity <xref target="EV16" format="default"/>; OAE1 <xref target="HRRV15" format="default"/> (a stronger notion; originally OAE (Online Authenticated Encryption) in <xref target="FFL12" format="default"/>). 
 					</t>
 					<t>
 						Examples: Deoxys <xref target="JNPS21" format="default"/>, SAEF <xref target="ABV21" format="default"/>.
 					</t>
 					<t>
-						Notes: Blockwise security is highly relevant for streamable AEAD algorithms (see <xref target="Online" format="default"/>). OAE1 (OAE) security notion <xref target="HRRV15" format="default"/>, and OAE2 notion <xref target="HRRV15" format="default"/> are tailored for streamable AEAD algorithms. Blockwise security follows from security in the OAE notion <xref target="EV16" format="default"/>. For a discussion on security notions for streamable AEAD algorithms see <xref target="HRRV15" format="default"/>.	
+						Notes: Blockwise security is highly relevant for streamable AEAD algorithms (see <xref target="Online" format="default"/>). The OAE1 security notion <xref target="HRRV15" format="default"/>, and the OAE2 notion <xref target="HRRV15" format="default"/> are tailored for streamable AEAD algorithms. OAE1 was first defined in <xref target="FFL12" format="default"/> under the name OAE; however, it contained a glitch, and the reformulated definition was presented in <xref target="HRRV15" format="default"/>. Blockwise security follows from security in the OAE notion <xref target="EV16" format="default"/>. For a discussion on security notions for streamable AEAD algorithms see <xref target="HRRV15" format="default"/>.	
 					</t>	
 					<t>
 						Applications: Real-time streaming protocols, encryption on resource-constrained devices.
@@ -556,10 +566,14 @@
 				For some properties, examples of AEAD algorithms that provide them are given, with standardized AEAD algorithms preferred for commonly encountered properties. However, for certain properties, only non-standardized algorithms exist. Implementing such algorithms requires careful consideration, and it is advised to contact the algorithm designers for reference implementations and implementation guidelines. 
 			</t>
 			<t>
-				Every claimed security property of an AEAD algorithm MUST undergo security analysis within a relevant notion. It’s RECOMMENDED to use the security notions referenced in the document. If an alternative notion is used, there MUST exist proof of equivalence or it SHOULD be indicated that a non-equivalent notion is used. For security properties that extend adversarial capabilities, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated. 
+				Every claimed security property of an AEAD algorithm MUST undergo security analysis within a relevant notion. It's RECOMMENDED to use the security notions referenced in the document. If an alternative notion is used, there MUST exist proof of equivalence or it SHOULD be indicated that a non-equivalent notion is used. For security properties that extend adversarial capabilities, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated. 
 			</t>
 			<t>
+<<<<<<< Updated upstream
 				When specifying security requirements for an AEAD algorithm in an application, it SHOULD be indicated, for every required security property, whether only integrity or confidentiality is necessary. Additionally, for each security property, it SHOULD be specified whether an analysis in an alternative security notion is required. We also note that some additional properties come with trade-offs in terms of classical security and efficiency, and may only be supported in non-standardized or modified AEAD algorithms. This immediately implies challenges in deployment and interoperability. In an application, the requirements for additional AEAD properties SHOULD be highly motivated and justified, as SHOULD all trade-offs be carefully considered.
+=======
+				When specifying security requirements for an AEAD algorithm in an application, it SHOULD be indicated, for every required security property, whether only integrity or confidentiality is necessary. Additionally, for each security property, it SHOULD be specified whether an analysis in an alternative security notion is required. We also note that some additional properties come with trade-offs in terms of classical security and efficiency, and may only be supported in non-standardized or modified AEAD algorithms. This immediately implies challenges in deployment and interoperability. In an application, the requirements for additional AEAD properties SHOULD be highly motivated and justified, as should all trade-offs be carefully considered.
+>>>>>>> Stashed changes
 			</t>
 		</section>
 		<section anchor="IANACON" numbered="true" toc="default">
@@ -654,7 +668,7 @@
 						<date year="2011" />
 					</front>
 					<seriesInfo name="DOI" value="10.1007/978-3-642-22792-9_35" />
-					<refcontent>Advances in Cryptology – CRYPTO 2011. CRYPTO 2011. Lecture Notes in Computer Science, vol 6841. Springer, Berlin, Heidelberg.</refcontent>
+					<refcontent>Advances in Cryptology - CRYPTO 2011. CRYPTO 2011. Lecture Notes in Computer Science, vol 6841. Springer, Berlin, Heidelberg.</refcontent>
 				</reference>
 -->
 				<reference anchor="FOR17">
@@ -716,7 +730,7 @@
 						<date year="2019" />
 					</front>
 					<seriesInfo name="DOI" value="10.1007/978-3-030-30530-7_8" />
-					<refcontent>Progress in Cryptology – LATINCRYPT 2019. LATINCRYPT 2019. Lecture Notes in Computer Science, vol 11774. Springer, Cham</refcontent>
+					<refcontent>Progress in Cryptology - LATINCRYPT 2019. LATINCRYPT 2019. Lecture Notes in Computer Science, vol 11774. Springer, Cham</refcontent>
 				</reference>
 				<reference anchor="BT16">
 					<front>
@@ -829,11 +843,11 @@
 						<author initials="C." surname="Dobraunig" fullname="Christoph Dobraunig" />
 						<author initials="L." surname="Grassi" fullname="Lorenzo Grassi" />
 						<author initials="G." surname="Guinet" fullname="Anna Guinet" />
-						<author initials="K." surname="Kuijsters" fullname="Daniël Kuijsters" />
+						<author initials="D." surname="Kuijsters" fullname="Daniël Kuijsters" />
 						<date year="2021" />
 					</front>
 					<seriesInfo name="DOI" value="10.1007/978-3-030-77886-6_1" />
-					<refcontent>Advances in Cryptology – EUROCRYPT 2021. EUROCRYPT 2021. Lecture Notes in Computer Science(), vol 12697. Springer, Cham</refcontent>
+					<refcontent>Advances in Cryptology - EUROCRYPT 2021. EUROCRYPT 2021. Lecture Notes in Computer Science(), vol 12697. Springer, Cham</refcontent>
 				</reference>
 -->
 				<reference anchor="BKY02">
@@ -897,7 +911,7 @@
 						<date year="1998" />
 					</front>
 					<seriesInfo name="DOI" value="10.1007/BFb0054131" />
-					<refcontent>Advances in Cryptology — EUROCRYPT'98. EUROCRYPT 1998. Lecture Notes in Computer Science, vol 1403. Springer, Berlin, Heidelberg</refcontent>
+					<refcontent>Advances in Cryptology - EUROCRYPT'98. EUROCRYPT 1998. Lecture Notes in Computer Science, vol 1403. Springer, Berlin, Heidelberg</refcontent>
 				</reference>
 -->				
 <!--				<reference anchor="DA03">
@@ -908,7 +922,7 @@
 						<date year="2003" />
 					</front>
 					<seriesInfo name="DOI" value="10.1007/3-540-39200-9_19" />
-					<refcontent>Advances in Cryptology — EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</refcontent>
+					<refcontent>Advances in Cryptology - EUROCRYPT 2003. EUROCRYPT 2003. Lecture Notes in Computer Science, vol 2656. Springer, Berlin, Heidelberg</refcontent>
 			</reference>
 -->				
 				<reference anchor="HKR2015">
@@ -1165,7 +1179,7 @@
 						<date year="1999" />
 					</front>
 					<seriesInfo name="DOI" value="10.1007/3-540-48405-1_26" />
-					<refcontent>Advances in Cryptology—CRYPTO’99: 19th Annual International Cryptology Conference Santa Barbara, California, USA, August 15–19, 1999 Proceedings 19, pp. 398-412. Springer Berlin Heidelberg, 1999.</refcontent>
+					<refcontent>Advances in Cryptology—CRYPTO'99: 19th Annual International Cryptology Conference Santa Barbara, California, USA, August 15–19, 1999 Proceedings 19, pp. 398-412. Springer Berlin Heidelberg, 1999.</refcontent>
 				</reference>
 				
 				<reference anchor="M05">
