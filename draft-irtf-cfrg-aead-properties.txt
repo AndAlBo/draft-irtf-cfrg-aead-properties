@@ -4,21 +4,12 @@
 
 Crypto Forum                                            A.A. Bozhko, Ed.
 Internet-Draft                                                 CryptoPro
-<<<<<<< Updated upstream
-Intended status: Informational                              1 April 2024
-Expires: 3 October 2024
-
-
-                     Properties of AEAD Algorithms
-                   draft-irtf-cfrg-aead-properties-06
-=======
-Intended status: Informational                            9 October 2024
-Expires: 12 April 2025
+Intended status: Informational                           11 October 2024
+Expires: 14 April 2025
 
 
                      Properties of AEAD Algorithms
                    draft-irtf-cfrg-aead-properties-08
->>>>>>> Stashed changes
 
 Abstract
 
@@ -46,11 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-<<<<<<< Updated upstream
-   This Internet-Draft will expire on 3 October 2024.
-=======
-   This Internet-Draft will expire on 12 April 2025.
->>>>>>> Stashed changes
+   This Internet-Draft will expire on 14 April 2025.
 
 Copyright Notice
 
@@ -66,16 +53,9 @@ Copyright Notice
 
 
 
-<<<<<<< Updated upstream
-
-Bozhko                   Expires 3 October 2024                 [Page 1]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                 [Page 1]
+Bozhko                    Expires 14 April 2025                 [Page 1]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -116,33 +96,27 @@ Table of Contents
        4.4.2.  Inverse-Free  . . . . . . . . . . . . . . . . . . . .  14
        4.4.3.  Lightweight . . . . . . . . . . . . . . . . . . . . .  14
        4.4.4.  Parallelizable  . . . . . . . . . . . . . . . . . . .  14
-       4.4.5.  Setup-Free  . . . . . . . . . . . . . . . . . . . . .  14
+       4.4.5.  Setup-Free  . . . . . . . . . . . . . . . . . . . . .  15
        4.4.6.  Single Pass . . . . . . . . . . . . . . . . . . . . .  15
        4.4.7.  Static Associated Data Efficient  . . . . . . . . . .  15
        4.4.8.  Streamable  . . . . . . . . . . . . . . . . . . . . .  15
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  16
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  17
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  17
    Appendix A.  AEAD Algorithms with Additional Functionality  . . .  25
 
 
 
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                 [Page 2]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                 [Page 2]
+Bozhko                    Expires 14 April 2025                 [Page 2]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
 
-     A.1.  Incremental Authenticated Encryption  . . . . . . . . . .  25
+     A.1.  Incremental Authenticated Encryption  . . . . . . . . . .  26
      A.2.  Robust Authenticated Encryption . . . . . . . . . . . . .  26
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  26
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  27
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  27
 
 1.  Introduction
@@ -191,15 +165,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
 
 
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                 [Page 3]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                 [Page 3]
+Bozhko                    Expires 14 April 2025                 [Page 3]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
 
    properties for which no game-based formalization exists.  When
@@ -253,21 +221,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
 
 
-<<<<<<< Updated upstream
-
-
-
-
-
-
-Bozhko                   Expires 3 October 2024                 [Page 4]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                 [Page 4]
+Bozhko                    Expires 14 April 2025                 [Page 4]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
 
    *  A deterministic operation of authenticated decryption has four
@@ -283,7 +239,7 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    independent output of the encryption operation and as an independent
    input of the decryption operation.  Throughout this document, by
    default, we will consider the authentication tag as part of the
-   ciphertext unless stated otherwise.
+   ciphertext.
 
    For more details on the AEAD definition, please refer to [RFC5116].
 
@@ -321,15 +277,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
 
 
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                 [Page 5]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                 [Page 5]
+Bozhko                    Expires 14 April 2025                 [Page 5]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
 
    conventional AEAD interface.  We refer to these properties as
@@ -383,22 +333,16 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
 
 
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                 [Page 6]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                 [Page 6]
+Bozhko                    Expires 14 April 2025                 [Page 6]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
 
 4.2.2.  Data Integrity
 
-   Definition: An AEAD algorithm guarantees that the ciphertext and the
-   associated data have not been changed or forged by an active, nonce-
-   respecting adversary.
+   Definition: An AEAD algorithm allows one to ensure that the
+   ciphertext and the associated data have not been changed or forged by
+   an active, nonce-respecting adversary.
 
    Security notion: IND-CTXT [BN2000] (or AUTH [R02]).
 
@@ -428,36 +372,13 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    already computed ciphertext parts during an encryption operation.
 
    Security notion: D-LORS-BCPA for confidentiality against passive
-<<<<<<< Updated upstream
-   adversaries, B-INT-CTXT for integrity [EV16]; OAE1 [HRRV15] (stronger
-   notion; originally, OAE in [FFL12]).
-=======
    adversaries, B-INT-CTXT for integrity [EV16]; OAE1 [HRRV15] (a
    stronger notion; originally OAE (Online Authenticated Encryption) in
    [FFL12]).
->>>>>>> Stashed changes
 
    Examples: Deoxys [JNPS21], SAEF [ABV21].
 
    Notes: Blockwise security is highly relevant for streamable AEAD
-<<<<<<< Updated upstream
-   algorithms (see Section 4.4.8).  OAE1 (OAE) security notion [HRRV15],
-   and OAE2 notion [HRRV15] are tailored for streamable AEAD algorithms.
-   Blockwise security follows from security in the OAE notion [EV16].
-   For a discussion on security notions for streamable AEAD algorithms
-   see [HRRV15].
-
-   Applications: Real-time streaming protocols, encryption on resource-
-   constrained devices.
-
-
-
-Bozhko                   Expires 3 October 2024                 [Page 7]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-
-
-=======
    algorithms (see Section 4.4.8).  The OAE1 security notion [HRRV15],
    and the OAE2 notion [HRRV15] are tailored for streamable AEAD
    algorithms.  OAE1 was first defined in [FFL12] under the name OAE;
@@ -468,7 +389,7 @@ Internet-Draft        Properties of AEAD algorithms           April 2024
 
 
 
-Bozhko                    Expires 12 April 2025                 [Page 7]
+Bozhko                    Expires 14 April 2025                 [Page 7]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
 
@@ -476,7 +397,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    Applications: Real-time streaming protocols, encryption on resource-
    constrained devices.
 
->>>>>>> Stashed changes
    Further reading: [EV16], [JMV2002], [FJMV2004], [HRRV15].
 
 4.3.2.  Full Commitment
@@ -523,21 +443,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    Notes: Key commitment follows from full commitment.  Full commitment
    does not follow from key commitment [BH22].
 
-<<<<<<< Updated upstream
-   Applications: Password-Authenticated Key Exchange, password-based
-   encryption [LGR21], key rotation, envelope encryption [ADGKLS22].
 
 
-
-Bozhko                   Expires 3 October 2024                 [Page 8]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-
-
-=======
-
-
-Bozhko                    Expires 12 April 2025                 [Page 8]
+Bozhko                    Expires 14 April 2025                 [Page 8]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
 
@@ -545,7 +453,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    Applications: Password-Authenticated Key Exchange, password-based
    encryption [LGR21], key rotation, envelope encryption [ADGKLS22].
 
->>>>>>> Stashed changes
    Further reading: [BH22],[CR22], [FOR17], [LGR21], [GLR17].
 
 4.3.4.  Leakage Resistance
@@ -589,35 +496,22 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    implemented without any leakages.  For more discussions on achieving
    leakage resistance see [B20].
 
-<<<<<<< Updated upstream
-=======
 
 
 
 
 
-Bozhko                    Expires 12 April 2025                 [Page 9]
+Bozhko                    Expires 14 April 2025                 [Page 9]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
 
 
->>>>>>> Stashed changes
    A well-known weaker property, Leakage Resilience, introduced in
    [BMOS17], can also be considered.  However, this document makes a
    conscious choice to focus on the stronger Leakage Resistance,
    following the framework established in [GPPS19], [B20], for its
    enhanced practicality and comprehensiveness.
 
-<<<<<<< Updated upstream
-
-
-Bozhko                   Expires 3 October 2024                 [Page 9]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-
-
-=======
->>>>>>> Stashed changes
    Applications: Encryption on smart cards, Internet-of-things devices,
    or other constrained devices.
 
@@ -661,24 +555,9 @@ Internet-Draft        Properties of AEAD algorithms           April 2024
    about the nonce in the ciphertext and doesn't require the nonce as
    input for the decryption operation.
 
-<<<<<<< Updated upstream
-   Security notion: AE2 [BNT19].
-
-   Examples: Hide-Nonce (HN) transforms [BNT19].
 
 
-
-
-
-Bozhko                   Expires 3 October 2024                [Page 10]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-
-
-=======
-
-
-Bozhko                    Expires 12 April 2025                [Page 10]
+Bozhko                    Expires 14 April 2025                [Page 10]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
 
@@ -687,7 +566,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
    Examples: Hide-Nonce (HN) transforms [BNT19].
 
->>>>>>> Stashed changes
    Notes: As discussed in [BNT19], adversary-visible nonces might
    compromise message and user privacy, similar to the way any metadata
    might do.  As pointed out in [B13], even using a counter as a nonce
@@ -706,8 +584,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    queries.  Nonce misuse resilience and resistance are defined as
    follows:
 
-   *  Nonce misuse resilience: Security is provided only for messages
-      encrypted with fresh nonces (correctly encrypted messages).
+   *  Nonce misuse resilience: Security is provided for messages
+      encrypted with non-repeated (fresh) nonces (correctly encrypted
+      messages).
 
       Security notion: CPA resilience (confidentiality), authenticity
       resilience (integrity), CCA resilience (authenticated encryption)
@@ -729,31 +608,21 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    Notes: Nonce misuse resilience follows from nonce misuse resistance.
    Nonce misuse resistance does not follow from nonce misuse resilience.
 
-   Applications: Any application where nonce uniqueness can't be
-   guaranteed, security against fault-injection attacks and
-   malfunctions, processes parallelization, full disk encryption.
-
-<<<<<<< Updated upstream
-   Further reading: [RS06], [ADL17].
 
 
 
 
 
-Bozhko                   Expires 3 October 2024                [Page 11]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-
-=======
-
-
-Bozhko                    Expires 12 April 2025                [Page 11]
+Bozhko                    Expires 14 April 2025                [Page 11]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
 
 
+   Applications: Any application where nonce uniqueness can't be
+   guaranteed, security against fault-injection attacks and
+   malfunctions, processes parallelization, full disk encryption.
+
    Further reading: [RS06], [ADL17].
->>>>>>> Stashed changes
 
 4.3.8.  Quantum Security
 
@@ -798,24 +667,15 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
    Security notion: j-Int-CTXT [FLLW17].
 
-   Examples: Deoxys [JNPS21], AEGIS [I-D.irtf-cfrg-aegis-aead], Ascon
-   [DEMS21a][DEMS21b].
 
 
-
-
-<<<<<<< Updated upstream
-
-
-Bozhko                   Expires 3 October 2024                [Page 12]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 12]
+Bozhko                    Expires 14 April 2025                [Page 12]
 
 Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
 
+
+   Examples: Deoxys [JNPS21], AEGIS [I-D.irtf-cfrg-aegis-aead], Ascon
+   [DEMS21a][DEMS21b].
 
    Applications: VoIP, real-time streaming in a lightweight setting,
    applications that require small ciphertext expansion (i.e., short
@@ -856,6 +716,20 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    Definition: An AEAD algorithm ensures optimal performance when
    operating on hardware that complies with the specified requirements.
 
+
+
+
+
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 13]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    Notes: Various classes of hardware may be taken into consideration.
    Certain algorithms are tailored to minimize the area of dedicated
    hardware implementations, while others are intended to capitalize on
@@ -864,25 +738,10 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    AEAD to fulfill its intended purpose, as well as to match its
    performance and security claims.
 
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 13]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 13]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
-
 4.4.2.  Inverse-Free
 
-   Definition: An AEAD algorithm that is based on some primitive can be
-   implemented without evaluating the inverse of that primitive.
+   Definition: An AEAD algorithm based on a given primitive can be
+   implemented without invoking the inverse of that primitive.
 
    Examples: AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253],
    MGM [RFC9058], AEGIS [I-D.irtf-cfrg-aegis-aead].
@@ -916,6 +775,17 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
    Further reading: [C20].
 
+
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 14]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
 4.4.5.  Setup-Free
 
    Definition: An AEAD algorithm's operations can be implemented in a
@@ -926,20 +796,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
    Examples: ChaCha20-Poly1305 [RFC8439], AEGIS
    [I-D.irtf-cfrg-aegis-aead], Ascon [DEMS21a][DEMS21b].
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 14]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 14]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
 4.4.6.  Single Pass
 
@@ -979,6 +835,13 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
    Further reading: [HRRV15], [FJMV2004].
 
+
+
+Bozhko                    Expires 14 April 2025                [Page 15]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
 5.  Security Considerations
 
    This document gives high-level definitions of AEAD properties.  For
@@ -989,20 +852,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    properties that can be formalized using this approach.  However,
    there are different approaches to formalizing AEAD security, like the
    indifferentiability framework [BM18]; security in such notions should
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 15]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 15]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
-
    be studied separately.
 
    For some properties, examples of AEAD algorithms that provide them
@@ -1032,11 +881,7 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    in non-standardized or modified AEAD algorithms.  This immediately
    implies challenges in deployment and interoperability.  In an
    application, the requirements for additional AEAD properties SHOULD
-<<<<<<< Updated upstream
-   be highly motivated and justified, as SHOULD all trade-offs be
-=======
    be highly motivated and justified, as should all trade-offs be
->>>>>>> Stashed changes
    carefully considered.
 
 6.  IANA Considerations
@@ -1045,29 +890,20 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
 
 7.  References
 
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 16]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
 7.1.  Normative References
 
    [D07]      Dworkin, M., "Recommendation for Block Cipher Modes of
               Operation: Galois/Counter Mode (GCM) and GMAC", NIST
               Special Publication 800-38D, DOI 10.6028/NIST.SP.800-38D,
               2007, <https://csrc.nist.gov/pubs/sp/800/38/d/final>.
-
-
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 16]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 16]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1106,6 +942,18 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               encryption without key commitment", 1st USENIX Security
               Symposium (USENIX Security 22), pp. 3291-3308. 2022, 2022.
 
+
+
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 17]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    [ADL17]    Ashur, T., Dunkelman, O., and A. Luykx, "Boosting
               Authenticated Encryption Robustness with Minimal
               Modifications", Advances in Cryptology – CRYPTO 2017.
@@ -1117,19 +965,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               Google group on cryptographic competitions, October 2013.,
               2013, <https://groups.google.com/d/msg/crypto-
               competitions/n5ECGwYr6Vk/bsEfPWqSAU4J>.
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 17]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 17]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [B20]      Bellizia, D., Bronchain, O., Cassiers, G., Grosso, V.,
               Guo, C., Momin, C., Pereira, O., Peters, T., and FX.
@@ -1167,6 +1002,14 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               GCM-SIV: multi-user security, faster key derivation, and
               better bounds", Annual International Conference on the
               Theory and Applications of Cryptographic Techniques, pp.
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 18]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
               468-499. Cham: Springer International Publishing, 2018,
               DOI 10.1007/978-3-319-78381-9_18, 2018,
               <https://doi.org/10.1007/978-3-319-78381-9_18>.
@@ -1176,22 +1019,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               2001. Lecture Notes in Computer Science, vol 2355.
               Springer, Berlin, Heidelberg, DOI 10.1007/3-540-45473-X_9,
               2002, <https://doi.org/10.1007/3-540-45473-X_9>.
-
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 18]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 18]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [BM18]     Barbosa, M. and P. Farshim, "Indifferentiable
               authenticated encryption", Advances in Cryptology–CRYPTO
@@ -1229,31 +1056,22 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               DOI 10.13154/tosc.v2017.i3.271-293, 2017,
               <https://doi.org/10.13154/tosc.v2017.i3.271-293>.
 
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 19]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    [BT16]     Bellare, M. and B. Tackmann, "The Multi-User Security of
               Authenticated Encryption: AES-GCM in TLS 1.3", Advances in
               Cryptology – CRYPTO 2016. CRYPTO 2016. Lecture Notes in
               Computer Science, vol 9814. Springer, Berlin, Heidelberg,
               DOI 10.1007/978-3-662-53018-4_10, 2016,
               <https://doi.org/10.1007/978-3-662-53018-4_10>.
-
-
-
-
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 19]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 19]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [C20]      Chakraborti, A., Datta, N., Jha, A., Mancillas-López, C.,
               Nandi, M., and Y. Sasaki, "INT-RUP Secure Lightweight
@@ -1294,6 +1112,16 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               1981-2003. 2021., DOI 10.1145/3460120.3484814, 2021,
               <https://doi.org/10.1145/3460120.3484814>.
 
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 20]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    [EV16]     Endignoux, G. and D. Vizár, "Linking Online Misuse-
               Resistant Authenticated Encryption and Blockwise Attack
               Models", IACR Transactions on Symmetric Cryptology,
@@ -1303,20 +1131,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    [FFL12]    Fleischmann, E., Forler, C., and S. Lucks, "McOE: A family
               of almost foolproof on-line authenticated encryption
               schemes", Fast Software Encryption: 19th International
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 20]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 20]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
-
               Workshop, FSE 2012, Washington, DC, USA, March 19-21,
               2012. Revised Selected Papers. Springer Berlin Heidelberg,
               2012, DOI 10.1007/978-3-642-34047-5_12, 2012,
@@ -1354,6 +1168,16 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               DOI 10.1007/978-3-319-63697-9_3, 2017,
               <https://doi.org/10.1007/978-3-319-63697-9_3>.
 
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 21]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    [GPPS19]   Guo, C., Pereira, O., Peters, T., and FX. Standaert,
               "Authenticated Encryption with Nonce Misuse and Physical
               Leakages: Definitions, Separation Results and Leveled
@@ -1365,20 +1189,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    [HKR2015]  Hoang, VT., Krovetz, T., and P. Rogaway, "Robust
               Authenticated-Encryption AEZ and the Problem That It
               Solves", Advances in Cryptology -- EUROCRYPT 2015.
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 21]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 21]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
-
               EUROCRYPT 2015. Lecture Notes in Computer Science, vol
               9056. Springer, Berlin, Heidelberg.,
               DOI 10.1007/978-3-662-46800-5_2, 2015,
@@ -1402,9 +1212,9 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    [I-D.irtf-cfrg-aead-limits]
               Günther, F., Thomson, M., and C. A. Wood, "Usage Limits on
               AEAD Algorithms", Work in Progress, Internet-Draft, draft-
-              irtf-cfrg-aead-limits-08, 1 April 2024,
+              irtf-cfrg-aead-limits-09, 9 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
-              aead-limits-08>.
+              aead-limits-09>.
 
    [I-D.irtf-cfrg-aegis-aead]
               Denis, F. and S. Lucas, "The AEGIS Family of Authenticated
@@ -1416,6 +1226,14 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    [JMV2002]  Joux, A., Martinet, G., and F. Valette, "Blockwise-
               Adaptive Attackers Revisiting the (In)Security of Some
               Provably Secure Encryption Modes: CBC, GEM, IACBC",
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 22]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
               Advances in Cryptology — CRYPTO 2002. CRYPTO 2002. Lecture
               Notes in Computer Science, vol 2442. Springer, Berlin,
               Heidelberg, DOI 10.1007/3-540-45708-9_2, 2002,
@@ -1425,21 +1243,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               Deoxys AEAD family", Journal of Cryptology 34, no. 3
               (2021): 31., DOI 10.1007/s00145-021-09397-w, 2021,
               <https://doi.org/10.1007/s00145-021-09397-w>.
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 22]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 22]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [KLLNP16]  Menda, M., Leurent, G., Leverrier, A., and M. Naya-
               Plasencia, "Quantum Differential and Linear
@@ -1477,6 +1280,16 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               DOI 10.1007/978-3-031-30634-1_13, 2023,
               <https://doi.org/10.1007/978-3-031-30634-1_13>.
 
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 23]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    [R02]      Rogaway, P., "Authenticated-encryption with associated-
               data", Proceedings of the 9th ACM conference on Computer
               and communications security (CCS '02), Association for
@@ -1487,21 +1300,6 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
    [RFC4303]  Kent, S., "IP Encapsulating Security Payload (ESP)",
               RFC 4303, DOI 10.17487/RFC4303, December 2005,
               <https://www.rfc-editor.org/info/rfc4303>.
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 23]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 23]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [RFC7253]  Krovetz, T. and P. Rogaway, "The OCB Authenticated-
               Encryption Algorithm", RFC 7253, DOI 10.17487/RFC7253, May
@@ -1541,29 +1339,19 @@ Internet-Draft        Properties of AEAD algorithms         October 2024
               DOI 10.17487/RFC9058, June 2021,
               <https://www.rfc-editor.org/info/rfc9058>.
 
+
+
+Bozhko                    Expires 14 April 2025                [Page 24]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
    [RS06]     Rogaway, R. and T. Shrimpton, "A Provable-Security
               Treatment of the Key-Wrap Problem", Advances in Cryptology
               - EUROCRYPT 2006. EUROCRYPT 2006. Lecture Notes in
               Computer Science, vol 4004. Springer, Berlin, Heidelberg,
               DOI 10.1007/11761679_23, 2016,
               <https://doi.org/10.1007/11761679_23>.
-
-
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 24]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 24]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    [S04]      Shrimpton, T., "A Characterization of Authenticated-
               Encryption as a Form of Chosen-Ciphertext Security",
@@ -1606,26 +1394,20 @@ Appendix A.  AEAD Algorithms with Additional Functionality
    only briefly describe the additional functionality they offer and
    provide further references.
 
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 25]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
 A.1.  Incremental Authenticated Encryption
 
    Definition: An AEAD algorithm allows re-encrypting and authenticating
    a message (associated data and a plaintext pair), which only partly
    differs from some previous message, faster than processing it from
    scratch.
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 25]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 25]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
    Examples: Incremental AEAD algorithm of [SY16].
 
@@ -1665,6 +1447,17 @@ A.2.  Robust Authenticated Encryption
 
    Further reading: [HKR2015].
 
+
+
+
+
+
+
+Bozhko                    Expires 14 April 2025                [Page 26]
+
+Internet-Draft        Properties of AEAD algorithms         October 2024
+
+
 Acknowledgments
 
    This document benefited greatly from the comments received from the
@@ -1674,20 +1467,6 @@ Acknowledgments
    Kyazhin, Samuel Lucas, Grigory Marshalko, Christopher Patton, and
    Christopher Wood for their thoughtful comments, proposals, and
    discussions.
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 26]
-
-Internet-Draft        Properties of AEAD algorithms           April 2024
-=======
-Bozhko                    Expires 12 April 2025                [Page 26]
-
-Internet-Draft        Properties of AEAD algorithms         October 2024
->>>>>>> Stashed changes
-
 
 Author's Address
 
@@ -1730,18 +1509,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-<<<<<<< Updated upstream
-Bozhko                   Expires 3 October 2024                [Page 27]
-=======
-Bozhko                    Expires 12 April 2025                [Page 27]
->>>>>>> Stashed changes
+Bozhko                    Expires 14 April 2025                [Page 27]

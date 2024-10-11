@@ -5,17 +5,10 @@
   <!ENTITY nbhy   "&#8209;">
   <!ENTITY wj     "&#8288;">
 ]>
-<<<<<<< Updated upstream
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-06" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
-	<front>
-		<title abbrev="Properties of AEAD algorithms">Properties of AEAD Algorithms</title>
-		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-06" />
-=======
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-irtf-cfrg-aead-properties-08" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" category="info" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 	<front>
 		<title abbrev="Properties of AEAD algorithms">Properties of AEAD Algorithms</title>
-		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-08" />
->>>>>>> Stashed changes
+		<seriesInfo name="Internet-Draft" value="draft-irtf-cfrg-aead-properties-09" />
 		<author fullname="Andrey Bozhko" initials="A.A." role="editor" surname="Bozhko">
 			<organization>CryptoPro</organization>
 			<address>
@@ -91,7 +84,7 @@
 					</li>
 				</ul>
 			<t>
-				We note that specifications of AEAD algorithms that use authentication tags to ensure integrity MAY define it as an independent output of the encryption operation and as an independent input of the decryption operation. Throughout this document, by default, we will consider the authentication tag as part of the ciphertext unless stated otherwise.
+				We note that specifications of AEAD algorithms that use authentication tags to ensure integrity MAY define it as an independent output of the encryption operation and as an independent input of the decryption operation. Throughout this document, by default, we will consider the authentication tag as part of the ciphertext.
 			</t>	
 			<t>
 				For more details on the AEAD definition, please refer to <xref target="RFC5116" format="default" />.
@@ -165,7 +158,7 @@
 				<section anchor="Int" numbered="true" toc="default">
 					<name>Data Integrity</name>
 					<t>
-						Definition: An AEAD algorithm guarantees that the ciphertext and the associated data have not been changed or forged by an active, nonce-respecting adversary. 
+						Definition: An AEAD algorithm allows one to ensure that the ciphertext and the associated data have not been changed or forged by an active, nonce-respecting adversary. 
 					</t>
 					<t>
 						Security notion: IND-CTXT <xref target="BN2000" format="default"/> (or AUTH <xref target="R02" format="default"/>).
@@ -350,7 +343,9 @@
 					</t>
 					<ul>
 						<li>
-							<t>Nonce misuse resilience: Security is provided only for messages encrypted with fresh nonces (correctly encrypted messages).</t>
+							<t>
+								Nonce misuse resilience: Security is provided for messages encrypted with non-repeated (fresh) nonces (correctly encrypted messages).
+							</t>
 							<t>
 								Security notion: CPA resilience (confidentiality), authenticity resilience (integrity), CCA resilience (authenticated encryption) <xref target="ADL17" format="default" />.
 							</t>
@@ -471,7 +466,7 @@
 				<section anchor="Inverse" numbered="true" toc="default">
 					<name>Inverse-Free</name>
 					<t>
-						Definition: An AEAD algorithm that is based on some primitive can be implemented without evaluating the inverse of that primitive.
+						Definition: An AEAD algorithm based on a given primitive can be implemented without invoking the inverse of that primitive.
 					</t>
 					<t>
 						Examples: AES-GCM <xref target="D07" format="default"/>, ChaCha20-Poly1305 <xref target="RFC8439" format="default"/>, OCB <xref target="RFC7253" format="default"/>, MGM <xref target="RFC9058" format="default"/>, AEGIS <xref target="I-D.irtf-cfrg-aegis-aead" format="default"/>.
@@ -569,11 +564,7 @@
 				Every claimed security property of an AEAD algorithm MUST undergo security analysis within a relevant notion. It's RECOMMENDED to use the security notions referenced in the document. If an alternative notion is used, there MUST exist proof of equivalence or it SHOULD be indicated that a non-equivalent notion is used. For security properties that extend adversarial capabilities, consideration of integrity and confidentiality separately may be relevant. If the algorithm provides only one of these, that SHOULD be indicated. 
 			</t>
 			<t>
-<<<<<<< Updated upstream
-				When specifying security requirements for an AEAD algorithm in an application, it SHOULD be indicated, for every required security property, whether only integrity or confidentiality is necessary. Additionally, for each security property, it SHOULD be specified whether an analysis in an alternative security notion is required. We also note that some additional properties come with trade-offs in terms of classical security and efficiency, and may only be supported in non-standardized or modified AEAD algorithms. This immediately implies challenges in deployment and interoperability. In an application, the requirements for additional AEAD properties SHOULD be highly motivated and justified, as SHOULD all trade-offs be carefully considered.
-=======
 				When specifying security requirements for an AEAD algorithm in an application, it SHOULD be indicated, for every required security property, whether only integrity or confidentiality is necessary. Additionally, for each security property, it SHOULD be specified whether an analysis in an alternative security notion is required. We also note that some additional properties come with trade-offs in terms of classical security and efficiency, and may only be supported in non-standardized or modified AEAD algorithms. This immediately implies challenges in deployment and interoperability. In an application, the requirements for additional AEAD properties SHOULD be highly motivated and justified, as should all trade-offs be carefully considered.
->>>>>>> Stashed changes
 			</t>
 		</section>
 		<section anchor="IANACON" numbered="true" toc="default">
